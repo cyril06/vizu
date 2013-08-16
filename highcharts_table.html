@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>HighCharts Table Plot</title>
+		<script src="jquery-1.9.1.min.js"></script>
+		<script src="highcharts.js"></script>
+		<script src="highcharts-more.js"></script>
+		<script type="text/javascript" src="data.js"></script>
+		<script>
+			window.onload = function () {
+				var cpt_pos=0;
+				var cpt_neg=0;
+				var cpt=0;
+				var res_neg=new Array();
+				var res_pos=new Array();
+				for (var i=0;i<col.length;i++) {
+					for (var j=0;j<line.length;j++) {
+						if (val[cpt]<0) {
+							res_neg[cpt_neg]=[j,i,Math.abs(Math.round(val[cpt]*100)/100)];
+							cpt_neg++;
+						}
+						else {
+							res_pos[cpt_pos]=[j,i,Math.abs(Math.round(val[cpt]*100)/100)];
+							cpt_pos++;
+						}
+						cpt++;
+					};
+				};
+
+				$('#container').highcharts({
+
+					chart: {
+						type: 'bubble',
+						plotBorderWidth: 1,
+						zoomType: 'xy',
+						width:600
+					},
+
+					title: {
+						text: 'Table Plot'
+					},
+					
+					tooltip: {
+						formatter: function() {
+							var s = line[this.x-1]+" , "+col[this.y]+"<br><b>"+this.point.z+"</b></br>";
+							
+							return s;
+						},
+						
+					},
+
+					xAxis: {
+						min:0,
+						max:line.length-1,
+						categories:line,
+						title: {
+							text: "Trajectories"
+						},
+						gridLineWidth:1,
+						endOnTick:false
+					},
+					yAxis: {
+						min:-0.5,
+						max:col.length-0.5,
+						startOnTick:false,
+						endOnTick:false,
+						categories:col,
+						title: {
+							text: "Countries"
+						}
+					},
+
+					series: [{
+						data: res_pos,
+						color:'#EF8A62',
+						name: 'Positive'},
+						{data: res_neg,
+						color:'#67A9CF',
+						name: 'Negative'}
+					]
+
+				});
+			};
+		</script>
+	</head>
+	<body class="HighCharts Table Plot">
+		<div id="container"></div>
+	</body>
+</html>
+		

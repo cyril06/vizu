@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>HighCharts Rank Size</title>
+		<script src="jquery-1.9.1.min.js"></script>
+		<script src="highcharts.js"></script>
+		<script src="highcharts-more.js"></script>
+		<script type="text/javascript" src="marius_list.js"></script>
+		<script type="text/javascript" src="marius_range.js"></script>
+		<script>
+			window.onload = function () {
+				$('#container').highcharts({
+            
+					chart: {
+						width:400,
+						zoomType: 'xy'
+					},
+					
+					plotOptions: {
+						line: {
+							lineWidth:0.5,
+							marker: {
+								symbol:"triangle",
+								radius:1
+							}	
+						}
+					},
+            
+					title: {
+						text: 'Evolution of the rank size distribution',
+						style: {
+							color: "black"
+						}
+					},
+            
+					xAxis: {
+						type: 'logarithmic',
+						minortickInterval: 0.1,
+						title: {
+							text: "Rank",
+							style: {
+								color: "black",
+								fontSize: '11px',
+								fontWeight: 'normal'
+							}
+						},
+						labels: {
+							formatter: function() {
+								return this.value;
+							}
+						}
+					},
+            
+					yAxis: {
+						type: 'logarithmic',
+						minorTickInterval: 0.1,
+						title: {
+							text: "Population (thousand)",
+							style: {
+								color:"black",
+								fontSize:'11px',
+								fontWeight:'normal'
+							}
+						},
+						labels: {
+							formatter: function() {
+								return this.value;
+							}
+						}
+					},
+            
+					tooltip: {
+						headerFormat: '<b>{series.name}</b><br />',
+						pointFormat: 'x = {point.x}, y = {point.y}'
+					},
+            
+					series: [
+						{
+							data: real,
+							pointStart: 1,
+							name: 'Observed'
+						},
+						/*{            
+							data: ranges,
+							name: 'Range',
+							type: 'arearange',
+							lineWidth: 0,
+							//linkedTo: ':previous',
+							fillOpacity: 0.3
+						}*/
+						{
+						data: l_3,
+						pointStart: 1
+						},
+						{
+						data: l_4,
+						pointStart: 1
+						},
+						{
+						data: l_5,
+						pointStart: 1
+						}
+					]
+				});
+			};
+		</script>
+	</head>
+	<body class="HighCharts Rank Size">
+		<div id="container"></div>
+	</body>
+</html>

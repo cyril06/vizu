@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <title>Titre de la page</title>
+    <meta charset="utf-8">
+  <script src="csvToArray.v2.1.min.js"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+  /*var rows = CSV.parse("one,two,three\n4,5,6");
+  console.log(JSON.stringify(rows, null, " "));*/
+	var res=new Array();
+	$.ajax({
+		url: "marius_real.csv",
+        dataType: 'text',
+        cache: false
+	}).done(function(csvAsString){
+        csvAsArray=csvAsString.csvToArray();
+		for (var i=1;i<csvAsArray.length-1;i++) {
+			res[i-1]=parseFloat(JSON.stringify(csvAsArray[i]).split(";")[17]);//.split(";")[17];
+		};
+		res.sort(function(a,b) {return b-a});
+		alert(res[0]);
+		
+ });
+
+ 
+</script>
+</body>
+</html>

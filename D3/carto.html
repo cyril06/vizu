@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+        <title>D3 map</title>
+		<script src="d3.v3.min.js"></script>
+		<script src="russia.js"></script>
+		<script src="../files/mariusreal.js"></script>
+		<script src="../files/mariusexchange.js"></script>
+	</head>
+	<body>
+		<div id="map"></div>
+		<script type="text/javascript">
+			(function() {
+			
+				function getLonLat(okato) {
+					for (var i=0;i < cities_russia.length;i++) {
+						if (cities_russia[i].okato==okato) {
+							return [cities_russia[i].long,cities_russia[i].lat];
+							break;
+						}
+					}
+				}
+				
+				var width = 1600;
+				var height = 1400;
+				
+				//var cities_russia='[{"name":"MOSCOU","long":37.61666667,"lat":55.75}]'
+				
+				//var flows_russia=[{"name":"flow1","long1":37.61666667,"lat1":55.75,"long2":137.61666667,"lat2":55.75}]
+				
+				var res=new Array();
+				
+				for (var i in cities_flows) {
+					for (var j in cities_flows[i].dest) {
+						res.push([cities_flows[i].orig,cities_flows[i].dest[j]]);
+					}
+				}
+				 
+				/*
+				 * On créait un nouvel objet path qui permet
+				 * de manipuler les données géographiques.
+				*/
+				var path = d3.geo.path();
+ 
+				// On définit les propriétés de la projection à utiliser
+				/*var projection = d3.geo.azimuthalEqualArea()
+					.center([0,0]) //
+					.rotate([-90,0])
+					.scale(500)
+					.translate([width / 2, height / 2]);*/
+				
+				var projection = d3.geo.albers()
+					.rotate([-105, 0])
+					.center([-10, 65])
+					.parallels([52, 64])
+					.scale(700);
+					//.translate([width / 2, height / 2]);
+					
+ 
+				path.projection(projection); // On assigne la projection au path
+ 
+				/*
+				 * On créait un nouvel élément svg à la racine de notre div #map,
+				 * définie plus haut dans le HTML
+				*/
+				var svg = d3.select("#map").append("svg")
+					.attr("width", width)
+					.attr("height", height);
+					
+ 
+				/*
+				 * On créé un groupe SVG qui va accueillir
+				 * tous nos départements
+				*/
+				var country = svg
+					.append("g")
+					.attr("iso", "name_english");
+ 
+				/*
+				 * On charge les données GeoJSON
+				 */
+				 russia= JSON.parse(russia_country);
+				 
+				//d3.json('russia.json', function(req, geojson) {
+ 
+				/*
+				 * On "bind" un élément SVG path pour chaque entrée
+				 * du tableau features de notre objet geojson
+				 */
+					var features = country
+						.selectAll("path")
+						.data(russia.features);
+ 
+				/*
+				 * On créait un ColorScale, qui va nous
+				 * permettre d'assigner plus tard une
+				 * couleur de fond à chacun de nos
+				 * départements
+				*/
+					var colorScale = d3.scale.category20c();
+ 
+				/*
+				 * Pour chaque entrée du tableau feature, on
+				 * créait un élément SVG path, avec les
+				 * propriétés suivantes
+				*/
+				
+				
+					features.enter()
+						.append("path")
+						.attr('class', 'REGION')
+						.attr('fill', '#f6f4f2')
+						.attr('stroke', '#aaa')
+						.attr('stroke-width',0.5)
+						.attr("d", path);
+						
+					//cities=JSON.parse(cities_russia);		
+					
+					country.selectAll("circle")
+					 .data(cities_russia)
+					 .enter()
+					 .append("circle")
+					 .attr("cx", function(d) {
+						var x=d.long;
+						var y=d.lat;
+						return projection([x, y])[0];
+					})
+					.attr("cy", function(d) {
+						var x=d.long;
+						var y=d.lat;
+						return projection([x, y])[1];
+					})
+					.attr("r", 1)
+					.style("fill", "red");
+					
+					/*country.append("svg:line")
+					 .data(res)
+					 .attr("x1", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						alert(x+y);
+						return projection([x, y])[0];
+					})
+					.attr("y1", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						alert(x+y);
+						return projection([x, y])[1];
+					})
+					.attr("x2", function(d) {
+						var coord=getLonLat(d[1])
+						var x=coord[0];
+						var y=coord[1];
+						alert(x+y);
+						return projection([x, y])[0];
+					})
+					.attr("y2", function(d) {
+						var coord=getLonLat(d[1])
+						var x=coord[0];
+						var y=coord[1];
+						alert(x+y);
+						return projection([x, y])[1];
+					})
+					.style('stroke', '#aaa');*/
+					
+					country.selectAll("line")
+					 .data(res)
+					 .enter()
+					 .append("line")
+					 .attr("x1", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[0];
+					})
+					.attr("y1", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[1];
+					})
+					.attr("x2", function(d) {
+						var coord=getLonLat(d[1])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[0];
+					})
+					.attr("y2", function(d) {
+						var coord=getLonLat(d[1])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[1];
+					})
+					.style('stroke', '#aaa');
+
+ 
+				}());
+			//}());
+			
+		</script>
+		
+	</body>
+</html>
+		
