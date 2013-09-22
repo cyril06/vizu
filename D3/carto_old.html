@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+        <title>D3 map</title>
+		<script src="d3.v3.min.js"></script>
+		<script src="tooltip.js"></script>
+		<script src="russia.js"></script>
+		<script src="../files/mariusreal.js"></script>
+		<script src="../files/mariusexchange.js"></script>
+		<script type="text/javascript">
+			(function draw() {
+			
+				function getLonLat(okato) {
+					for (var i=0;i < cities_russia.length;i++) {
+						if (cities_russia[i].okato==okato) {
+							return [cities_russia[i].long,cities_russia[i].lat];
+							break;
+						}
+					}
+				}
+				
+				function getName(okato) {
+					for (var i=0;i < cities_russia.length;i++) {
+						if (cities_russia[i].okato==okato) {
+							return cities_russia[i].name;
+							break;
+						}
+					}
+				}
+				
+				var width = 1000;//1600
+				var height = 550;//1400
+				
+				var sizeMaxCircle=30;
+				var sizeMinCircle=0.5;
+				
+				var d3color = d3.interpolateRgb("#BDC9E1", "#045A8D");
+				
+
+				
+				//var cities_russia='[{"name":"MOSCOU","long":37.61666667,"lat":55.75}]'
+				
+				//var flows_russia=[{"name":"flow1","long1":37.61666667,"lat1":55.75,"long2":137.61666667,"lat2":55.75}]
+				
+				var res=new Array();
+				var resNodes=new Array();
+				var max={flow:0,pop:0,wealth:0,total:0};
+				var min={flow:cities_flows[0][1][0].weight,pop:cities_flows[0][0].pop,wealth:cities_flows[0][0].wealth,total:Math.abs(cities_flows[0][0].total)};
+				
+				for (var i in cities_flows) {
+					for (var j in cities_flows[i][1]) {
+						flow=Math.round(parseFloat(cities_flows[i][1][j].weight)*100)/100;
+						res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,flow]);
+						if (flow>max.flow) {max.flow=flow};
+						if (flow<min.flow) {min.flow=flow};
+					}
+				}
+				
+				for (var i in cities_flows) {
+					pop=Math.round(parseFloat(cities_flows[i][0].pop)*100)/100;
+					wealth=Math.round(parseFloat(cities_flows[i][0].wealth)*100)/100;
+					total=Math.round(parseFloat(cities_flows[i][0].total)*100)/100;
+					resNodes.push([cities_flows[i][0].orig,pop,wealth,total]);
+					if (pop>max.pop) {max.pop=pop};
+					if (wealth>max.wealth) {max.wealth=wealth};
+					if (Math.abs(total)>max.total) {max.total=Math.abs(total)};
+					if (pop<min.pop) {min.pop=pop};
+					if (wealth<min.wealth) {min.wealth=wealth};
+					if (Math.abs(total)<min.total) {min.total=Math.abs(total)};
+				};
+				
+				/*
+				 * On créait un nouvel objet path qui permet
+				 * de manipuler les données géographiques.
+				*/
+				var path = d3.geo.path();
+ 
+				// On définit les propriétés de la projection à utiliser
+				/*var projection = d3.geo.azimuthalEqualArea()
+					.center([0,0]) //
+					.rotate([-90,0])
+					.scale(500)
+					.translate([width / 2, height / 2]);*/
+				
+				var projection = d3.geo.albers()
+					.rotate([-105, 0])
+					.center([-10, 65])
+					.parallels([52, 64])
+					.scale(700);
+					//.translate([width / 2, height / 2]);
+					
+ 
+				path.projection(projection); // On assigne la projection au path
+				
+				var tooltip = d3.select("body")
+					.append("div")
+					.style("position", "absolute")
+					.style("z-index", "10")
+					.style("visibility", "hidden")
+					.text("a simple tooltip");
+				
+ 
+				/*
+				 * On créait un nouvel élément svg à la racine de notre div #map,
+				 * définie plus haut dans le HTML
+				*/
+				var svg = d3.select("#map").append("svg")
+					.attr("width", width)
+					.attr("height", height);
+					
+						
+				var axes = svg.append("g").attr("id", "axes"),
+					xAxis = axes.append("line").attr("y2", height),
+					yAxis = axes.append("line").attr("x2", width);
+					
+				svg.append("svg:defs").selectAll("marker")
+					.data(["arrow"])
+					.enter().append("svg:marker")
+					.attr("id", "arrow")
+					.attr("viewBox", "0 -5 10 10")
+					.attr("refX", 15)
+					.attr("refY", -1.5)
+					.attr("markerWidth", 6)
+					.attr("markerHeight", 6)
+					.attr("orient", "auto")
+					.append("svg:path")
+					.attr("d", "M0,-5L10,0L0,5");
+					
+				    var color_scale = d3.scale.linear().range([0, 1]).domain([min.flow,max.flow]);
+					var width_scale = d3.scale.linear().range([0.5, 3]).domain([min.flow,max.flow]);
+					var city_scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([min.pop,max.pop]);
+					var total_scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([min.total,max.total]);
+					
+ 
+				/*
+				 * On créé un groupe SVG qui va accueillir
+				 * tous nos départements
+				*/
+				var country = svg
+					.append("g")
+					.attr("id", "map");
+					/*.call(d3.behavior.zoom()
+						.translate(projection.translate())
+						.scale(projection.scale())
+						.on("zoom", redraw));*/
+
+ 
+				/*
+				 * On charge les données GeoJSON
+				 */
+				 russia= JSON.parse(russia_country);
+				 
+				//d3.json('russia.json', function(req, geojson) {
+ 
+				/*
+				 * On "bind" un élément SVG path pour chaque entrée
+				 * du tableau features de notre objet geojson
+				 */
+					var features = country
+						.selectAll("path")
+						.data(russia.features);
+ 
+				/*
+				 * On créait un ColorScale, qui va nous
+				 * permettre d'assigner plus tard une
+				 * couleur de fond à chacun de nos
+				 * départements
+				*/
+					var colorScale = d3.scale.category20c();
+ 
+				/*
+				 * Pour chaque entrée du tableau feature, on
+				 * créait un élément SVG path, avec les
+				 * propriétés suivantes
+				*/
+				
+				
+					features.enter()
+						.append("path")
+						.attr('class', 'REGION')
+						.attr('fill', '#f6f4f2')
+						.attr('stroke', '#aaa')
+						.attr('stroke-width',0.5)
+						.attr("d", path);
+						
+					//cities=JSON.parse(cities_russia);		
+					
+					/*country.selectAll("circle")
+					 .data(cities_russia)
+					 .enter()
+					 .append("circle")
+					 .attr("cx", function(d) {
+						var x=d.long;
+						var y=d.lat;
+						return projection([x, y])[0];
+					})
+					.attr("cy", function(d) {
+						var x=d.long;
+						var y=d.lat;
+						return projection([x, y])[1];
+					})
+					.attr("r", 1)
+					.style("fill", "red")
+					.call(d3.helper.tooltip()
+						.text(function(d,i) {return d.name}));*/
+					
+					var cities=country.selectAll("circle")
+					 .data(resNodes)
+					 .enter()
+					 .append("circle")
+					 .attr("cx", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[0];
+					})
+					.attr("cy", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[1];
+					})
+					.attr("id",function(d) {return d[0]})
+					.attr("r", function(d) {if (d[3]>=0) {return total_scale(d[3])} else {return total_scale(-1*d[3])}})
+					//.style("fill", "#f6f4f2")
+					.style("fill",function(d) {if (d[3]>0) {return "red"}
+												if (d[3]==0) {return "#f6f4f2"}
+												if (d[3]<0) {return "blue"}})
+					.style("stroke","black")
+					.style("stroke_width",0.5)
+					.on("mouseover", function(d){var elem=d3.select(this);
+													var cityTo=[];
+													var cityFrom=[];
+													cityTo.push(elem.attr("id"));
+													lines.filter(function(e) {if (e[0]==d[0]) {cityTo.push(e[1])};return e[0]==d[0]}).attr("stroke","blue");
+													lines.filter(function(e) {if (e[1]==d[0]) {cityFrom.push(e[0])};return e[1]==d[0]}).attr("stroke","red");
+													lines.filter(function(e) {return (e[0]!=d[0] && e[1]!=d[0])}).attr("display","none");
+													cities.filter(function(e) {return e[0]!=d[0]}).attr("display","none");
+													cities.filter(function(e) {var city=cityTo.concat(cityFrom);for (j in city) {if (e[0]==city[j]) {return true; break;}}}).attr("display","true");
+													})
+					.on("mouseout",function(d){var elem=d3.select(this);
+													elem.attr("r",function(d) {if (d[3]>=0) {return total_scale(d[3])} else {return total_scale(-1*d[3])}});
+													lines.attr("display","true");
+													lines.attr("stroke",function(d) {return d3color(color_scale(d[2]))})
+													cities.attr("display","true");
+													});
+													
+					cities.append("svg:title")
+						  .text(function(d) {return getName(d[0])+"    Total: "+d[3]});
+					/*.call(d3.helper.tooltip()
+						.text(function(d,i) {return "<b>"+getName(d[0])+"</b><br>Total: "+d[3]}));*/
+					
+					/*country.append("svg:line")
+					 .data(res)
+					 .attr("x1", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						alert(x+y);
+						return projection([x, y])[0];
+					})
+					.attr("y1", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						alert(x+y);
+						return projection([x, y])[1];
+					})
+					.attr("x2", function(d) {
+						var coord=getLonLat(d[1])
+						var x=coord[0];
+						var y=coord[1];
+						alert(x+y);
+						return projection([x, y])[0];
+					})
+					.attr("y2", function(d) {
+						var coord=getLonLat(d[1])
+						var x=coord[0];
+						var y=coord[1];
+						alert(x+y);
+						return projection([x, y])[1];
+					})
+					.style('stroke', '#aaa');*/
+					
+					var lines=country.selectAll("line")
+					 .data(res)
+					 .enter()
+					 .append("line")
+					 .attr("from",function(d) {return d[0]})
+					 .attr("to",function(d) {return d[1]})
+					 .attr("x1", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[0];
+					})
+					.attr("y1", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[1];
+					})
+					.attr("x2", function(d) {
+						var coord=getLonLat(d[1])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[0];
+					})
+					.attr("y2", function(d) {
+						var coord=getLonLat(d[1])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[1];
+					})
+					.on("mouseover",function(d) {var elem=d3.select(this);
+												 lines.filter(function(e) {return (e[0]!=elem.attr("from") || e[1]!=elem.attr("to"))}).attr("display","none");
+												 cities.filter(function(e) {return (e[0]!=elem.attr("from") && e[0]!=elem.attr("to"))}).attr("display","none");
+												})
+					.on("mouseout",function(d) {lines.attr("display","true");
+												cities.attr("display","true");})
+					.attr("stroke",function(d) {return d3color(color_scale(d[2]))})
+					.attr("marker-end", "url(#arrow)")
+					.attr("stroke-width",function(d) {return width_scale(d[2])})
+					;
+					
+					lines.append("svg:title")
+						 .text(function (d) {return ("From: "+getName(d[0])+"  To: "+getName(d[1])+"   Value: "+d[2])});
+					
+					var LegendContainer = d3.select('div#legenddiv')
+						.append('svg')
+						.attr('width', 200) 
+						.attr('height', 150)
+						.attr('id', 'Legendsvg');
+						
+					var legendCircles=LegendContainer.append("circle")
+													.attr("cx",10+sizeMaxCircle)
+													.attr("cy",10+sizeMaxCircle)
+													.attr("r",sizeMaxCircle)
+													.attr("stroke","#aaa")
+													.attr("stroke-width",2)
+													.attr("fill","white");
+													
+					var text=LegendContainer.selectAll("text")
+											.data([max.total])
+											.enter()
+											.append("text");
+											
+					var textLabels=text
+									.attr("x",function(d) {return 20+2*sizeMaxCircle})
+									.attr("y",function(d) {return 10+sizeMaxCircle})
+									.text(function(d) {return d})
+									.attr("font-family", "sans-serif")
+									.attr("font-size", "15px");
+													
+				
+function redraw() {
+if (d3.event) {
+projection
+.translate(d3.event.translate)
+.scale(d3.event.scale);
+}
+svg.selectAll("path").attr("d", path);
+var t = projection.translate();
+xAxis.attr("x1", t[0]).attr("x2", t[0]);
+yAxis.attr("y1", t[1]).attr("y2", t[1]);
+}
+ 
+				}());
+			//}());
+			
+		</script>
+	</head>
+	<body>
+		<div style="float:left" id="map"></div>
+			<div style="float:left" id="commentdiv">
+			<div style="float:bottom" id="choice">Choix d'une carte:
+				<SELECT id="taux" onChange="draw();">
+					<OPTION VALUE=pop>Population
+					<OPTION VALUE=wealth>Wealth
+					<OPTION VALUE=exchange>Exchange
+				</SELECT>
+			</div>
+			<div style="float:bottom;border-style:solid" id="legenddiv"></div>
+		</div>
+		
+		
+	</body>
+</html>
+		

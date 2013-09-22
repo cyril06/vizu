@@ -7,38 +7,12 @@
 		<link rel="stylesheet" href="nouislider.space.css" type="text/css">
 		<link rel="stylesheet" href="nouislider.fox.css" type="text/css">
 		
-		<style>
-			div#header{
-				position: floated;
-				border: 2px solid gray;
-				margin: 2px;
-				padding:2px;
-			}
-			#step{
-				position: floated;
-				color: red;
-				font-family: sans;
-				font-size: 40px;
-			}
-			#info{
-				position: floated;
-				color: black;
-				font-family: sans;
-				font-size: 20px;
-			}
-			div#map{
-				position: absolute;
-				top: 60px;
-			}
-		</style>
-		
 		<script src="d3.v3.min.js"></script>
 
 		<script src="../HighCharts/jquery-1.9.1.min.js"></script>
 		<script src="jquery.nouislider.min.js"></script>
 		<script src="../HighCharts/highcharts.js"></script>
 		<script src="../HighCharts/highcharts-more.js"></script>
-		<script src="thenBy.min.js"></script>
 		<script src="russia.js"></script>
 		<script src="../files/mariusreal.js"></script>
 		<script src="../files/mariusexchange.js"></script>
@@ -145,6 +119,8 @@
 				
 			function draw(mapChoice,mini,maxi,exchangeType,threshold) {
 			
+				alert(threshold);
+			
 				if (mapChoice=="commercial") {	
 					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain(domainExchange);
 					
@@ -161,13 +137,13 @@
 				};
 				if (mapChoice=="exchange"){
 					if (exchangeType=="in") {
-						scale=scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([0,dataGen.exchange.maxSumIn]);
+						scale=scale = d3.scale.sqrt().range([sizeMinCircle+1, sizeMaxCircle]).domain([1,dataGen.exchange.maxSumIn]);
 					}
 					else {
-						scale=scale = d3.scale.sqrt().range([sizeMinCircle+1, sizeMaxCircle]).domain([0,dataGen.exchange.maxSumOut]);
+						scale=scale = d3.scale.sqrt().range([sizeMinCircle+1, sizeMaxCircle]).domain([1,dataGen.exchange.maxSumOut]);
 					}
-					color_scale = d3.scale.linear().range([0, 1]).domain([threshold,100]);
-					width_scale = d3.scale.linear().range([0.3, 3]).domain([mini,maxi]);
+					color_scale = d3.scale.linear().range([0, 1]).domain([0,100]);
+					width_scale = d3.scale.linear().range([0.5, 2]).domain([0,100]);
 				};
 				
 				/*res=new Array();
@@ -202,7 +178,7 @@
 				if (lines) {lines.remove();};
 					
 				cities=country.selectAll("circle")
-					 .data(function () {return fetchDataNodes(mapChoice,mini,maxi,exchangeType)})
+					 .data(function () {return fetchDataNodes(mapChoice,mini,maxi)})
 					 .enter()
 					 .append("circle")
 					 .attr("cx", function(d) {
@@ -223,7 +199,7 @@
 					.style("stroke","#fff")
 					.style("stroke-width",0.5)
 					.style("fill-opacity",0.8)
-					.on("mouseover", function(d){var elem=d3.select(this);
+					/*.on("mouseover", function(d){var elem=d3.select(this);
 												if (mapChoice=="exchange") {
 													if (click==false) {
 														cityMouseOver(elem,d);
@@ -233,11 +209,10 @@
 					.on("mouseout",function(d){var elem=d3.select(this);
 												if (mapChoice=="exchange") {
 													if (click==false) {
-														draw(mapChoice,mini,maxi,exchangeType,threshold);
 														cityMouseOut(elem,d);
 													}
 													}})
-					/*.on("click",function(d){var elem=d3.select(this);
+					.on("click",function(d){var elem=d3.select(this);
 											if (mapChoice=="commercial") {
 												eraseGraph(graph2);
 												zoomCityComm(d);	
@@ -247,6 +222,23 @@
 						
 					/*cities.append("svg:title")
 						  .text(function(d) {return getName(d[0])+"   "+mapChoice+" : "+d[1]});*/
+					eraseGraph(graph);
+					eraseGraph(graph2);
+					if (mapChoice=="pop") {
+						genRankPop(resNodes,pop2010);
+						drawUrbanPop(resNodes,pop2010);
+					};
+						  
+					if (mapChoice=="commercial") {
+						cities.on("mouseover", function(d, i) {
+							zoomCityComm(d);
+							return tooltip.style("visibility", "visible").style("top", (d3.event.pageY + 5) + "px").style("left",(d3.event.pageX + 5) + "px")
+						})
+						.on("mouseout", function(d, i) {
+							return tooltip.style("visibility", "hidden");
+						});
+						drawWhiskers();			
+					}
 			
 				if (mapChoice=="exchange") {
 					lines=country.selectAll("line")
@@ -285,7 +277,7 @@
 						var y=coord[1];
 						return projection([x, y])[1];
 					})
-					/*.on("mouseover",function(d) {var elem=d3.select(this);
+					.on("mouseover",function(d) {var elem=d3.select(this);
 												 if (click==false) {
 													lines.filter(function(e) {return (e[0]!=elem.attr("from") || e[1]!=elem.attr("to"))}).attr("display","none");
 													cities.filter(function(e) {return (e[0]!=elem.attr("from") && e[0]!=elem.attr("to"))}).attr("display","none");
@@ -295,10 +287,10 @@
 													lines.attr("display","true");
 													cities.attr("display","true")
 												}
-												})*/
+												})
 					.attr("stroke",function(d) {return d3color(color_scale(d[2]))})
 					.attr("marker-end", "url(#arrow)")
-					.attr("stroke-width",function(d) {return width_scale(d[3])});
+					.attr("stroke-width",function(d) {return width_scale(d[2])});
 
 					
 					lines.append("svg:title")
@@ -307,84 +299,61 @@
 				}
 				else { if (lines) {lines.remove();}};
 				
-				if (mapChoice=="commercial") {var dataLegend=[domainExchange[1],domainExchange[0]]};
-				if (mapChoice=="pop") {var dataLegend=[maxi,mini]};
-				if (mapChoice=="wealth") {var dataLegend=[maxi,mini]};
-				
-				if (legendCircles) {legendCircles.remove()};
+		if (mapChoice=="commercial") {var dataLegend=[domainExchange[1],domainExchange[0]]};
+		if (mapChoice=="pop") {var dataLegend=[maxi,mini]};
+		if (mapChoice=="wealth") {var dataLegend=[maxi,mini]}
 		
-				/*legendCircles=LegendContainer.selectAll("circle")
-					.data(dataLegend)
-					.enter()
-					.append("circle")
-					.attr("cx",function(d,i){return (10+sizeMaxCircle*(i+1)+(i*sizeMaxCircle))})
-					.attr("cy",10+sizeMaxCircle)
-					.attr("r",function(d){return scale(d)})
-					.attr("stroke","#aaa")
-					.attr("stroke-width",2)
-					.attr("fill","white");*/
+		if (legendCircles) {legendCircles.remove()};
+		
+		legendCircles=LegendContainer.selectAll("circle")
+			.data(dataLegend)
+			.enter()
+			.append("circle")
+			.attr("cx",function(d,i){return (10+sizeMaxCircle*(i+1)+(i*sizeMaxCircle))})
+			.attr("cy",10+sizeMaxCircle)
+			.attr("r",function(d){return scale(d)})
+			.attr("stroke","#aaa")
+			.attr("stroke-width",2)
+			.attr("fill","white");
 			
-				if (text) {text.remove();};
+		if (text) {text.remove();};
 			
-				/*text=LegendContainer.selectAll("text")
-					.data(function(d) { if (mapChoice=="commercial") return(["Abs(Max) = "+domainExchange[1]])
-						if (mapChoice=="pop") return(["Max = "+maxi])
-						if (mapChoice=="wealth") return(["Max = "+maxi])})
-					.enter()
-					.append("text");
+		text=LegendContainer.selectAll("text")
+			.data(function(d) { if (mapChoice=="commercial") return(["Abs(Max) = "+domainExchange[1]])
+								if (mapChoice=="pop") return(["Max = "+maxi])
+								if (mapChoice=="wealth") return(["Max = "+maxi])})
+			.enter()
+			.append("text");
 											
-				var textLabels=text
-					.attr("x",function(d) {return sizeMaxCircle/2})
-					.attr("y",function(d) {return 3*sizeMaxCircle})
-					.text(function(d) {return d})
-					.attr("font-family", "sans-serif")
-					.attr("font-size", "10px");	*/
-			
-				if (textGen) {textGen.remove();};
-				var dataText=new Array();
-				if (mapChoice=="commercial") dataText=["FLOWS","Minimum: "+min.flow,"Maximum: "+max.flow,"Mean: "+mean.flow];
-				if (mapChoice=="pop") dataText=["POPULATION","Minimum: "+min.pop,"Maximum: "+max.pop,"Mean: "+mean.pop];
-				if (mapChoice=="wealth") dataText=["WEALTH","Minimum: "+min.wealth,"Maximum: "+max.wealth,"Mean: "+mean.wealth];
-				
-			
-				textGen=LegendContainerText.selectAll("text")
-					.data(dataText)
-					.enter()
-					.append("text");
+		var textLabels=text
+			.attr("x",function(d) {return sizeMaxCircle/2})
+			.attr("y",function(d) {return 3*sizeMaxCircle})
+			.text(function(d) {return d})
+			.attr("font-family", "sans-serif")
+			.attr("font-size", "10px");						
 
-				var textLabelsGen=textGen
-					.attr("x",function(d,i) {return 20})
-					.attr("y",function(d,i) {return 20*(i+1)})
-					.text(function(d) {return d})
-					.attr("font-family", "sans-serif")
-					.attr("font-size", "15px");
-					
-				/* Graphics*/
-				
-				eraseGraph(graph);
-				eraseGraph(graph2);
-				
-				if (mapChoice=="pop") {
-					genRankPop(resNodes,pop2010);
-					drawUrbanPop(resNodes,pop2010);
-				};	  
-				if (mapChoice=="commercial") {
-					cities.on("mouseover", function(d, i) {
-						zoomCityComm(d);
-						return tooltip.style("visibility", "visible").style("top", (d3.event.pageY + 5) + "px").style("left",(d3.event.pageX + 5) + "px")
-					})
-					.on("mouseout", function(d, i) {
-						return tooltip.style("visibility", "hidden");
-					});
-					drawWhiskers();			
-				};
-				if (mapChoice=="exchange") {
-					drawHistogram(exchangeType);
-				}
+			
+		if (textGen) {textGen.remove();};
+		var dataText=new Array();
+		if (mapChoice=="commercial") dataText=["FLOWS","Minimum: "+min.flow,"Maximum: "+max.flow,"Mean: "+mean.flow];
+		if (mapChoice=="pop") dataText=["POPULATION","Minimum: "+min.pop,"Maximum: "+max.pop,"Mean: "+mean.pop];
+		if (mapChoice=="wealth") dataText=["WEALTH","Minimum: "+min.wealth,"Maximum: "+max.wealth,"Mean: "+mean.wealth];
+			
+		textGen=LegendContainerText.selectAll("text")
+			.data(dataText)
+			.enter()
+			.append("text");
+
+		var textLabelsGen=textGen
+			.attr("x",function(d,i) {return 20})
+			.attr("y",function(d,i) {return 20*(i+1)})
+			.text(function(d) {return d})
+			.attr("font-family", "sans-serif")
+			.attr("font-size", "15px");				
 		
-			}
+		};
 
-		function fetchDataNodes(mapChoice,mini,maxi,exchangeType) {
+		function fetchDataNodes(mapChoice,mini,maxi) {
 			resNodes=new Array();
 			pop2010=new Array();
 			if (mapChoice=='pop') {
@@ -414,17 +383,12 @@
 			}
 			if (mapChoice=='exchange') {
 				for (var i in cities_flows) {
-					if (exchangeType=="out") {
-						var somme=parseFloat(cities_flows[i][0].totalOut);
+					var somme=parseFloat(cities_flows[i][0].totalOut);
+					if (somme != 0) {
+						resNodes.push([cities_flows[i][0].orig,Math.round(somme*100)/100]);
 					}
-					else {
-						var somme=parseFloat(cities_flows[i][0].totalIn);
-					}
-					
-					resNodes.push([cities_flows[i][0].orig,Math.round(somme*100)/100]);
 				}
 			}
-			
 			if (mapChoice=='exchangeBis') {
 				for (var i in cities_flows) {
 					var somme=parseInt(cities_flows[i][0].nbFrom)+parseInt(cities_flows[i][0].nbTo);
@@ -449,38 +413,31 @@
 			return res;
 		}*/
 		function fetchDataLinks(direction,mini,maxi,thresh) {
+
 			var res=new Array();
-			var city=new Array();
 			for (var i in cities_flows) {
 				for (var j in cities_flows[i][1]) {
-					distance=Math.round(cities_flows[i][1][j].distance/1000);
-					flow=parseFloat(cities_flows[i][1][j].weight*100)/100;
-					if (flow>=mini && flow<=maxi) {
-						if (direction=="out") {
-							percent=(flow/cities_flows[i][0].totalOut)*100;
-						}
-						if (direction=="in") {
-							for (var k in cities_flows) {
-								if (cities_flows[k][0].orig==cities_flows[i][1][j].dest) {
-									percent=Math.round((flow/cities_flows[k][0].totalIn)*100);
-									//if (cities_flows[i][1][j].dest=="AR45") {console.log(cities_flows[i][0].orig+" "+percent)};
-									break;
-								}
+					flow=Math.round(parseFloat(cities_flows[i][1][j].weight)*100)/100;
+					percent=Math.round((flow/cities_flows[i][0].totalOut)*100);
+					if (direction=="out" & flow>=mini && flow<=maxi && percent>=thresh) {
+						res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,percent]);
+					}
+					if (direction=="in" & flow>=mini && flow<=maxi && flow>=thresh) {
+						for (var k in cities_flows) {
+							if (cities_flows[k][0].orig==cities_flows[i][1][j].dest) {
+								percent=Math.round((flow/cities_flows[k][0].totalIn)*100);
+								break;
 							}
 						}
 						if (percent>=thresh) {
-							res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,Math.round(percent*100)/100,flow,distance]);
-							city.push(cities_flows[i][0].orig);
-							city.push(cities_flows[i][1][j].dest);
+							res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,percent]);
 						}
 					}
 				}
 			}
-			cities.attr("display","none");
-			cities.filter(function(d) {present=false;for (var i=0;i<city.length;i++) {if (city[i]==d[0]) {present=true;break}};return present}).attr("display","true");
 			return res;
 		}
-
+		
 		function applyStyleNodes(d,mapChoice) {
 			if (mapChoice=="commercial") {
 				if (d[1]>0) {return "red"};
@@ -493,29 +450,25 @@
 		};
 		
 		function cityMouseOver(elem,d,click) {
-			city=[];
-			city.push(elem.attr("id"));
-			if (document.getElementById("exchangeType").value=="out") {
-				lines.filter(function(e) {return d3.select(this).attr("display")!="none"})
-				.filter(function(e) {if (e[0]!=d[0]) {return true} else {city.push(e[1])}}).attr("display","none");
-			}
-			else {
-				lines.filter(function(e) {return d3.select(this).attr("display")!="none"})
-				.filter(function(e) {if (e[1]!=d[0]) {return true} else {city.push(e[0])}}).attr("display","none");
-			}
+			cityTo=[];
+			cityFrom=[];
+			flowTo=0;
+			flowFrom=0;
+			cityTo.push(elem.attr("id"));
+			lines.filter(function(e) {if (e[0]==d[0]) {cityTo.push(e[1]);flowFrom+=e[2]};return e[0]==d[0]}).attr("stroke","blue").attr("stroke-width",1.5);
+			lines.filter(function(e) {if (e[1]==d[0]) {cityFrom.push(e[0]);flowTo+=e[2]};return e[1]==d[0]}).attr("stroke","red").attr("stroke-width",1.5);
+			lines.filter(function(e) {return (e[0]!=d[0] && e[1]!=d[0])}).attr("display","none");
 			cities.filter(function(e) {return e[0]!=d[0]}).attr("display","none");
-			cities.filter(function(e) {for (j in city) {if (e[0]==city[j]) {return true; break;}}}).attr("display","true");
+			cities.filter(function(e) {var city=cityTo.concat(cityFrom);for (j in city) {if (e[0]==city[j]) {return true; break;}}}).attr("display","true");
+			return {cityFrom:cityFrom,cityTo:cityTo,flowFrom:Math.round(flowFrom*100)/100,flowTo:Math.round(flowTo*100)/100};
 		}
 		
 		function cityMouseOut(elem,d) {
-			/*lines.attr("display","true");
+			elem.attr("r",function(d) {if (d[3]>=0) {return scale(d[3])} else {return scale(-1*d[3])}});
+			lines.attr("display","true");
 			lines.attr("stroke",function(d) {return d3color(color_scale(d[2]))});
-			lines.attr("stroke-width",function(d) {return width_scale(d[3])});
-			cities.attr("display","true");*/
-			if (document.getElementById("preferred").checked) {
-				prefLinks(document.getElementById("exchangeType").value);
-			}
-			
+			lines.attr("stroke-width",function(d) {return width_scale(d[2])});
+			cities.attr("display","true");
 		}
 		
 		function attrR(d,mapChoice,scale) {
@@ -538,19 +491,8 @@
 			//features.select(".county-border").style("stroke-width", .5 / d3.event.scale + "px");
 		};
 		
-		function prefLinks(typeEx) {
-			if (typeEx=="out") {
-				var old='';
-				lines.sort(firstBy(function (a,b) {return d3.ascending(a[0],b[0]);})
-						.thenBy(function (a,b) {return Math.abs(b[2])-Math.abs(a[2]);}))
-					.filter(function (e) {if (e[0]!=old) {old=e[0]} else {return true}}).attr("display","none");
-			}
-			else {
-				var old='';
-				lines.sort(firstBy(function (a,b) {return d3.ascending(a[1],b[1]);})
-						.thenBy(function (a,b) {return Math.abs(b[2])-Math.abs(a[2]);}))
-					.filter(function (e) {if (e[1]!=old) {old=e[1]} else {return true}}).attr("display","none");
-			}
+		function prefLinks() {
+			alert (lines);
 		}
 		
 		function eraseGraph(graph) {
@@ -809,224 +751,6 @@
 			
 		};
 		
-		function drawHistogram(direction) {
-			var res=new Array()
-			var hist2={};
-			var cat=new Array();
-			var dat=new Array();
-			if (direction=="out") {
-				lines.filter(function(e) {return d3.select(this).attr("display")!="none"})
-					 .each(function(e) {res.push(e[0])});
-			}
-			else {
-				lines.filter(function(e) {return d3.select(this).attr("display")!="none"})
-					 .each(function(e) {res.push(e[1])});
-			}
-			var hist = res.reduce( function (prev, item) { 
-				if (item in prev ) prev[item] ++; 
-				else prev[item] = 1; 
-				return prev; 
-			}, {} );
-			for (var i in hist) {
-				if (parseInt(hist[i]) in hist2) hist2[parseInt(hist[i])]++;
-				else hist2[parseInt(hist[i])]=1;
-			}
-			var max=0;
-			for (var i in hist2) {
-				if (parseInt(i)>max) max=parseInt(i);
-			}
-			for (var i=1;i<=max;i++) {
-				cat.push(i);
-				trouve=false;
-				for (var j in hist2) {
-					if (i==j) {dat.push(hist2[j]);trouve=true;break;};
-				}
-				if (trouve==false) dat.push(0);
-			}
-
-			chart = new Highcharts.Chart({
-				chart : {
-					renderTo: 'graph',
-					defaultSeriesType:'column',
-					borderWidth:0,
-					backgroundColor:'#eee',
-					borderWidth:1,
-					borderColor:'#ccc',
-					plotBackgroundColor:'#FCFFC5',
-					plotBorderWidth:1,
-					plotBorderColor:'#ccc'
-				},
-				title:{text:'Histogram Test'},
-				legend:{
-					//enabled:false
-				},
-				tooltip:{
-					borderWidth:1,
-					formatter:function() {
-						return '<b>Range:</b><br/> '+ this.x +'<br/>'+
-						'<b>Count:</b> '+ this.y;
-					}
-				},
-				plotOptions:{
-					column:{
-						shadow:false,
-						borderWidth:.5,
-						borderColor:'#666',
-						pointPadding:0,
-						groupPadding:0,
-						color: 'rgba(204,204,204,.85)',
-					},
-					spline:{
-						shadow:false,
-						marker:{
-							radius:1
-						}
-					},
-					areaspline:{
-						color:'rgb(69, 114, 167)',
-						fillColor:'rgba(69, 114, 167,.25)',
-						shadow:false,
-						marker:{
-							radius:1
-						}
-					},
-					series:{
-						cursor:'pointer',
-						point:{
-							events:{
-								mouseOver: function(){
-									for (var i in hist) {
-										if (hist[i]==this.category) {
-											cities.filter(function(e) {if (e[0]==i) return true}).style("fill","red");
-										}
-									}
-								},
-								mouseOut: function(){ cities.style("fill","#A1D99B")}
-									
-							}
-						}
-					}
-				},
-				xAxis:{
-					categories: cat,//['> 48.00 =< 51.81','> 51.81 =< 54.63','> 54.63 =< 57.44','> 57.44 =< 60.25','> 60.25 =< 63.06','> 63.06 =< 65.88','> 65.88 =< 68.69','> 68.69 =< 71.50','> 71.50 =< 74.31','> 74.31 =< 77.13','> 77.13 =< 79.94','> 79.94 =< 82.75','> 82.75 =< 85.56','> 85.56 =< 88.38','> 88.38 =< 91.19','> 91.19 =< 94.00'],
-					labels:{
-						enabled:false,
-						style: {
-							fontSize:'8px',
-							fontWeight:'normal',
-							color:'#333'
-						},
-					},
-					lineWidth:0,
-					lineColor:'#999',
-					//tickLength:70,
-					tickColor:'#ccc',
-				},
-				yAxis:{
-					title:{text:''},
-					//maxPadding:0,
-					tickWidth:1,
-					tickColor:'#ccc',
-					lineColor:'#ccc',
-					endOnTick:false,
-				},
-				series: [{
-					name:'Bins',
-					data: dat//[3,2,1,6,10,5,13,9,14,21,23,66,47,14,5,2],
-				},{
-					name:'Curve',
-					type:'spline',
-					visible:false,
-					data: dat,//[3,2,1,6,10,5,13,9,14,21,23,66,47,14,5,2],
-					//color: 'rgba(204,204,255,.85)'
-				},{
-					name:'Filled Curve',
-					type:'areaspline',
-					visible:false,
-					data: dat,//[3,2,1,6,10,5,13,9,14,21,23,66,47,14,5,2],
-					//color: 'rgba(204,204,255,.85)'
-				}]
-			});
-		}
-		
-		function drawWeightByDistance() {
-			var res=new Array();
-			lines.filter(function(e) {return d3.select(this).attr("display")!="none"})
-					 .each(function(e) {res.push([e[4],e[3]])});
-			chart = new Highcharts.Chart({
-					chart: {
-						renderTo: 'graph',
-						type: 'scatter',
-						width:300,
-						/*height:500,*/
-						plotBackgroundColor: '#FCFFC5',
-						zoomType: 'xy'
-					},
-					title: {
-						text: 'Weight by distance',
-						style: {
-							color: "black"
-						}
-					},
-					legend: {
-						enabled: false
-					},
-					xAxis: {
-						title: {
-							enabled:true,
-							text: "Distance",
-							style: {
-								color: "black",
-								fontSize: '11px',
-								fontWeight: 'normal'
-							}
-						},
-						startOnTick: true,
-						endOnTick: true,
-						showLastLabel: true
-					},
-					yAxis: {
-						type:"logarithmic",
-						title: {
-							text: "Weight",
-							style: {
-								color:"black",
-								fontSize:'11px',
-								fontWeight:'normal'
-							}
-						}
-					},
-					plotOptions: {
-						scatter: {
-							marker: {
-								radius: 1,
-								states: {
-									hover: {
-										enabled: true,
-										lineColor: 'rgb(100,100,100)'
-									}
-								}
-							},
-							states: {
-								hover: {
-									marker: {
-										enabled: false
-									}
-								}
-							},
-							tooltip: {
-								headerFormat: '<b>{series.name}</b><br />',
-								pointFormat: 'x = {point.x}, y = {point.y}'
-							}
-						}
-					},
-					series: [{data:res}]
-					
-				});
-				//console.log(res);
-			};
-			
-		
 		function drawWhiskersFlow() {
 			
 			chartFlow=new Highcharts.Chart({
@@ -1084,12 +808,8 @@
 		</script>
 	</head>
 	<body>
-		<div id="header">
-			<class id="step"></class>
-			<class id="info"></div>
-		</div>
-		<div id="map"></div>
-		<div style="float:right" id="commentdiv">
+		<div style="float:left" id="map"></div>
+			<div style="float:left" id="commentdiv">
 			<div style="float:bottom;height:40px" id="choice">Variable:
 				<SELECT name="mapType" id="mapType" onChange='var val=this.options[this.selectedIndex].value;onChangeType(val)'>
 					<OPTION id="default" value="" selected="selected"></option>
@@ -1104,45 +824,32 @@
 			</div>
 			<div style="float:bottom;height:40px">
 				<div style="float:left">Minimum: <input type="text" id="from" size=3 onChange='onChangeButton()'></div>
-				<div style="float:right">Maximum: <input type="text" id="to" size=3 onChange='onChangeButton()'></div>
+				<div style="float:right">Maximum: <input type="text" id="to" size=3 onChange='var threshold=document.getElementById("exPerc").value;draw(document.getElementById("mapType").value,document.getElementById("from").value,this.value,threshold)'></div>
 			</div>
 			<div style="float:bottom;visibility:hidden" id="divextype">
-			Direction:
-				<SELECT name="exchangeType" id="exchangeType" onChange='onChangeButton()'>
+				<SELECT name="exchangeType" id="exchangeType" onChange='var val=this.options[this.selectedIndex].value;draw("exchange",document.getElementById("from").value,document.getElementById("to").value,val,document.getElementById("exPerc").value)'>
 					<OPTION id="default" value="" selected="selected"></option>
 					<OPTION VALUE="out">Sell
 					<OPTION VALUE="in">Buy
 				</SELECT>
-				<div style="float:bottom" id="divexPerc">
+
 				Minimum threshold:
-					<SELECT name="exPerc" id="exPerc" onChange='onChangeButton()'>
+				<div style="float:bottom" id="divexPerc">
+					<SELECT name="exPerc" id="exPerc" onChange='var val=this.options[this.selectedIndex].value;draw("exchange",document.getElementById("from").value,document.getElementById("to").value,document.getElementById("exchangeType").value,val)'>
 						<OPTION id="default" value="0" selected="selected">0%
 						<OPTION VALUE="25">25%
 						<OPTION VALUE="50">50%
 						<OPTION VALUE="75">75%
 					</SELECT>
 				</div>
-				Preferred Links:
-				<input type="checkbox" id="preferred" onChange='onChangeButtonDir();'>
+				<input type="checkbox" id="preferred" onChange='prefLinks();'>
 			</div>
 			<div style="float:bottom;border-style:solid" id="legenddiv"></div>
 			<div style="float:bottom;height:100px" id="legendtext"></div>
-			<div style="float:bottom;visibility:hidden" id="divgraphchoice">
-			Choose a graphic:
-				<SELECT name="graphicType" id="graphicType" onChange='onChangeButtonGraph()'>
-					<OPTION id="default" value="" selected="selected"></option>
-					<OPTION VALUE="histo">Histogramm
-					<OPTION VALUE="distweight">Weight by distance
-				</SELECT>
-			</div>
 			<div style="float:bottom;height:400px" id="graph"></div>
 			<div style="float:bottom" id="graph2"></div>
 		</div>
 	<script type="text/javascript">
-		var newYear=parseInt(header.yearBegin)+parseInt(header.oneStep)*parseInt(header.step);
-		document.getElementById("step").innerHTML=header.version+"Step: "+parseInt(header.step)+"/"+parseInt(header.totalStep);
-		document.getElementById("info").innerHTML="Year begin: "+parseInt(header.yearBegin)+"  Year end: "+parseInt(header.yearEnd);
-	
 		var tooltip = d3.select("body")
 				.append("div")
 				.attr("id","tooltip")
@@ -1217,8 +924,7 @@
 		features.enter()
 			.append("path")
 			.attr('class', 'REGION')
-			.attr('fill', '#BCBDDC')//#f6f4f2')
-			.style("fill-opacity",0.6)
+			.attr('fill', '#f6f4f2')
 			.attr('stroke', '#aaa')
 			.attr('stroke-width',0.5)
 			.attr("d", path)
@@ -1248,12 +954,10 @@
 			slider(val);
 			if (val!="exchange") {
 				document.getElementById("divextype").style.visibility="hidden";
-				document.getElementById("divgraphchoice").style.visibility="hidden";
 				draw(val,document.getElementById("from").value,document.getElementById("to").value,0);
 			} 
 			else {
 				document.getElementById("divextype").style.visibility="visible";
-				document.getElementById("divgraphchoice").style.visibility="visible";
 			}
 		}
 		
@@ -1261,29 +965,8 @@
 			var map=document.getElementById("mapType").value;
 			var min=document.getElementById("from").value;
 			var max=document.getElementById("to").value;
-			var typeEx=document.getElementById("exchangeType").value;
 			var threshold=document.getElementById("exPerc").value;
-			document.getElementById("preferred").checked=false;
-			draw(map,min,max,typeEx,threshold);
-		}
-		
-		function onChangeButtonDir() {
-			var typeEx=document.getElementById("exchangeType").value;
-			var pref=document.getElementById("preferred").checked;
-			if (pref==true) {
-				prefLinks(typeEx);
-			}
-			else {
-				onChangeButton();
-			}
-		}
-		
-		function onChangeButtonGraph() {
-			var typeGraphic=document.getElementById("graphicType").value;
-			var typeEx=document.getElementById("exchangeType").value;
-			eraseGraph(graph);
-			if (typeGraphic=="histo") drawHistogram(typeEx);
-			if (typeGraphic=="distweight") drawWeightByDistance();
+			draw(map,min,max,threshold);
 		}
 		
 		function drawSlider(min,max) {
