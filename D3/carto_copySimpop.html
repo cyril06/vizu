@@ -42,7 +42,6 @@
 		<script src="map.js"></script>
 		<script src="../files/simpopreal.js"></script>
 		<script src="../files/simpopexchange.js"></script>
-		<script src="../files/simpopallpop.js"></script>
 		<script type="text/javascript">
 
 			var svg;
@@ -83,15 +82,16 @@
 					.center([-10, 65])
 					.parallels([52, 64])
 					.scale(700);
+					
+ 
+				path.projection(projection); // On assigne la projection au path
 			}
 			else {
-				var path = d3.geo.path();
-				var projection = d3.geo.equirectangular()
+				var path = d3.geo.path()
+				var projection = d3.geo.mercator()
 					.center([0,0])
 					.scale(400);
 			}
-			
-			path.projection(projection); // On assigne la projection au path
 			
 			var zoom = d3.behavior.zoom()
 				.translate([0, 0])
@@ -118,9 +118,9 @@
 			}
 				
 			function getName(id) {
-				for (var i=0;i < cities_def.length;i++) {
-					if (cities_def[i].id==id) {
-						return cities_def[i].name;
+				for (var i=0;i < cities.length;i++) {
+					if (cities[i].id==id) {
+						return cities[i].name;
 						break;
 					}
 				}
@@ -157,7 +157,7 @@
 					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([mini,maxi]);
 					//drawSlider(min.wealth,max.wealth);
 				};
-				if (mapChoice=="exchange"){
+				if (mapChoice=="exchange" && model=='marius'){
 					if (exchangeType=="in") {
 						scale=scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([0,dataGen.exchange.maxSumIn]);
 					}
@@ -167,6 +167,10 @@
 					color_scale = d3.scale.linear().range([0, 1]).domain([threshold,100]);
 					width_scale = d3.scale.linear().range([0.3, 3]).domain([mini,maxi]);
 				};
+				if (mapChoice=="exchange" && model=='simpoplocal'){
+					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([dataGen.pop.min,dataGen.pop.max]);
+					color_scale = d3.scale.linear().range([0, 1]).domain([0,100]);
+				}
 				
 				/*res=new Array();
 				resNodes=new Array();
@@ -222,14 +226,14 @@
 					.style("stroke-width",0.5)
 					.style("fill-opacity",0.8)
 					.on("mouseover", function(d){var elem=d3.select(this);
-												if (mapChoice=="exchange") {
+												if (mapChoice=="exchange" && model=='marius') {
 													if (click==false) {
 														cityMouseOver(elem,d);
 													}
 												}
 												})
 					.on("mouseout",function(d){var elem=d3.select(this);
-												if (mapChoice=="exchange") {
+												if (mapChoice=="exchange" && model=='marius') {
 													if (click==false) {
 														draw(mapChoice,mini,maxi,exchangeType,threshold);
 														cityMouseOut(elem,d);
@@ -243,18 +247,24 @@
 										})*/
 					.sort(function (a,b) {return Math.abs(b[1])-Math.abs(a[1])});
 						
-					cities.append("svg:title")
-						  .text(function(d) {return getName(d[0])+"   "+mapChoice+" : "+d[1]});
+					/*cities.append("svg:title")
+						  .text(function(d) {return getName(d[0])+"   "+mapChoice+" : "+d[1]});*/
 			
 				if (mapChoice=="exchange") {
 					lines=country.selectAll("line")
 					 .data(function() {
-										if (exchangeType=="in") {
-											return fetchDataLinks("in",mini,maxi,threshold);
+										if (model=='marius') {
+											if (exchangeType=="in") {
+												return fetchDataLinks("in",mini,maxi,threshold);
+											}
+											else {
+												return fetchDataLinks("out",mini,maxi,threshold);
+											}
 										}
-										else {
-											return fetchDataLinks("out",mini,maxi,threshold);
+										if (model=='simpoplocal') {
+											return fetchDataLinks("",mini,maxi,0);
 										}
+										
 									})
 					 .enter()
 					 .append("line")
@@ -366,13 +376,6 @@
 				if (mapChoice=="pop") {
 					genRankPop(resNodes,pop2010);
 					drawUrbanPop(resNodes,pop2010);
-					cities.on("mouseover", function(d, i) {
-						zoomCityPop(d);
-						return tooltip.style("visibility", "visible").style("top", (d3.event.pageY + 5) + "px").style("left",(d3.event.pageX + 5) + "px")
-					})
-					.on("mouseout", function(d, i) {
-						return tooltip.style("visibility", "hidden");
-					});
 				};	  
 				if (mapChoice=="commercial") {
 					cities.on("mouseover", function(d, i) {
@@ -387,7 +390,6 @@
 				if (mapChoice=="exchange") {
 					drawHistogram(exchangeType);
 				}
-				
 		
 			}
 
@@ -419,7 +421,7 @@
 					}
 				}
 			}
-			if (mapChoice=='exchange') {
+			if (mapChoice=='exchange' && model=='marius') {
 				for (var i in cities_flows) {
 					if (exchangeType=="out") {
 						var somme=parseFloat(cities_flows[i][0].totalOut);
@@ -429,6 +431,12 @@
 					}
 					
 					resNodes.push([cities_flows[i][0].orig,Math.round(somme*100)/100]);
+				}
+			}
+			if (mapChoice=='exchange' && model=='simpoplocal') {
+				for (var i in cities_flows) {
+					pop=Math.round(cities_flows[i][0].pop*100)/100;
+					resNodes.push([cities_flows[i][0].orig,pop]);
 				}
 			}
 			
@@ -458,34 +466,42 @@
 		function fetchDataLinks(direction,mini,maxi,thresh) {
 			var res=new Array();
 			var city=new Array();
-			for (var i in cities_flows) {
-				for (var j in cities_flows[i][1]) {
-					distance=Math.round(cities_flows[i][1][j].distance/1000);
-					flow=parseFloat(cities_flows[i][1][j].weight*100)/100;
-					if (flow>=mini && flow<=maxi) {
-						if (direction=="out") {
-							percent=(flow/cities_flows[i][0].totalOut)*100;
-						}
-						if (direction=="in") {
-							for (var k in cities_flows) {
-								if (cities_flows[k][0].orig==cities_flows[i][1][j].dest) {
-									percent=Math.round((flow/cities_flows[k][0].totalIn)*100);
-									//if (cities_flows[i][1][j].dest=="AR45") {console.log(cities_flows[i][0].orig+" "+percent)};
-									break;
+			if (model=='marius') {
+				for (var i in cities_flows) {
+					for (var j in cities_flows[i][1]) {
+						distance=Math.round(cities_flows[i][1][j].distance/1000);
+						flow=parseFloat(cities_flows[i][1][j].weight*100)/100;
+						if (flow>=mini && flow<=maxi) {
+							if (direction=="out") {
+								percent=(flow/cities_flows[i][0].totalOut)*100;
+							}
+							if (direction=="in") {
+								for (var k in cities_flows) {
+									if (cities_flows[k][0].orig==cities_flows[i][1][j].dest) {
+										percent=Math.round((flow/cities_flows[k][0].totalIn)*100);
+										//if (cities_flows[i][1][j].dest=="AR45") {console.log(cities_flows[i][0].orig+" "+percent)};
+										break;
+									}
 								}
 							}
-						}
-						if (percent>=thresh) {
-							res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,Math.round(percent*100)/100,flow,distance]);
-							city.push(cities_flows[i][0].orig);
-							city.push(cities_flows[i][1][j].dest);
+							if (percent>=thresh) {
+								res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,Math.round(percent*100)/100,flow,distance]);
+								city.push(cities_flows[i][0].orig);
+								city.push(cities_flows[i][1][j].dest);
+							}
 						}
 					}
 				}
+				cities.attr("display","none");
+				cities.filter(function(d) {present=false;for (var i=0;i<city.length;i++) {if (city[i]==d[0]) {present=true;break}};return present}).attr("display","true");
 			}
-			cities.attr("display","none");
-			cities.filter(function(d) {present=false;for (var i=0;i<city.length;i++) {if (city[i]==d[0]) {present=true;break}};return present}).attr("display","true");
-			
+			if (model=='simpoplocal') {
+				for (var i in cities_flows) {
+					for (var j in cities_flows[i][1]) {
+						res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,100,cities_flows[i][1][j].weight,0]);
+					}
+				}
+			}
 			return res;
 		}
 
@@ -614,76 +630,6 @@
 						style: {
 							color: '#4572A7'
 							}
-					},
-				},
-				series:[{color: '#4572A7',data: res}]
-			});
-			return document.getElementById("tooltip").innerHTML;
-		}
-		
-		function zoomCityPop(d) {
-			var res=new Array();
-			for (var i=0;i<cities_pop.length;i++) {
-				if (cities_pop[i][0].id==d[0]) {
-					for (var j=0;j<cities_pop[i][1].length;j++) {
-						if (parseInt(cities_pop[i][1][j].step)==0) step=1; else step=parseInt(cities_pop[i][1][j].step);
-						res.push([step,parseFloat(cities_pop[i][1][j].pop)]);
-					}
-					break;
-				}
-			};
-
-			chart = new Highcharts.Chart({
-				chart : {
-					renderTo: 'tooltip',
-					type: 'line',
-					width:200,
-					height:200,
-					plotBackgroundColor: '#FCFFC5',
-					zoomType: 'xy'
-				},
-				plotOptions: {
-					line: {
-						lineWidth: 0.8,
-						marker: {
-							radius: 0
-						},
-						pointToStart:1
-					}
-				},
-				title: {
-					text: getName(d[0])
-				},
-				subtitle: {
-					text: "Population: "+parseInt(d[1])
-				},
-				legend: {
-					enabled: false
-				},	
-				xAxis: {
-					title:{
-						enabled:true,
-						text:'Step'
-					},
-					min:1,
-					labels: {
-						formatter: function() {
-							return this.value;
-						}
-					}
-				},
-				yAxis: {
-					title: {
-						text: 'Population (Log)',
-					},
-					type: 'logarithmic',
-					labels: {
-						style: {
-							color: '#4572A7'
-							},
-						formatter: function() {
-							return this.value;
-						}
 					},
 				},
 				series:[{color: '#4572A7',data: res}]
