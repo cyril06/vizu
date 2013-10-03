@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
 		<meta charset="utf-8">
-        <title>D3 map</title>
+        <title>Data from models</title>
 		
 		<link rel="stylesheet" href="nouislider.space.css" type="text/css">
 		<link rel="stylesheet" href="nouislider.fox.css" type="text/css">
@@ -10,41 +10,64 @@
 		<style>
 			div#header{
 				position: floated;
-				border: 2px solid gray;
+				border: 1px solid gray;
 				margin: 2px;
 				padding:2px;
 			}
-			#step{
+			div#step{
 				position: floated;
 				color: red;
 				font-family: sans;
-				font-size: 40px;
+				font-size: 35px;
+				padding:400px;
 			}
 			#info{
 				position: floated;
-				color: black;
+				color: red;
 				font-family: sans;
-				font-size: 20px;
+				font-size: 35px;
+				padding:400px;
+			}
+			#slidertime{
+				position: floated;
 			}
 			div#map{
 				position: absolute;
 				top: 60px;
 			}
+			div#help{
+				position:absolute;
+				top:25px;
+				right:80px;
+				font-family: sans;
+				font-size: 21px;
+			}
+			div#commentmouse{
+				position:absolute;
+				top:600px;
+				right:500px;
+				color: grey;
+				font-family: sans;
+				font-size: 14px;
+				font-style:italic;
+			}
 		</style>
 		
 		<script src="d3.v3.min.js"></script>
-
 		<script src="../HighCharts/jquery-1.9.1.min.js"></script>
 		<script src="jquery.nouislider.min.js"></script>
 		<script src="../HighCharts/highcharts.js"></script>
 		<script src="../HighCharts/highcharts-more.js"></script>
 		<script src="thenBy.min.js"></script>
-		<script src="map.js"></script>
+		
+		<script src="map_square.js"></script>
 		<script src="../files/simpopreal.js"></script>
 		<script src="../files/simpopexchange.js"></script>
 		<script src="../files/simpopallpop.js"></script>
+		
+		<script src="../files/simpopalltime.js"></script>
+		
 		<script type="text/javascript">
-
 			var svg;
 			var LegendContainer;
 			var LegendContainerText;
@@ -107,6 +130,7 @@
 			var chartFlow;
 			var resNodes;
 			var pop2010;
+			var popInit;
 		
 			function getLonLat(id2) {
 				for (var i=0;i < cities_def.length;i++) {
@@ -125,6 +149,14 @@
 					}
 				}
 			}
+			
+			/*function getMaxMin(step){
+				var max={flow:Math.round(dataGen.flow.max*100)/100,pop:Math.round(dataGen.pop.max*100)/100,wealth:Math.round(dataGen.wealth.max*100)/100,totalPos:Math.round(dataGen.commercial.maxPos*100)/100,totalNeg:Math.round(dataGen.commercial.maxNeg*100)/100};
+			var min={flow:Math.round(dataGen.flow.min*100)/100,pop:Math.round(dataGen.pop.min*100)/100,wealth:Math.round(dataGen.wealth.min*100)/100,totalPos:Math.round(dataGen.commercial.minPos*100)/100,totalNeg:Math.round(dataGen.commercial.minNeg*100)/100};
+				for (var i in alltimeexchange) {
+					if {alltimeexchange[i][0].step==step) {
+						for (var j in alltimeexchange[i][1][j]) {
+							if*/
 			
 			function slider(mapChoice) {
 				if (mapChoice=="commercial") {	
@@ -145,17 +177,13 @@
 			
 				if (mapChoice=="commercial") {	
 					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain(domainExchange);
-					
-					//drawSlider(domain[0],domain[1]);
 				};
 				if (mapChoice=="pop") {
 					//scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([min.pop,max.pop]);
 					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([mini,maxi]);
-					//drawSlider(min.pop,max.pop);
 				};
 				if (mapChoice=="wealth") {
 					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([mini,maxi]);
-					//drawSlider(min.wealth,max.wealth);
 				};
 				if (mapChoice=="exchange"){
 					if (exchangeType=="in") {
@@ -217,6 +245,7 @@
 					})
 					.attr("id",function(d) {return d[0]})
 					.attr("r", function(d) {return attrR(d,mapChoice,scale)})
+					.attr("value",function(d) {return parseInt(parseFloat(d[1]*100)/100)})
 					.style("fill",function(d) {return applyStyleNodes(d,mapChoice)})
 					.style("stroke","#fff")
 					.style("stroke-width",0.5)
@@ -235,16 +264,10 @@
 														cityMouseOut(elem,d);
 													}
 													}})
-					/*.on("click",function(d){var elem=d3.select(this);
-											if (mapChoice=="commercial") {
-												eraseGraph(graph2);
-												zoomCityComm(d);	
-											}
-										})*/
 					.sort(function (a,b) {return Math.abs(b[1])-Math.abs(a[1])});
 						
-					cities.append("svg:title")
-						  .text(function(d) {return getName(d[0])+"   "+mapChoice+" : "+d[1]});
+					/*cities.append("svg:title")
+						  .text(function(d) {return getName(d[0])+"   "+mapChoice+" : "+d[1]});*/
 			
 				if (mapChoice=="exchange") {
 					lines=country.selectAll("line")
@@ -284,7 +307,7 @@
 						var y=coord[1];
 						return projection([x, y])[1];
 					})
-					/*.on("mouseover",function(d) {var elem=d3.select(this);
+					.on("mouseover",function(d) {var elem=d3.select(this);
 												 if (click==false) {
 													lines.filter(function(e) {return (e[0]!=elem.attr("from") || e[1]!=elem.attr("to"))}).attr("display","none");
 													cities.filter(function(e) {return (e[0]!=elem.attr("from") && e[0]!=elem.attr("to"))}).attr("display","none");
@@ -294,78 +317,51 @@
 													lines.attr("display","true");
 													cities.attr("display","true")
 												}
-												})*/
+												})
 					.attr("stroke",function(d) {return d3color(color_scale(d[2]))})
 					.attr("marker-end", "url(#arrow)")
 					.attr("stroke-width",function(d) {return width_scale(d[3])});
 
 					
 					lines.append("svg:title")
-						 .text(function (d) {return ("From: "+getName(d[0])+"  To: "+getName(d[1])+"   Value: "+d[2])});
+						 .text(function (d) {return ("From: "+getName(d[0])+"  To: "+getName(d[1])+"    Percent: "+d[2]+"   Value: "+d[3])});
 						 
 				}
 				else { if (lines) {lines.remove();}};
 				
-				if (mapChoice=="commercial") {var dataLegend=[domainExchange[1],domainExchange[0]]};
-				if (mapChoice=="pop") {var dataLegend=[maxi,mini]};
-				if (mapChoice=="wealth") {var dataLegend=[maxi,mini]};
+				//LEGEND
 				
 				if (legendCircles) {legendCircles.remove()};
-		
-				/*legendCircles=LegendContainer.selectAll("circle")
-					.data(dataLegend)
+				sizeMaxMin=lookForMaxMin() //recherche du rayon et de la valeur associee au cercle de plus grande/petite taille
+				legendCircles=LegendContainer.selectAll("circle")
+					.data(sizeMaxMin[0])
 					.enter()
 					.append("circle")
 					.attr("cx",function(d,i){return (10+sizeMaxCircle*(i+1)+(i*sizeMaxCircle))})
 					.attr("cy",10+sizeMaxCircle)
-					.attr("r",function(d){return scale(d)})
+					.attr("r",function(d){return d})
 					.attr("stroke","#aaa")
 					.attr("stroke-width",2)
-					.attr("fill","white");*/
+					.attr("fill","white");
 			
 				if (text) {text.remove();};
 			
-				/*text=LegendContainer.selectAll("text")
-					.data(function(d) { if (mapChoice=="commercial") return(["Abs(Max) = "+domainExchange[1]])
-						if (mapChoice=="pop") return(["Max = "+maxi])
-						if (mapChoice=="wealth") return(["Max = "+maxi])})
+				text=LegendContainer.selectAll("text")
+					.data(sizeMaxMin[1])
 					.enter()
 					.append("text");
 											
 				var textLabels=text
-					.attr("x",function(d) {return sizeMaxCircle/2})
-					.attr("y",function(d) {return 3*sizeMaxCircle})
+					.attr("x",function(d,i) {return sizeMaxCircle*(i+1)+(i*sizeMaxCircle)})
+					.attr("y",function(d,i) {return 3*sizeMaxCircle})
 					.text(function(d) {return d})
 					.attr("font-family", "sans-serif")
-					.attr("font-size", "10px");	*/
-			
-				if (textGen) {textGen.remove();};
-				var dataText=new Array();
-				if (mapChoice=="commercial") dataText=["FLOWS","Minimum: "+min.flow,"Maximum: "+max.flow,"Mean: "+mean.flow];
-				if (mapChoice=="pop") dataText=["POPULATION","Minimum: "+min.pop,"Maximum: "+max.pop,"Mean: "+mean.pop];
-				if (mapChoice=="wealth") dataText=["WEALTH","Minimum: "+min.wealth,"Maximum: "+max.wealth,"Mean: "+mean.wealth];
-				
-			
-				textGen=LegendContainerText.selectAll("text")
-					.data(dataText)
-					.enter()
-					.append("text");
-
-				var textLabelsGen=textGen
-					.attr("x",function(d,i) {return 20})
-					.attr("y",function(d,i) {return 20*(i+1)})
-					.text(function(d) {return d})
-					.attr("font-family", "sans-serif")
-					.attr("font-size", "15px");
+					.attr("font-size", "10px");
+				//Pie: villes presentes/absentes
+				drawPie();
 					
-				/* Graphics*/
-				
-				eraseGraph(graph);
-				eraseGraph(graph2);
-				
+
 				if (mapChoice=="pop") {
-					genRankPop(resNodes,pop2010);
-					drawUrbanPop(resNodes,pop2010);
 					cities.on("mouseover", function(d, i) {
 						zoomCityPop(d);
 						return tooltip.style("visibility", "visible").style("top", (d3.event.pageY + 5) + "px").style("left",(d3.event.pageX + 5) + "px")
@@ -390,16 +386,39 @@
 				
 		
 			}
+			
+		function lookForMaxMin() {
+			var max=0;
+			var min=0;
+			if (d3.selectAll("circle")[0].length==0) {
+				return([[0,0],[0,0]]);
+			}
+			if (d3.selectAll("circle")[0].length!=0) {
+				min=Math.abs(d3.selectAll("circle")[0][0].getAttribute("value"));
+			}
+			var radiusMax=0;
+			var radiusMin=0
+			for (i in d3.selectAll("circle")[0]) {
+				if (d3.selectAll("circle")[0][0].getAttribute("display")!="none") {;
+					value=Math.abs(parseFloat(d3.selectAll("circle")[0][i].getAttribute("value")));
+					if (value>max) {max=value;radiusMax=d3.selectAll("circle")[0][i].getAttribute("r")};
+					if (value<min) {min=value;radiusMin=d3.selectAll("circle")[0][i].getAttribute("r")};
+				}
+			}
+			return([[parseFloat(radiusMax),parseFloat(radiusMin)],[parseInt(max),parseInt(min)]]);
+		}
 
 		function fetchDataNodes(mapChoice,mini,maxi,exchangeType) {
 			resNodes=new Array();
 			pop2010=new Array();
+			popInit=new Array();
 			if (mapChoice=='pop') {
 				for (var i in cities_flows) {
 					if (Math.round(cities_flows[i][0].pop) >= mini && Math.round(cities_flows[i][0].pop) <= maxi) {
 						pop=Math.round(cities_flows[i][0].pop*100)/100;
 						resNodes.push([cities_flows[i][0].orig,pop]);
 						pop2010.push(Math.round(cities_flows[i][0].pop2010*100)/100);
+						popInit.push(Math.round(cities_flows[i][0].popInit*100)/100);
 					}
 				}
 			}
@@ -413,7 +432,7 @@
 			}
 			if (mapChoice=='commercial') {
 				for (var i in cities_flows) {
-					if ( Math.abs(Math.round(cities_flows[i][0].total)) >= mini && Math.abs(Math.round(cities_flows[i][0].total) <= maxi)) {
+					if ( Math.abs(Math.round(cities_flows[i][0].total))!=0&&Math.abs(Math.round(cities_flows[i][0].total)) >= mini && Math.abs(Math.round(cities_flows[i][0].total) <= maxi)) {
 						total=Math.round(cities_flows[i][0].total*100)/100;
 						resNodes.push([cities_flows[i][0].orig,total]);
 					}
@@ -460,7 +479,12 @@
 			var city=new Array();
 			for (var i in cities_flows) {
 				for (var j in cities_flows[i][1]) {
-					distance=Math.round(cities_flows[i][1][j].distance/1000);
+					if (model=='marius') {
+						distance=Math.round(cities_flows[i][1][j].distance/1000);
+					}
+					else {
+						distance=Math.round(cities_flows[i][1][j].distance);
+					}
 					flow=parseFloat(cities_flows[i][1][j].weight*100)/100;
 					if (flow>=mini && flow<=maxi) {
 						if (direction=="out") {
@@ -470,13 +494,12 @@
 							for (var k in cities_flows) {
 								if (cities_flows[k][0].orig==cities_flows[i][1][j].dest) {
 									percent=Math.round((flow/cities_flows[k][0].totalIn)*100);
-									//if (cities_flows[i][1][j].dest=="AR45") {console.log(cities_flows[i][0].orig+" "+percent)};
 									break;
 								}
 							}
 						}
 						if (percent>=thresh) {
-							res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,Math.round(percent*100)/100,flow,distance]);
+							res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,Math.round(percent*100)/100,Math.round(flow*100)/100,distance]);
 							city.push(cities_flows[i][0].orig);
 							city.push(cities_flows[i][1][j].dest);
 						}
@@ -496,7 +519,7 @@
 				if (d[1]<0) {return "blue"}
 			}
 			else {
-				return "#A1D99B"
+				return "#23991F"
 			}
 		};
 		
@@ -601,7 +624,7 @@
 					enabled: false
 				},	
 				xAxis: {
-					categories: ['Buy','Sell']
+					categories: ['In','Out']
 				},
 				yAxis: {
 					title: {
@@ -691,7 +714,7 @@
 			return document.getElementById("tooltip").innerHTML;
 		}
 
-		function genRankPop(resNodes,pop2010) {
+		function genRankPop() {
 			chart = new Highcharts.Chart({
 					chart: {
 						renderTo: 'graph',
@@ -712,7 +735,7 @@
 					},
             
 					title: {
-						text: 'Rank size',
+						text: null,
 						style: {
 							color: "black"
 						}
@@ -770,21 +793,29 @@
 				
 				resRank.sort(function(a,b){return b - a});
 				pop2010.sort(function(a,b){return b - a});
+				popInit.sort(function(a,b){return b - a});
 			
 				chart.addSeries({data: resRank,
 							pointStart: 1,
 							name: 'Estimated'},false);
-							
-				chart.addSeries({data: pop2010,
+				if (model=='marius'){			
+					chart.addSeries({data: pop2010,
 							pointStart: 1,
 							color:'red',
-							name: 'Observed'},false); 
+							name: 'Observed'},false);
+				}
+				if (model=='simpoplocal'){			
+					chart.addSeries({data: popInit,
+							pointStart: 1,
+							color:'red',
+							name: 'Initial'},false);
+				}
 							
 				chart.redraw();
 				
 			};
 			
-		function drawUrbanPop(resNodes,pop2010) {
+		function drawUrbanPop() {
 			var sumEstimated=0;
 			var sumObserved=0;
 			for (var i in resNodes) {
@@ -796,7 +827,7 @@
 			
 			chart = new Highcharts.Chart({
 				chart : {
-					renderTo: 'graph2',
+					renderTo: 'graph',
 					type: 'column',
 					width:200,
 					height:200,
@@ -804,13 +835,13 @@
 					zoomType: 'xy'
 				},
 				title: {
-					text: 'Urban Population'
+					text: null
 				},
 				legend: {
 					enabled: false
 				},	
 				xAxis: {
-					categories: ['Estimated','Observed']
+					categories: ['Estimated','Observed'],
 				},
 				yAxis: {
 					title: {
@@ -822,7 +853,10 @@
 					labels: {
 						style: {
 							color: '#4572A7'
-							}
+						},
+						formatter: function() {
+								return this.value;
+						}
 					},
 				},
 				series:[{color: '#4572A7',data: [Math.round(sumEstimated*100)/100,Math.round(sumObserved*100)/100]}]
@@ -830,7 +864,6 @@
 		}
 		
 		function drawWhiskers() {
-			
 			chart=new Highcharts.Chart({
 					chart: {
 						renderTo: 'graph',
@@ -934,7 +967,7 @@
 					plotBorderWidth:1,
 					plotBorderColor:'#ccc'
 				},
-				title:{text:'Histogram Test'},
+				title:{text:null},
 				legend:{
 					//enabled:false
 				},
@@ -1041,7 +1074,7 @@
 						zoomType: 'xy'
 					},
 					title: {
-						text: 'Weight by distance',
+						text: null,
 						style: {
 							color: "black"
 						}
@@ -1059,6 +1092,11 @@
 								fontWeight: 'normal'
 							}
 						},
+						labels: {
+							formatter: function() {
+							return this.value;
+							}
+						},
 						startOnTick: true,
 						endOnTick: true,
 						showLastLabel: true
@@ -1071,6 +1109,11 @@
 								color:"black",
 								fontSize:'11px',
 								fontWeight:'normal'
+							}
+						},
+						labels: {
+							formatter: function() {
+								return this.value;
 							}
 						}
 					},
@@ -1101,79 +1144,189 @@
 					series: [{data:res}]
 					
 				});
-				//console.log(res);
 			};
 			
-		
-		function drawWhiskersFlow() {
-			
-			chartFlow=new Highcharts.Chart({
-					chart: {
-						renderTo: 'graph2',
-						plotBackgroundColor: '#FCFFC5',
-						type: 'boxplot'
-					},
-	    
-					title: {
-						text: ''//'Highcharts box plot styling'
-					},
-	    
-					legend: {
-						enabled: false
-					},
-	
-					/*xAxis: {
-						categories: ['Positive'],
-					},*/
-	    
-					yAxis: {
-						type: 'logarithmic',
-						title: {
-							text: 'Flow'
-						} 
-					},
-
-					plotOptions: {
-						boxplot: {
-							fillColor: '#F0F0E0',
-							lineWidth: 2,
-							medianColor: '#0C5DA5',
-							medianWidth: 3,
-							stemColor: '#A63400',
-							stemDashStyle: 'dot',
-							stemWidth: 1,
-							whiskerColor: '#3D9200',
-							whiskerLength: '20%',
-							whiskerWidth: 3 
-						}
-					},
-	
-					series: []
-	
+		function drawPie() {
+			//Nb total de villes visibles
+			var nbOnScreen=0;
+			//Nb total de villes visibles
+			for (i in cities[0]) {
+				if (d3.selectAll("circle")[0][i].getAttribute("display")!="none") {
+					nbOnScreen=nbOnScreen+1;
+				}
+			}
+			chart = new Highcharts.Chart({
+				chart : {
+					renderTo: 'legendtext',
+					type: 'pie',
+					width:150,
+					height:150,
+					plotBackgroundColor: '#FCFFC5',
+					zoomType: 'xy'
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: false
+						},
+						showInLegend: true
+					}
+				},
+				tooltip: {
+					pointFormat: '<b>{point.percentage:.1f}%</b>'
+				},
+				credits: {
+					enabled:false
+				},
+				title: {
+					text: null
+				},
+				legend: {
+					enabled: false
+				},	
+				series:[{data: [['Present',nbOnScreen],['NoPresent',cities_def.length-nbOnScreen]]}]
 			});
 			
-			chartFlow.addSeries({data:[{low:dataGen.flow.min,q1:dataGen.flow.q1,median:dataGen.flow.median,q3:dataGen.flow.q3,high:dataGen.flow.max,mean:dataGen.flow.mean}],
-							},false);
-			chartFlow.redraw();
+		}
 			
+		function drawRegress() {
+			var res=new Array();
+			for (i in cities_coeff) {
+				res.push([parseInt(cities_coeff[i].step),Math.abs(Math.round(parseFloat(cities_coeff[i].coeff)*100)/100)]);
+			}
+			chart = new Highcharts.Chart({
+				chart : {
+					renderTo: 'graph',
+					type: 'line',
+					width:200,
+					height:200,
+					plotBackgroundColor: '#FCFFC5',
+					zoomType: 'xy'
+				},
+				plotOptions: {
+					line: {
+						lineWidth: 0.8,
+						marker: {
+							radius: 0
+						}
+					}
+				},
+				title: {
+					text: null
+				},
+				legend: {
+					enabled: false
+				},	
+				xAxis: {
+					title:{
+						enabled:true,
+						text:'Step'
+					},
+					min:1,
+					labels: {
+						formatter: function() {
+							return this.value;
+						}
+					}
+				},
+				yAxis: {
+					title: {
+						text: 'Coefficient',
+					},
+					labels: {
+						style: {
+							color: '#4572A7'
+							},
+						formatter: function() {
+							return this.value;
+						}
+					},
+				},
+				series:[{color: '#4572A7',data: res}]
+			});
 		};
+		
+		function drawEvolPop() {
+			var res=new Array();
+			//Construction de la liste vide
+			for (i in cities_coeff) {
+				res.push([parseInt(cities_coeff[i].step),parseFloat(cities_coeff[i].popTotal)]);
+			}
 
+			chart = new Highcharts.Chart({
+				chart : {
+					renderTo: 'graph',
+					type: 'line',
+					width:200,
+					height:200,
+					plotBackgroundColor: '#FCFFC5',
+					zoomType: 'xy'
+				},
+				plotOptions: {
+					line: {
+						lineWidth: 0.8,
+						marker: {
+							radius: 0
+						}
+					}
+				},
+				title: {
+					text: null
+				},
+				legend: {
+					enabled: false
+				},	
+				xAxis: {
+					title:{
+						enabled:true,
+						text:'Step'
+					},
+					min:1,
+					labels: {
+						formatter: function() {
+							return this.value;
+						}
+					}
+				},
+				yAxis: {
+					title: {
+						text: 'Population',
+					},
+					labels: {
+						style: {
+							color: '#4572A7'
+							},
+						formatter: function() {
+							return this.value;
+						}
+					},
+				},
+				series:[{color: '#4572A7',data: res}]
+			});
+		};
+			
 			
 		</script>
 	</head>
 	<body>
 		<div id="header">
-			<class id="step"></class>
 			<class id="info"></div>
+			<div><input type="text" id ="step"></div>		
+		</div>
+		<div style="position:absolute;left:10px;top:50px">
+			<div style="float:bottom" id="slidertime" class="noUiSlider"></div>
 		</div>
 		<div id="map"></div>
-		<div style="float:right" id="commentdiv">
+		<div id="commentmouse">Use your mouse in order to zoom and pan</div>
+		<div style="position:absolute;right:10px" id="commentdiv" >
 			<div style="float:bottom;height:40px" id="choice">Variable:
 				<SELECT name="mapType" id="mapType" onChange='var val=this.options[this.selectedIndex].value;onChangeType(val)'>
 					<OPTION id="default" value="" selected="selected"></option>
 					<OPTION VALUE="pop">Population
 					<OPTION VALUE="wealth">Wealth
-					<OPTION VALUE="commercial">Commercial Balance
+					<OPTION VALUE="commercial">Balance
 					<OPTION VALUE="exchange">Exchange
 				</SELECT>
 			</div>
@@ -1188,8 +1341,8 @@
 			Direction:
 				<SELECT name="exchangeType" id="exchangeType" onChange='onChangeButton()'>
 					<OPTION id="default" value="" selected="selected"></option>
-					<OPTION VALUE="out">Sell
-					<OPTION VALUE="in">Buy
+					<OPTION VALUE="out">Out
+					<OPTION VALUE="in">In
 				</SELECT>
 				<div style="float:bottom" id="divexPerc">
 				Minimum threshold:
@@ -1203,23 +1356,58 @@
 				Preferred Links:
 				<input type="checkbox" id="preferred" onChange='onChangeButtonDir();'>
 			</div>
-			<div style="float:bottom;border-style:solid" id="legenddiv"></div>
-			<div style="float:bottom;height:100px" id="legendtext"></div>
-			<div style="float:bottom;visibility:hidden" id="divgraphchoice">
+		</div>
+		<div style="position:absolute;top:240px;left:1050px;width:130px;border-style:solid" id="legenddiv"></div>
+			<div style="position:absolute;top:220px;left:1200px" id="legendtext"></div>
+			<div style="position:absolute;top:360px;left:1050px;visibility:visible" id="divgraphchoice">
 			Choose a graphic:
 				<SELECT name="graphicType" id="graphicType" onChange='onChangeButtonGraph()'>
 					<OPTION id="default" value="" selected="selected"></option>
 					<OPTION VALUE="histo">Histogramm
 					<OPTION VALUE="distweight">Weight by distance
+					<OPTION VALUE="rank">Rank-size distribution
+					<OPTION VALUE="coeff">Regression
+					<OPTION VALUE="total">Total
+					<OPTION VALUE="whisker">Whiskers
+					<OPTION VALUE="evol">Evolution of Population
 				</SELECT>
 			</div>
-			<div style="float:bottom;height:400px" id="graph"></div>
-			<div style="float:bottom" id="graph2"></div>
-		</div>
+			<div style="position:absolute;top:400px;left:1050px;height:300px;width:200px" id="graph"></div>
+			<div id="help">
+				<a href="help.html">Help</a>
+			</id>	
+			
+			
+			
+			
+			
+		
 	<script type="text/javascript">
 		var newYear=parseInt(header.yearBegin)+parseInt(header.oneStep)*parseInt(header.step);
-		document.getElementById("step").innerHTML=header.version+"Step: "+parseInt(header.step)+"/"+parseInt(header.totalStep);
-		document.getElementById("info").innerHTML="Year begin: "+parseInt(header.yearBegin)+"  Year end: "+parseInt(header.yearEnd);
+		document.getElementById("step").innerHTML=100//parseInt(header.step)//+"/"+parseInt(header.totalStep);
+		document.getElementById("info").innerHTML=header.version;
+		
+		$("#slidertime").empty();
+			$("#slidertime").noUiSlider({
+				range: [100, 3909],
+				start: 100,
+				step:100,
+				handles: 1,
+				orientation: "horizontal",
+				serialization: {
+					to: $("#step"),
+					resolution: 1
+				},
+				slide: function(){
+					var values=$(this).val();
+					var map=document.getElementById("mapType").value;
+					var typeEx=document.getElementById("exchangeType").value;
+					var threshold=document.getElementById("exPerc").value;
+					var fromv=document.getElementById("from").value;
+					var tov=document.getElementById("to").value;
+					draw(map,fromv,tov,typeEx,threshold,values);
+				}
+			});
 	
 		var tooltip = d3.select("body")
 				.append("div")
@@ -1263,22 +1451,22 @@
 				.translate(projection.translate())
 				.scale(projection.scale())
 				.on("zoom", redraw));*/
- 
+		
 		if (model=='marius') {
 			/*
 			* On charge les données GeoJSON
 			*/
-			russia= JSON.parse(russia_country);
-			gas=JSON.parse(russia_gas);
-			fronteer=JSON.parse(russia_fronteer);
- 
+			//russia= JSON.parse(json_country);
+			gas=JSON.parse(json_gas);
+			fronteer=JSON.parse(json_fronteer);
+
 			/*
 			* On "bind" un élément SVG path pour chaque entrée
 			* du tableau features de notre objet geojson
 			*/
-			var features = country
+			/*var features = country
 				.selectAll("path")
-				.data(russia.features);
+				.data(russia.features);*/
 			
 			var features_fronteer = country
 				.selectAll("path")
@@ -1305,38 +1493,38 @@
 				.attr("d", path)
 				.attr("id",function(d){return d.properties.IDREG});*/
 			
-			features_gas.enter()
-				.append("path")
-				.attr('class', 'NAME')
-				.attr('fill', '#f6f4f2')//#f6f4f2')
-				.style("fill-opacity",0.9)
-				.attr('stroke', '#aaa')
-				.attr('stroke-width',0.5)
-				.attr("d", path)
-				.attr("id",function(d){return d.properties.NAME_ENGLI});
-		
 			features_fronteer.enter()
 				.append("path")
 				.attr('class', 'COUNTRY')
 				.attr('fill', '#BCBDDC')//#f6f4f2')
-				.style("fill-opacity",0.2)
+				.style("fill-opacity",0.5)
 				.attr('stroke', 'red')
 				.attr('stroke-width',0.5)
 				.attr("d", path)
 				.attr("id",function(d){return d.properties.ISO});
 			
+			features_gas.enter()
+				.append("path")
+				.attr('class', 'NAME')
+				.attr('fill', 'red')//#f6f4f2')
+				.style("fill-opacity",0.1)
+				.attr('stroke', '#aaa')
+				.attr('stroke-width',0.3)
+				.attr("d", path)
+				.attr("id",function(d){return d.properties.NAME_ENGLI});
+			
 		}
 		
-		if (model='simpoplocal') {
-			var square = JSON.parse(square_country);
+		if (model=='simpoplocal') {
+			var square = JSON.parse(json_country);
 			var features = country
 				.selectAll("path")
 				.data(square.features);
 			features.enter()
 				.append("path")
 				.attr('class', 'NAME')
-				.attr('fill', '#f6f4f2')//#f6f4f2')
-				.style("fill-opacity",0.9)
+				.attr('fill', '#BCBDDC')//#f6f4f2')
+				.style("fill-opacity",0.5)
 				.attr('stroke', '#aaa')
 				.attr('stroke-width',0.5)
 				.attr("d", path);
@@ -1367,12 +1555,12 @@
 			//if (model=='marius') {
 				if (val!="exchange") {
 					document.getElementById("divextype").style.visibility="hidden";
-					document.getElementById("divgraphchoice").style.visibility="hidden";
+					//document.getElementById("divgraphchoice").style.visibility="hidden";
 					draw(val,document.getElementById("from").value,document.getElementById("to").value,0);
 				} 
 				else {
 					document.getElementById("divextype").style.visibility="visible";
-					document.getElementById("divgraphchoice").style.visibility="visible";
+					//document.getElementById("divgraphchoice").style.visibility="visible";
 				}
 			//}
 			/*if (model=='simpoplocal') {
@@ -1412,17 +1600,23 @@
 		
 		function onChangeButtonGraph() {
 			var typeGraphic=document.getElementById("graphicType").value;
+			var map=document.getElementById("mapType").value;
 			var typeEx=document.getElementById("exchangeType").value;
 			eraseGraph(graph);
 			if (typeGraphic=="histo") drawHistogram(typeEx);
 			if (typeGraphic=="distweight") drawWeightByDistance();
+			if (typeGraphic=="rank") genRankPop();
+			if (typeGraphic=="total") drawUrbanPop();
+			if (typeGraphic=="coeff") drawRegress();
+			if (typeGraphic=="whisker") drawWhiskers();
+			if (typeGraphic=="evol" && map=='pop') drawEvolPop();
 		}
 		
 		function drawSlider(min,max) {
 			$("#slider").empty();
 			$("#slider").noUiSlider({
-				range: [min, max],
-				start: [min,max],
+				range: [parseInt(min), parseInt(max)+1],
+				start: [parseInt(min),parseInt(max)+1],
 				handles: 2,
 				orientation: "horizontal",
 				serialization: {
@@ -1431,10 +1625,14 @@
 				},
 				slide: function(){
 					var values=$(this).val();
-					//draw(document.getElementById("mapType").value,values[0],values[1]);
+					var map=document.getElementById("mapType").value;
+					var typeEx=document.getElementById("exchangeType").value;
+					var threshold=document.getElementById("exPerc").value;
+					draw(map,values[0],values[1],typeEx,threshold);
 				}
 			});
-			$("#slider").noUiSlider("disabled",true);
+			//$("#slider").noUiSlider("enabled",false);
+			
 		}
 					
 	</script>	

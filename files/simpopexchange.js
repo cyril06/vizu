@@ -1,1004 +1,1045 @@
 var header={
-  "step": "3942",
+  "step": "3910",
   "yearEnd": "??",
-  "totalStep": "3942",
+  "totalStep": "3910",
   "oneStep": "?",
   "yearBegin": "??",
   "version": "simpoplocal"
 }
 var cities_flows =[[{
-  "totalOut": "162",
-  "pop": "276.28043917746913",
+  "popInit": "87.4607807434",
+  "totalOut": "156",
+  "pop": "235.08689599290315",
   "nbFrom": "15",
-  "total": "50",
+  "total": "64",
   "pop2010": "none",
-  "wealth": "292.33982284140615",
+  "wealth": "243.329279098454",
   "orig": "45",
   "nbTo": "10",
-  "totalIn": "112"
+  "totalIn": "92"
 }, [{
   "dest": "46",
-  "weight": "4",
-  "distance": "none"
+  "weight": "3",
+  "distance": "15.811388300841896"
 }, {
   "dest": "91",
-  "weight": "3",
-  "distance": "none"
+  "weight": "8",
+  "distance": "12.206555615733702"
 }, {
   "dest": "90",
-  "weight": "2",
-  "distance": "none"
+  "weight": "3",
+  "distance": "9.486832980505138"
 }, {
   "dest": "4",
-  "weight": "11",
-  "distance": "none"
+  "weight": "10",
+  "distance": "9.899494936611665"
 }, {
   "dest": "53",
-  "weight": "9",
-  "distance": "none"
+  "weight": "16",
+  "distance": "3.1622776601683795"
 }, {
   "dest": "10",
-  "weight": "9",
-  "distance": "none"
+  "weight": "15",
+  "distance": "9.433981132056603"
 }, {
   "dest": "22",
-  "weight": "7",
-  "distance": "none"
+  "weight": "16",
+  "distance": "16.97056274847714"
 }, {
   "dest": "30",
-  "weight": "7",
-  "distance": "none"
+  "weight": "1",
+  "distance": "18.867962264113206"
 }, {
   "dest": "27",
-  "weight": "28",
-  "distance": "none"
+  "weight": "18",
+  "distance": "2.8284271247461903"
 }, {
   "dest": "98",
   "weight": "12",
-  "distance": "none"
+  "distance": "7.0710678118654755"
 }, {
   "dest": "61",
-  "weight": "27",
-  "distance": "none"
+  "weight": "10",
+  "distance": "15.231546211727817"
 }, {
   "dest": "86",
-  "weight": "15",
-  "distance": "none"
+  "weight": "19",
+  "distance": "8.06225774829855"
 }, {
   "dest": "41",
-  "weight": "4",
-  "distance": "none"
+  "weight": "6",
+  "distance": "13.038404810405298"
 }, {
   "dest": "89",
-  "weight": "15",
-  "distance": "none"
+  "weight": "12",
+  "distance": "7.810249675906654"
 }, {
   "dest": "55",
-  "weight": "9",
-  "distance": "none"
+  "weight": "7",
+  "distance": "11.704699910719626"
 }]], [{
-  "totalOut": "153",
-  "pop": "221.58056939086657",
+  "popInit": "99.75194488",
+  "totalOut": "169",
+  "pop": "268.12123420517514",
   "nbFrom": "15",
-  "total": "86",
+  "total": "87",
   "pop2010": "none",
-  "wealth": "228.68164183804714",
+  "wealth": "279.05289565855406",
   "orig": "98",
   "nbTo": "8",
-  "totalIn": "67"
+  "totalIn": "82"
 }, [{
   "dest": "4",
-  "weight": "20",
-  "distance": "none"
+  "weight": "9",
+  "distance": "8.0"
 }, {
   "dest": "68",
-  "weight": "5",
-  "distance": "none"
+  "weight": "12",
+  "distance": "15.556349186104045"
 }, {
   "dest": "79",
-  "weight": "9",
-  "distance": "none"
+  "weight": "7",
+  "distance": "3.0"
 }, {
   "dest": "53",
-  "weight": "14",
-  "distance": "none"
+  "weight": "10",
+  "distance": "4.0"
 }, {
   "dest": "76",
-  "weight": "9",
-  "distance": "none"
+  "weight": "17",
+  "distance": "9.486832980505138"
 }, {
   "dest": "55",
-  "weight": "4",
-  "distance": "none"
+  "weight": "8",
+  "distance": "14.866068747318506"
 }, {
   "dest": "46",
-  "weight": "10",
-  "distance": "none"
+  "weight": "11",
+  "distance": "8.94427190999916"
 }, {
   "dest": "10",
-  "weight": "10",
-  "distance": "none"
+  "weight": "14",
+  "distance": "15.524174696260024"
 }, {
   "dest": "41",
-  "weight": "5",
-  "distance": "none"
+  "weight": "7",
+  "distance": "15.231546211727817"
 }, {
   "dest": "27",
-  "weight": "11",
-  "distance": "none"
+  "weight": "15",
+  "distance": "9.055385138137417"
 }, {
   "dest": "89",
-  "weight": "14",
-  "distance": "none"
+  "weight": "19",
+  "distance": "6.082762530298219"
 }, {
   "dest": "95",
-  "weight": "10",
-  "distance": "none"
+  "weight": "13",
+  "distance": "6.4031242374328485"
 }, {
   "dest": "51",
-  "weight": "10",
-  "distance": "none"
+  "weight": "6",
+  "distance": "2.8284271247461903"
 }, {
   "dest": "91",
-  "weight": "12",
-  "distance": "none"
+  "weight": "5",
+  "distance": "9.0"
 }, {
   "dest": "45",
-  "weight": "10",
-  "distance": "none"
+  "weight": "16",
+  "distance": "7.0710678118654755"
 }]], [{
-  "totalOut": "54",
-  "pop": "178.4052336100521",
+  "popInit": "107.9385665851",
+  "totalOut": "57",
+  "pop": "230.02108874128317",
   "nbFrom": "3",
-  "total": "17",
+  "total": "2",
   "pop2010": "none",
-  "wealth": "185.660334810071",
+  "wealth": "246.72807081803",
   "orig": "34",
   "nbTo": "3",
-  "totalIn": "37"
+  "totalIn": "55"
 }, [{
   "dest": "92",
-  "weight": "13",
-  "distance": "none"
+  "weight": "5",
+  "distance": "12.083045973594572"
 }, {
   "dest": "42",
-  "weight": "25",
-  "distance": "none"
+  "weight": "45",
+  "distance": "19.849433241279208"
 }, {
   "dest": "69",
-  "weight": "16",
-  "distance": "none"
+  "weight": "7",
+  "distance": "12.649110640673518"
 }]], [{
-  "totalOut": "3",
-  "pop": "107.53196309958463",
+  "popInit": "76.8407244705",
+  "totalOut": "8",
+  "pop": "106.25561770899566",
   "nbFrom": "1",
-  "total": "-18",
+  "total": "-21",
   "pop2010": "none",
   "wealth": "108.42731731458353",
   "orig": "67",
   "nbTo": "4",
-  "totalIn": "21"
-}, [{
-  "dest": "31",
-  "weight": "3",
-  "distance": "none"
-}]], [{
-  "totalOut": "21",
-  "pop": "75.91588602481771",
-  "nbFrom": "5",
-  "total": "16",
-  "pop2010": "none",
-  "wealth": "75.96653074308335",
-  "orig": "93",
-  "nbTo": "1",
-  "totalIn": "5"
-}, [{
-  "dest": "89",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "35",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "76",
-  "weight": "4",
-  "distance": "none"
-}, {
-  "dest": "95",
-  "weight": "3",
-  "distance": "none"
-}, {
-  "dest": "32",
-  "weight": "4",
-  "distance": "none"
-}]], [{
-  "totalOut": "92",
-  "pop": "1246.515782600755",
-  "nbFrom": "6",
-  "total": "-241",
-  "pop2010": "none",
-  "wealth": "2199.5607021734154",
-  "orig": "12",
-  "nbTo": "12",
-  "totalIn": "333"
-}, [{
-  "dest": "86",
-  "weight": "15",
-  "distance": "none"
-}, {
-  "dest": "84",
-  "weight": "13",
-  "distance": "none"
-}, {
-  "dest": "58",
-  "weight": "8",
-  "distance": "none"
-}, {
-  "dest": "48",
-  "weight": "23",
-  "distance": "none"
-}, {
-  "dest": "59",
-  "weight": "20",
-  "distance": "none"
-}, {
-  "dest": "19",
-  "weight": "13",
-  "distance": "none"
-}]], [{
-  "totalOut": "45",
-  "pop": "79.99181420775157",
-  "nbFrom": "6",
-  "total": "18",
-  "pop2010": "none",
-  "wealth": "80.13511217078455",
-  "orig": "66",
-  "nbTo": "3",
-  "totalIn": "27"
-}, [{
-  "dest": "59",
-  "weight": "12",
-  "distance": "none"
-}, {
-  "dest": "19",
-  "weight": "4",
-  "distance": "none"
-}, {
-  "dest": "84",
-  "weight": "6",
-  "distance": "none"
-}, {
-  "dest": "12",
-  "weight": "12",
-  "distance": "none"
-}, {
-  "dest": "20",
-  "weight": "3",
-  "distance": "none"
-}, {
-  "dest": "86",
-  "weight": "8",
-  "distance": "none"
-}]], [{
-  "totalOut": "25",
-  "pop": "213.20948856067278",
-  "nbFrom": "3",
-  "total": "-78",
-  "pop2010": "none",
-  "wealth": "221.26446366989205",
-  "orig": "89",
-  "nbTo": "10",
-  "totalIn": "103"
-}, [{
-  "dest": "79",
-  "weight": "9",
-  "distance": "none"
-}, {
-  "dest": "90",
-  "weight": "7",
-  "distance": "none"
-}, {
-  "dest": "32",
-  "weight": "9",
-  "distance": "none"
-}]], [{
-  "totalOut": "14",
-  "pop": "79.17860719221275",
-  "nbFrom": "3",
-  "total": "-7",
-  "pop2010": "none",
-  "wealth": "79.51343737279927",
-  "orig": "51",
-  "nbTo": "2",
-  "totalIn": "21"
-}, [{
-  "dest": "89",
-  "weight": "4",
-  "distance": "none"
-}, {
-  "dest": "95",
-  "weight": "7",
-  "distance": "none"
-}, {
-  "dest": "76",
-  "weight": "3",
-  "distance": "none"
-}]], [{
-  "totalOut": "61",
-  "pop": "257.6052064336752",
-  "nbFrom": "6",
-  "total": "-79",
-  "pop2010": "none",
-  "wealth": "279.1290264385087",
-  "orig": "84",
-  "nbTo": "15",
-  "totalIn": "140"
-}, [{
-  "dest": "12",
-  "weight": "16",
-  "distance": "none"
-}, {
-  "dest": "59",
-  "weight": "17",
-  "distance": "none"
-}, {
-  "dest": "66",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "88",
-  "weight": "8",
-  "distance": "none"
-}, {
-  "dest": "20",
-  "weight": "9",
-  "distance": "none"
-}, {
-  "dest": "18",
-  "weight": "6",
-  "distance": "none"
-}]], [{
-  "totalOut": "29",
-  "pop": "79.16946361676494",
-  "nbFrom": "3",
-  "total": "0",
-  "pop2010": "none",
-  "wealth": "79.22748524377417",
-  "orig": "8",
-  "nbTo": "2",
   "totalIn": "29"
 }, [{
-  "dest": "63",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "7",
-  "weight": "9",
-  "distance": "none"
-}, {
-  "dest": "65",
-  "weight": "15",
-  "distance": "none"
+  "dest": "31",
+  "weight": "8",
+  "distance": "8.0"
 }]], [{
-  "totalOut": "34",
-  "pop": "82.95952404768592",
-  "nbFrom": "4",
-  "total": "9",
+  "popInit": "65.3283201234",
+  "totalOut": "27",
+  "pop": "73.633340256051",
+  "nbFrom": "5",
+  "total": "17",
   "pop2010": "none",
-  "wealth": "83.40427312385594",
-  "orig": "73",
-  "nbTo": "2",
-  "totalIn": "25"
+  "wealth": "73.6353539212262",
+  "orig": "93",
+  "nbTo": "1",
+  "totalIn": "10"
 }, [{
-  "dest": "76",
-  "weight": "17",
-  "distance": "none"
+  "dest": "89",
+  "weight": "7",
+  "distance": "6.082762530298219"
 }, {
   "dest": "35",
-  "weight": "1",
-  "distance": "none"
+  "weight": "5",
+  "distance": "6.708203932499369"
 }, {
-  "dest": "75",
-  "weight": "10",
-  "distance": "none"
+  "dest": "76",
+  "weight": "7",
+  "distance": "4.47213595499958"
 }, {
   "dest": "95",
-  "weight": "6",
-  "distance": "none"
+  "weight": "3",
+  "distance": "9.0"
+}, {
+  "dest": "32",
+  "weight": "5",
+  "distance": "9.433981132056603"
 }]], [{
-  "totalOut": "23",
-  "pop": "98.32232075682143",
-  "nbFrom": "4",
-  "total": "-14",
+  "popInit": "77.5687625218",
+  "totalOut": "92",
+  "pop": "772.221648933105",
+  "nbFrom": "6",
+  "total": "-146",
   "pop2010": "none",
-  "wealth": "98.81403480300479",
-  "orig": "78",
-  "nbTo": "7",
+  "wealth": "1014.0626449822674",
+  "orig": "12",
+  "nbTo": "12",
+  "totalIn": "238"
+}, [{
+  "dest": "86",
+  "weight": "20",
+  "distance": "8.602325267042627"
+}, {
+  "dest": "84",
+  "weight": "13",
+  "distance": "9.486832980505138"
+}, {
+  "dest": "58",
+  "weight": "10",
+  "distance": "6.708203932499369"
+}, {
+  "dest": "48",
+  "weight": "29",
+  "distance": "2.23606797749979"
+}, {
+  "dest": "59",
+  "weight": "6",
+  "distance": "8.06225774829855"
+}, {
+  "dest": "19",
+  "weight": "14",
+  "distance": "6.708203932499369"
+}]], [{
+  "popInit": "61.402861006",
+  "totalOut": "30",
+  "pop": "88.4354216966956",
+  "nbFrom": "6",
+  "total": "-7",
+  "pop2010": "none",
+  "wealth": "88.66938609838579",
+  "orig": "66",
+  "nbTo": "3",
   "totalIn": "37"
 }, [{
-  "dest": "52",
-  "weight": "7",
-  "distance": "none"
-}, {
-  "dest": "17",
-  "weight": "2",
-  "distance": "none"
-}, {
-  "dest": "94",
+  "dest": "59",
   "weight": "9",
-  "distance": "none"
+  "distance": "3.605551275463989"
 }, {
-  "dest": "97",
-  "weight": "5",
-  "distance": "none"
-}]], [{
-  "totalOut": "25",
-  "pop": "157.2114638235566",
-  "nbFrom": "3",
-  "total": "-68",
-  "pop2010": "none",
-  "wealth": "163.18511211959463",
-  "orig": "19",
-  "nbTo": "11",
-  "totalIn": "93"
-}, [{
-  "dest": "58",
-  "weight": "5",
-  "distance": "none"
+  "dest": "19",
+  "weight": "2",
+  "distance": "9.848857801796104"
 }, {
-  "dest": "5",
-  "weight": "6",
-  "distance": "none"
+  "dest": "84",
+  "weight": "8",
+  "distance": "3.1622776601683795"
 }, {
   "dest": "12",
-  "weight": "14",
-  "distance": "none"
+  "weight": "5",
+  "distance": "6.324555320336759"
+}, {
+  "dest": "20",
+  "weight": "3",
+  "distance": "9.899494936611665"
+}, {
+  "dest": "86",
+  "weight": "3",
+  "distance": "9.055385138137417"
 }]], [{
-  "totalOut": "3",
-  "pop": "52.616901061319524",
-  "nbFrom": "2",
-  "total": "3",
+  "popInit": "79.1554808072",
+  "totalOut": "36",
+  "pop": "233.42638101818014",
+  "nbFrom": "3",
+  "total": "-81",
   "pop2010": "none",
-  "wealth": "52.61825101948027",
+  "wealth": "240.75168603723588",
+  "orig": "89",
+  "nbTo": "10",
+  "totalIn": "117"
+}, [{
+  "dest": "79",
+  "weight": "14",
+  "distance": "3.1622776601683795"
+}, {
+  "dest": "90",
+  "weight": "10",
+  "distance": "5.0"
+}, {
+  "dest": "32",
+  "weight": "12",
+  "distance": "7.0710678118654755"
+}]], [{
+  "popInit": "60.7461445292",
+  "totalOut": "9",
+  "pop": "78.78101012945073",
+  "nbFrom": "3",
+  "total": "-8",
+  "pop2010": "none",
+  "wealth": "78.89654833318964",
+  "orig": "51",
+  "nbTo": "2",
+  "totalIn": "17"
+}, [{
+  "dest": "89",
+  "weight": "4",
+  "distance": "8.54400374531753"
+}, {
+  "dest": "95",
+  "weight": "4",
+  "distance": "3.605551275463989"
+}, {
+  "dest": "76",
+  "weight": "1",
+  "distance": "8.602325267042627"
+}]], [{
+  "popInit": "74.9518482272",
+  "totalOut": "78",
+  "pop": "310.74492447896165",
+  "nbFrom": "6",
+  "total": "-74",
+  "pop2010": "none",
+  "wealth": "345.4412590283312",
+  "orig": "84",
+  "nbTo": "15",
+  "totalIn": "152"
+}, [{
+  "dest": "12",
+  "weight": "13",
+  "distance": "9.486832980505138"
+}, {
+  "dest": "59",
+  "weight": "19",
+  "distance": "4.123105625617661"
+}, {
+  "dest": "66",
+  "weight": "15",
+  "distance": "3.1622776601683795"
+}, {
+  "dest": "88",
+  "weight": "7",
+  "distance": "8.06225774829855"
+}, {
+  "dest": "20",
+  "weight": "19",
+  "distance": "8.94427190999916"
+}, {
+  "dest": "18",
+  "weight": "5",
+  "distance": "4.242640687119285"
+}]], [{
+  "popInit": "58.1893555767",
+  "totalOut": "9",
+  "pop": "69.33574837437857",
+  "nbFrom": "3",
+  "total": "-2",
+  "pop2010": "none",
+  "wealth": "69.39767586661684",
+  "orig": "8",
+  "nbTo": "2",
+  "totalIn": "11"
+}, [{
+  "dest": "63",
+  "weight": "2",
+  "distance": "7.0"
+}, {
+  "dest": "7",
+  "weight": "3",
+  "distance": "5.0990195135927845"
+}, {
+  "dest": "65",
+  "weight": "4",
+  "distance": "2.23606797749979"
+}]], [{
+  "popInit": "63.0503145856",
+  "totalOut": "25",
+  "pop": "72.02976779190588",
+  "nbFrom": "4",
+  "total": "15",
+  "pop2010": "none",
+  "wealth": "72.49276236464085",
+  "orig": "73",
+  "nbTo": "2",
+  "totalIn": "10"
+}, [{
+  "dest": "76",
+  "weight": "9",
+  "distance": "2.23606797749979"
+}, {
+  "dest": "35",
+  "weight": "8",
+  "distance": "7.615773105863909"
+}, {
+  "dest": "75",
+  "weight": "7",
+  "distance": "2.23606797749979"
+}, {
+  "dest": "95",
+  "weight": "1",
+  "distance": "5.830951894845301"
+}]], [{
+  "popInit": "67.8925819383",
+  "totalOut": "13",
+  "pop": "94.85444490055524",
+  "nbFrom": "4",
+  "total": "-17",
+  "pop2010": "none",
+  "wealth": "95.04629855856366",
+  "orig": "78",
+  "nbTo": "7",
+  "totalIn": "30"
+}, [{
+  "dest": "52",
+  "weight": "3",
+  "distance": "4.47213595499958"
+}, {
+  "dest": "17",
+  "weight": "1",
+  "distance": "3.1622776601683795"
+}, {
+  "dest": "94",
+  "weight": "3",
+  "distance": "8.0"
+}, {
+  "dest": "97",
+  "weight": "6",
+  "distance": "4.47213595499958"
+}]], [{
+  "popInit": "70.0803866583",
+  "totalOut": "26",
+  "pop": "130.31540596923728",
+  "nbFrom": "3",
+  "total": "-41",
+  "pop2010": "none",
+  "wealth": "134.4892639008078",
+  "orig": "19",
+  "nbTo": "11",
+  "totalIn": "67"
+}, [{
+  "dest": "58",
+  "weight": "8",
+  "distance": "4.242640687119285"
+}, {
+  "dest": "5",
+  "weight": "8",
+  "distance": "3.605551275463989"
+}, {
+  "dest": "12",
+  "weight": "10",
+  "distance": "6.708203932499369"
+}]], [{
+  "popInit": "50.7972430884",
+  "totalOut": "5",
+  "pop": "52.20896105443863",
+  "nbFrom": "3",
+  "total": "5",
+  "pop2010": "none",
+  "wealth": "52.20896105443881",
   "orig": "23",
   "nbTo": "0",
   "totalIn": "0"
 }, [{
+  "dest": "95",
+  "weight": "2",
+  "distance": "9.0"
+}, {
   "dest": "38",
-  "weight": "1",
-  "distance": "none"
+  "weight": "2",
+  "distance": "7.810249675906654"
 }, {
   "dest": "76",
-  "weight": "2",
-  "distance": "none"
+  "weight": "1",
+  "distance": "8.602325267042627"
 }]], [{
-  "totalOut": "4",
-  "pop": "100.4777365934574",
+  "popInit": "69.262310439",
+  "totalOut": "5",
+  "pop": "92.09679050160418",
   "nbFrom": "1",
-  "total": "-29",
+  "total": "-22",
   "pop2010": "none",
-  "wealth": "101.04506409596162",
+  "wealth": "92.76225677368807",
   "orig": "62",
   "nbTo": "5",
-  "totalIn": "33"
+  "totalIn": "27"
 }, [{
   "dest": "35",
-  "weight": "4",
-  "distance": "none"
+  "weight": "5",
+  "distance": "5.830951894845301"
 }]], [{
-  "totalOut": "140",
-  "pop": "205.50514486161475",
+  "popInit": "84.8928252858",
+  "totalOut": "136",
+  "pop": "214.49684946021296",
   "nbFrom": "14",
-  "total": "59",
+  "total": "54",
   "pop2010": "none",
-  "wealth": "210.3239551767762",
+  "wealth": "221.94761665052272",
   "orig": "4",
   "nbTo": "11",
-  "totalIn": "81"
+  "totalIn": "82"
 }, [{
   "dest": "68",
-  "weight": "6",
-  "distance": "none"
+  "weight": "4",
+  "distance": "11.40175425099138"
 }, {
   "dest": "41",
-  "weight": "14",
-  "distance": "none"
+  "weight": "7",
+  "distance": "8.48528137423857"
 }, {
   "dest": "0",
-  "weight": "7",
-  "distance": "none"
+  "weight": "5",
+  "distance": "18.439088914585774"
 }, {
   "dest": "10",
   "weight": "6",
-  "distance": "none"
+  "distance": "19.209372712298546"
 }, {
   "dest": "91",
-  "weight": "8",
-  "distance": "none"
+  "weight": "4",
+  "distance": "17.0"
 }, {
   "dest": "64",
-  "weight": "10",
-  "distance": "none"
+  "weight": "5",
+  "distance": "17.46424919657298"
 }, {
   "dest": "99",
-  "weight": "5",
-  "distance": "none"
+  "weight": "6",
+  "distance": "13.92838827718412"
 }, {
   "dest": "98",
-  "weight": "12",
-  "distance": "none"
+  "weight": "21",
+  "distance": "8.0"
 }, {
   "dest": "45",
-  "weight": "9",
-  "distance": "none"
+  "weight": "8",
+  "distance": "9.899494936611665"
 }, {
   "dest": "90",
-  "weight": "14",
-  "distance": "none"
+  "weight": "20",
+  "distance": "4.47213595499958"
 }, {
   "dest": "46",
-  "weight": "8",
-  "distance": "none"
+  "weight": "7",
+  "distance": "14.422205101855956"
 }, {
   "dest": "30",
-  "weight": "6",
-  "distance": "none"
+  "weight": "7",
+  "distance": "19.235384061671343"
 }, {
   "dest": "32",
   "weight": "11",
-  "distance": "none"
+  "distance": "5.0"
 }, {
   "dest": "89",
-  "weight": "24",
-  "distance": "none"
+  "weight": "25",
+  "distance": "2.23606797749979"
 }]], [{
-  "totalOut": "17",
-  "pop": "103.74468508824846",
+  "popInit": "68.5966841379",
+  "totalOut": "25",
+  "pop": "156.68155145695027",
   "nbFrom": "3",
-  "total": "-22",
+  "total": "-71",
   "pop2010": "none",
-  "wealth": "105.04815915631958",
+  "wealth": "168.50546294517412",
   "orig": "88",
-  "nbTo": "5",
-  "totalIn": "39"
+  "nbTo": "6",
+  "totalIn": "96"
 }, [{
   "dest": "56",
-  "weight": "8",
-  "distance": "none"
+  "weight": "6",
+  "distance": "3.1622776601683795"
 }, {
   "dest": "18",
-  "weight": "6",
-  "distance": "none"
+  "weight": "10",
+  "distance": "4.123105625617661"
 }, {
   "dest": "84",
-  "weight": "3",
-  "distance": "none"
+  "weight": "9",
+  "distance": "8.06225774829855"
 }]], [{
-  "totalOut": "14",
-  "pop": "74.79893171609022",
-  "nbFrom": "3",
-  "total": "8",
+  "popInit": "63.8862376941",
+  "totalOut": "16",
+  "pop": "75.92870745974311",
+  "nbFrom": "4",
+  "total": "6",
   "pop2010": "none",
-  "wealth": "74.79904319876862",
+  "wealth": "75.9737583351418",
   "orig": "77",
   "nbTo": "2",
-  "totalIn": "6"
+  "totalIn": "10"
 }, [{
   "dest": "52",
   "weight": "2",
-  "distance": "none"
+  "distance": "9.219544457292887"
 }, {
   "dest": "97",
-  "weight": "4",
-  "distance": "none"
+  "weight": "5",
+  "distance": "2.23606797749979"
 }, {
   "dest": "78",
-  "weight": "8",
-  "distance": "none"
+  "weight": "4",
+  "distance": "5.0"
+}, {
+  "dest": "17",
+  "weight": "5",
+  "distance": "2.23606797749979"
 }]], [{
-  "totalOut": "13",
-  "pop": "74.30198885089615",
+  "popInit": "67.8608135802",
+  "totalOut": "16",
+  "pop": "72.37572924074064",
   "nbFrom": "3",
-  "total": "13",
+  "total": "16",
   "pop2010": "none",
-  "wealth": "74.66731850568257",
+  "wealth": "72.37572931354023",
   "orig": "40",
   "nbTo": "0",
   "totalIn": "0"
 }, [{
   "dest": "90",
-  "weight": "3",
-  "distance": "none"
+  "weight": "2",
+  "distance": "9.848857801796104"
 }, {
   "dest": "33",
-  "weight": "5",
-  "distance": "none"
+  "weight": "8",
+  "distance": "5.385164807134504"
 }, {
   "dest": "2",
-  "weight": "5",
-  "distance": "none"
+  "weight": "6",
+  "distance": "8.94427190999916"
 }]], [{
-  "totalOut": "108",
-  "pop": "173.3394456359825",
+  "popInit": "88.1295442207",
+  "totalOut": "105",
+  "pop": "185.3054155583411",
   "nbFrom": "9",
-  "total": "51",
+  "total": "26",
   "pop2010": "none",
-  "wealth": "182.33886705050867",
+  "wealth": "201.54383700382547",
   "orig": "15",
   "nbTo": "6",
-  "totalIn": "57"
+  "totalIn": "79"
 }, [{
   "dest": "58",
-  "weight": "8",
-  "distance": "none"
+  "weight": "12",
+  "distance": "7.211102550927978"
 }, {
   "dest": "39",
-  "weight": "12",
-  "distance": "none"
+  "weight": "7",
+  "distance": "14.317821063276353"
 }, {
   "dest": "94",
-  "weight": "5",
-  "distance": "none"
+  "weight": "14",
+  "distance": "3.1622776601683795"
 }, {
   "dest": "44",
-  "weight": "8",
-  "distance": "none"
+  "weight": "2",
+  "distance": "11.704699910719626"
 }, {
   "dest": "92",
-  "weight": "8",
-  "distance": "none"
+  "weight": "6",
+  "distance": "12.529964086141668"
 }, {
   "dest": "42",
-  "weight": "25",
-  "distance": "none"
+  "weight": "38",
+  "distance": "18.35755975068582"
 }, {
   "dest": "19",
-  "weight": "10",
-  "distance": "none"
+  "weight": "8",
+  "distance": "7.615773105863909"
 }, {
   "dest": "61",
-  "weight": "25",
-  "distance": "none"
+  "weight": "12",
+  "distance": "12.806248474865697"
 }, {
   "dest": "30",
-  "weight": "7",
-  "distance": "none"
+  "weight": "6",
+  "distance": "14.142135623730951"
 }]], [{
+  "popInit": "60.7330958968",
   "totalOut": "3",
-  "pop": "65.72404439328525",
+  "pop": "64.89748029902985",
   "nbFrom": "1",
   "total": "3",
   "pop2010": "none",
-  "wealth": "65.94882307302274",
+  "wealth": "64.92813402828742",
   "orig": "11",
   "nbTo": "0",
   "totalIn": "0"
 }, [{
   "dest": "19",
   "weight": "3",
-  "distance": "none"
+  "distance": "8.246211251235321"
 }]], [{
-  "totalOut": "12",
-  "pop": "112.89205837425393",
+  "popInit": "69.881343032",
+  "totalOut": "18",
+  "pop": "136.573798358968",
   "nbFrom": "2",
-  "total": "-42",
-  "pop2010": "none",
-  "wealth": "114.27876238074887",
-  "orig": "90",
-  "nbTo": "10",
-  "totalIn": "54"
-}, [{
-  "dest": "32",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "89",
-  "weight": "7",
-  "distance": "none"
-}]], [{
-  "totalOut": "39",
-  "pop": "195.25267912052252",
-  "nbFrom": "3",
   "total": "-60",
   "pop2010": "none",
-  "wealth": "204.8931768191191",
+  "wealth": "139.79922191000665",
+  "orig": "90",
+  "nbTo": "10",
+  "totalIn": "78"
+}, [{
+  "dest": "32",
+  "weight": "10",
+  "distance": "5.0"
+}, {
+  "dest": "89",
+  "weight": "8",
+  "distance": "5.0"
+}]], [{
+  "popInit": "79.2957475036",
+  "totalOut": "21",
+  "pop": "165.43447393828546",
+  "nbFrom": "3",
+  "total": "-44",
+  "pop2010": "none",
+  "wealth": "170.2944383623737",
   "orig": "9",
-  "nbTo": "9",
-  "totalIn": "99"
+  "nbTo": "10",
+  "totalIn": "65"
 }, [{
   "dest": "16",
-  "weight": "10",
-  "distance": "none"
+  "weight": "3",
+  "distance": "6.4031242374328485"
 }, {
   "dest": "71",
-  "weight": "15",
-  "distance": "none"
+  "weight": "10",
+  "distance": "2.8284271247461903"
 }, {
   "dest": "37",
-  "weight": "14",
-  "distance": "none"
+  "weight": "8",
+  "distance": "8.246211251235321"
 }]], [{
-  "totalOut": "49",
-  "pop": "137.84145904258682",
+  "popInit": "87.4337666851",
+  "totalOut": "40",
+  "pop": "151.96322946759526",
   "nbFrom": "5",
-  "total": "7",
+  "total": "-10",
   "pop2010": "none",
-  "wealth": "142.98611157110878",
+  "wealth": "156.89341320929614",
   "orig": "44",
   "nbTo": "4",
-  "totalIn": "42"
+  "totalIn": "50"
 }, [{
   "dest": "19",
-  "weight": "14",
-  "distance": "none"
+  "weight": "2",
+  "distance": "8.06225774829855"
 }, {
   "dest": "15",
-  "weight": "3",
-  "distance": "none"
+  "weight": "4",
+  "distance": "11.704699910719626"
 }, {
   "dest": "39",
-  "weight": "12",
-  "distance": "none"
+  "weight": "7",
+  "distance": "7.615773105863909"
 }, {
   "dest": "61",
-  "weight": "13",
-  "distance": "none"
+  "weight": "10",
+  "distance": "14.317821063276353"
 }, {
   "dest": "74",
-  "weight": "7",
-  "distance": "none"
+  "weight": "17",
+  "distance": "17.88854381999832"
 }]], [{
-  "totalOut": "13",
-  "pop": "157.0962143247513",
+  "popInit": "68.1540283325",
+  "totalOut": "14",
+  "pop": "247.01129316810594",
   "nbFrom": "1",
-  "total": "-83",
+  "total": "-146",
   "pop2010": "none",
-  "wealth": "166.086678117343",
+  "wealth": "286.53320988808593",
   "orig": "33",
   "nbTo": "8",
-  "totalIn": "96"
+  "totalIn": "160"
 }, [{
   "dest": "2",
-  "weight": "13",
-  "distance": "none"
+  "weight": "14",
+  "distance": "6.708203932499369"
 }]], [{
-  "totalOut": "228",
-  "pop": "462.69897309138287",
+  "popInit": "102.8435472105",
+  "totalOut": "214",
+  "pop": "348.26485119569486",
   "nbFrom": "12",
-  "total": "79",
+  "total": "102",
   "pop2010": "none",
-  "wealth": "561.8661102131584",
+  "wealth": "392.1865206905109",
   "orig": "22",
   "nbTo": "7",
-  "totalIn": "149"
+  "totalIn": "112"
 }, [{
   "dest": "59",
-  "weight": "25",
-  "distance": "none"
+  "weight": "11",
+  "distance": "8.246211251235321"
 }, {
   "dest": "61",
-  "weight": "38",
-  "distance": "none"
+  "weight": "14",
+  "distance": "18.110770276274835"
 }, {
   "dest": "31",
-  "weight": "7",
-  "distance": "none"
+  "weight": "10",
+  "distance": "5.385164807134504"
 }, {
   "dest": "39",
-  "weight": "13",
-  "distance": "none"
+  "weight": "14",
+  "distance": "15.0"
 }, {
   "dest": "81",
-  "weight": "15",
-  "distance": "none"
+  "weight": "19",
+  "distance": "3.1622776601683795"
 }, {
   "dest": "84",
   "weight": "13",
-  "distance": "none"
+  "distance": "9.219544457292887"
 }, {
   "dest": "91",
   "weight": "8",
-  "distance": "none"
+  "distance": "19.1049731745428"
 }, {
   "dest": "74",
-  "weight": "29",
-  "distance": "none"
+  "weight": "46",
+  "distance": "8.06225774829855"
 }, {
   "dest": "55",
-  "weight": "10",
-  "distance": "none"
+  "weight": "5",
+  "distance": "8.06225774829855"
 }, {
   "dest": "10",
-  "weight": "32",
-  "distance": "none"
+  "weight": "28",
+  "distance": "8.06225774829855"
 }, {
   "dest": "20",
-  "weight": "26",
-  "distance": "none"
+  "weight": "39",
+  "distance": "3.605551275463989"
 }, {
   "dest": "45",
-  "weight": "12",
-  "distance": "none"
+  "weight": "7",
+  "distance": "16.97056274847714"
 }]], [{
-  "totalOut": "10",
-  "pop": "75.37064068961439",
+  "popInit": "64.6240795807",
+  "totalOut": "13",
+  "pop": "77.92983534825407",
   "nbFrom": "3",
-  "total": "2",
+  "total": "4",
   "pop2010": "none",
-  "wealth": "75.37695748980063",
+  "wealth": "78.37094543495252",
   "orig": "56",
-  "nbTo": "1",
-  "totalIn": "8"
+  "nbTo": "2",
+  "totalIn": "9"
 }, [{
   "dest": "54",
   "weight": "3",
-  "distance": "none"
+  "distance": "3.605551275463989"
 }, {
   "dest": "84",
-  "weight": "5",
-  "distance": "none"
+  "weight": "3",
+  "distance": "9.219544457292887"
 }, {
   "dest": "88",
-  "weight": "2",
-  "distance": "none"
+  "weight": "7",
+  "distance": "3.1622776601683795"
 }]], [{
-  "totalOut": "131",
-  "pop": "184.02156973322923",
+  "popInit": "80.9579143096",
+  "totalOut": "108",
+  "pop": "169.94495676829493",
   "nbFrom": "12",
-  "total": "49",
+  "total": "28",
   "pop2010": "none",
-  "wealth": "194.46014932010533",
+  "wealth": "182.8348343240439",
   "orig": "55",
   "nbTo": "8",
-  "totalIn": "82"
+  "totalIn": "80"
 }, [{
   "dest": "46",
-  "weight": "1",
-  "distance": "none"
+  "weight": "5",
+  "distance": "19.924858845171276"
 }, {
   "dest": "61",
-  "weight": "20",
-  "distance": "none"
+  "weight": "9",
+  "distance": "19.72308292331602"
 }, {
   "dest": "27",
-  "weight": "11",
-  "distance": "none"
+  "weight": "6",
+  "distance": "9.219544457292887"
 }, {
   "dest": "91",
-  "weight": "3",
-  "distance": "none"
+  "weight": "4",
+  "distance": "11.045361017187261"
 }, {
   "dest": "98",
-  "weight": "4",
-  "distance": "none"
+  "weight": "8",
+  "distance": "14.866068747318506"
 }, {
   "dest": "10",
-  "weight": "17",
-  "distance": "none"
+  "weight": "23",
+  "distance": "7.211102550927978"
 }, {
   "dest": "67",
-  "weight": "9",
-  "distance": "none"
+  "weight": "3",
+  "distance": "5.830951894845301"
 }, {
   "dest": "45",
   "weight": "7",
-  "distance": "none"
+  "distance": "11.704699910719626"
 }, {
   "dest": "74",
-  "weight": "8",
-  "distance": "none"
+  "weight": "17",
+  "distance": "16.1245154965971"
 }, {
   "dest": "22",
-  "weight": "16",
-  "distance": "none"
+  "weight": "8",
+  "distance": "8.06225774829855"
 }, {
   "dest": "20",
-  "weight": "20",
-  "distance": "none"
+  "weight": "10",
+  "distance": "6.324555320336759"
 }, {
   "dest": "31",
-  "weight": "15",
-  "distance": "none"
+  "weight": "8",
+  "distance": "4.242640687119285"
 }]], [{
-  "totalOut": "51",
-  "pop": "187.23432925173938",
+  "popInit": "89.896756841",
+  "totalOut": "34",
+  "pop": "138.35396882084777",
   "nbFrom": "6",
-  "total": "8",
+  "total": "7",
   "pop2010": "none",
-  "wealth": "187.8863300462964",
+  "wealth": "139.00949614761097",
   "orig": "26",
   "nbTo": "5",
-  "totalIn": "43"
+  "totalIn": "27"
 }, [{
   "dest": "99",
-  "weight": "6",
-  "distance": "none"
+  "weight": "7",
+  "distance": "15.264337522473747"
 }, {
   "dest": "0",
-  "weight": "5",
-  "distance": "none"
+  "weight": "2",
+  "distance": "12.041594578792296"
 }, {
   "dest": "85",
   "weight": "7",
-  "distance": "none"
+  "distance": "8.06225774829855"
 }, {
   "dest": "70",
-  "weight": "11",
-  "distance": "none"
+  "weight": "9",
+  "distance": "13.152946437965905"
 }, {
   "dest": "25",
-  "weight": "19",
-  "distance": "none"
+  "weight": "5",
+  "distance": "7.615773105863909"
 }, {
   "dest": "6",
-  "weight": "3",
-  "distance": "none"
+  "weight": "4",
+  "distance": "18.24828759089466"
 }]], [{
-  "totalOut": "10",
-  "pop": "81.22591330027961",
+  "popInit": "63.7770362768",
+  "totalOut": "12",
+  "pop": "97.39435638223121",
   "nbFrom": "3",
-  "total": "-17",
+  "total": "-42",
   "pop2010": "none",
-  "wealth": "83.41654470569529",
+  "wealth": "107.8208009241614",
   "orig": "50",
   "nbTo": "1",
-  "totalIn": "27"
+  "totalIn": "54"
 }, [{
   "dest": "33",
-  "weight": "5",
-  "distance": "none"
+  "weight": "6",
+  "distance": "5.0"
 }, {
   "dest": "52",
-  "weight": "2",
-  "distance": "none"
+  "weight": "1",
+  "distance": "7.280109889280518"
 }, {
   "dest": "7",
-  "weight": "3",
-  "distance": "none"
+  "weight": "5",
+  "distance": "9.0"
 }]], [{
-  "totalOut": "60",
-  "pop": "247.85219719152434",
+  "popInit": "71.1901791284",
+  "totalOut": "41",
+  "pop": "327.13459474896007",
   "nbFrom": "7",
-  "total": "-94",
+  "total": "-148",
   "pop2010": "none",
-  "wealth": "292.13477449766503",
+  "wealth": "389.822927374324",
   "orig": "37",
-  "nbTo": "14",
-  "totalIn": "154"
+  "nbTo": "15",
+  "totalIn": "189"
 }, [{
   "dest": "7",
-  "weight": "8",
-  "distance": "none"
+  "weight": "2",
+  "distance": "9.219544457292887"
 }, {
   "dest": "1",
-  "weight": "5",
-  "distance": "none"
+  "weight": "13",
+  "distance": "4.123105625617661"
 }, {
   "dest": "65",
-  "weight": "9",
-  "distance": "none"
+  "weight": "7",
+  "distance": "8.48528137423857"
 }, {
   "dest": "2",
-  "weight": "10",
-  "distance": "none"
+  "weight": "5",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "9",
-  "weight": "12",
-  "distance": "none"
+  "weight": "7",
+  "distance": "8.246211251235321"
 }, {
   "dest": "63",
-  "weight": "7",
-  "distance": "none"
+  "weight": "2",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "16",
-  "weight": "9",
-  "distance": "none"
+  "weight": "5",
+  "distance": "6.708203932499369"
 }]], [{
-  "totalOut": "65",
-  "pop": "139.23461975572454",
+  "popInit": "85.0975858149",
+  "totalOut": "55",
+  "pop": "139.5613530802411",
   "nbFrom": "9",
-  "total": "31",
+  "total": "21",
   "pop2010": "none",
   "wealth": "140.8025279125455",
   "orig": "68",
@@ -1006,285 +1047,306 @@ var cities_flows =[[{
   "totalIn": "34"
 }, [{
   "dest": "76",
-  "weight": "13",
-  "distance": "none"
+  "weight": "4",
+  "distance": "8.246211251235321"
 }, {
   "dest": "99",
-  "weight": "6",
-  "distance": "none"
+  "weight": "8",
+  "distance": "11.661903789690601"
 }, {
   "dest": "62",
-  "weight": "14",
-  "distance": "none"
+  "weight": "8",
+  "distance": "3.605551275463989"
 }, {
   "dest": "0",
-  "weight": "2",
-  "distance": "none"
+  "weight": "7",
+  "distance": "11.045361017187261"
 }, {
   "dest": "46",
   "weight": "4",
-  "distance": "none"
+  "distance": "15.297058540778355"
 }, {
   "dest": "4",
-  "weight": "7",
-  "distance": "none"
+  "weight": "12",
+  "distance": "11.40175425099138"
 }, {
   "dest": "98",
-  "weight": "3",
-  "distance": "none"
+  "weight": "4",
+  "distance": "15.556349186104045"
 }, {
   "dest": "35",
-  "weight": "13",
-  "distance": "none"
+  "weight": "6",
+  "distance": "3.0"
 }, {
   "dest": "41",
-  "weight": "3",
-  "distance": "none"
+  "weight": "2",
+  "distance": "17.26267650163207"
 }]], [{
-  "totalOut": "792",
-  "pop": "5528.537171979788",
+  "popInit": "103.3360374435",
+  "totalOut": "483",
+  "pop": "1415.3610438726766",
   "nbFrom": "17",
-  "total": "289",
+  "total": "187",
   "pop2010": "none",
-  "wealth": "9047.735173764733",
+  "wealth": "2479.5142105653185",
   "orig": "61",
   "nbTo": "12",
-  "totalIn": "503"
+  "totalIn": "296"
 }, [{
   "dest": "19",
-  "weight": "19",
-  "distance": "none"
+  "weight": "10",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "92",
-  "weight": "30",
-  "distance": "none"
+  "weight": "10",
+  "distance": "19.4164878389476"
 }, {
   "dest": "55",
-  "weight": "21",
-  "distance": "none"
+  "weight": "9",
+  "distance": "19.72308292331602"
 }, {
   "dest": "39",
   "weight": "22",
-  "distance": "none"
+  "distance": "9.219544457292887"
 }, {
   "dest": "15",
-  "weight": "21",
-  "distance": "none"
+  "weight": "8",
+  "distance": "12.806248474865697"
 }, {
   "dest": "41",
-  "weight": "18",
-  "distance": "none"
+  "weight": "10",
+  "distance": "16.55294535724685"
 }, {
   "dest": "30",
-  "weight": "43",
-  "distance": "none"
+  "weight": "21",
+  "distance": "10.770329614269007"
 }, {
   "dest": "42",
-  "weight": "124",
-  "distance": "none"
+  "weight": "120",
+  "distance": "18.027756377319946"
 }, {
   "dest": "48",
-  "weight": "43",
-  "distance": "none"
+  "weight": "34",
+  "distance": "3.1622776601683795"
 }, {
   "dest": "44",
   "weight": "14",
-  "distance": "none"
+  "distance": "14.317821063276353"
 }, {
   "dest": "12",
-  "weight": "177",
-  "distance": "none"
+  "weight": "88",
+  "distance": "2.23606797749979"
 }, {
   "dest": "58",
-  "weight": "21",
-  "distance": "none"
+  "weight": "17",
+  "distance": "5.656854249492381"
 }, {
   "dest": "10",
-  "weight": "62",
-  "distance": "none"
+  "weight": "29",
+  "distance": "12.529964086141668"
 }, {
   "dest": "74",
-  "weight": "51",
-  "distance": "none"
+  "weight": "43",
+  "distance": "19.924858845171276"
 }, {
   "dest": "86",
-  "weight": "49",
-  "distance": "none"
+  "weight": "25",
+  "distance": "9.219544457292887"
 }, {
   "dest": "22",
-  "weight": "50",
-  "distance": "none"
+  "weight": "7",
+  "distance": "18.110770276274835"
 }, {
   "dest": "45",
-  "weight": "27",
-  "distance": "none"
+  "weight": "16",
+  "distance": "15.231546211727817"
 }]], [{
-  "totalOut": "28",
-  "pop": "74.80081182729923",
+  "popInit": "63.5274206894",
+  "totalOut": "37",
+  "pop": "77.23677557875838",
   "nbFrom": "6",
-  "total": "14",
+  "total": "19",
   "pop2010": "none",
-  "wealth": "75.38412940081751",
+  "wealth": "77.77025020752491",
   "orig": "13",
   "nbTo": "2",
-  "totalIn": "14"
+  "totalIn": "18"
 }, [{
   "dest": "43",
   "weight": "6",
-  "distance": "none"
+  "distance": "7.211102550927978"
 }, {
   "dest": "2",
-  "weight": "5",
-  "distance": "none"
+  "weight": "3",
+  "distance": "6.324555320336759"
 }, {
   "dest": "32",
-  "weight": "3",
-  "distance": "none"
+  "weight": "7",
+  "distance": "7.615773105863909"
 }, {
   "dest": "33",
-  "weight": "8",
-  "distance": "none"
+  "weight": "5",
+  "distance": "8.54400374531753"
 }, {
   "dest": "90",
-  "weight": "4",
-  "distance": "none"
+  "weight": "5",
+  "distance": "6.708203932499369"
 }, {
   "dest": "72",
-  "weight": "2",
-  "distance": "none"
+  "weight": "11",
+  "distance": "3.605551275463989"
 }]], [{
-  "totalOut": "73",
-  "pop": "137.23334298606133",
+  "popInit": "88.6278629504",
+  "totalOut": "68",
+  "pop": "147.62613534980812",
   "nbFrom": "10",
-  "total": "40",
+  "total": "32",
   "pop2010": "none",
-  "wealth": "138.54095632485578",
+  "wealth": "148.53546991806385",
   "orig": "46",
   "nbTo": "6",
-  "totalIn": "33"
+  "totalIn": "36"
 }, [{
   "dest": "55",
-  "weight": "2",
-  "distance": "none"
+  "weight": "5",
+  "distance": "19.924858845171276"
 }, {
   "dest": "95",
-  "weight": "15",
-  "distance": "none"
+  "weight": "11",
+  "distance": "3.0"
 }, {
   "dest": "91",
-  "weight": "5",
-  "distance": "none"
+  "weight": "11",
+  "distance": "9.433981132056603"
 }, {
   "dest": "4",
   "weight": "3",
-  "distance": "none"
+  "distance": "14.422205101855956"
 }, {
   "dest": "98",
-  "weight": "10",
-  "distance": "none"
+  "weight": "12",
+  "distance": "8.94427190999916"
 }, {
   "dest": "38",
-  "weight": "6",
-  "distance": "none"
+  "weight": "5",
+  "distance": "6.082762530298219"
 }, {
   "dest": "76",
-  "weight": "9",
-  "distance": "none"
+  "weight": "11",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "68",
-  "weight": "5",
-  "distance": "none"
+  "weight": "3",
+  "distance": "15.297058540778355"
 }, {
   "dest": "75",
-  "weight": "7",
-  "distance": "none"
+  "weight": "3",
+  "distance": "3.1622776601683795"
 }, {
   "dest": "45",
-  "weight": "11",
-  "distance": "none"
+  "weight": "4",
+  "distance": "15.811388300841896"
 }]], [{
-  "totalOut": "72",
-  "pop": "159.5615046003319",
+  "popInit": "81.8909065909",
+  "totalOut": "80",
+  "pop": "175.85910019740183",
   "nbFrom": "12",
-  "total": "8",
+  "total": "13",
   "pop2010": "none",
-  "wealth": "161.0662478582235",
+  "wealth": "180.83795532186164",
   "orig": "99",
   "nbTo": "9",
-  "totalIn": "64"
+  "totalIn": "67"
 }, [{
   "dest": "0",
-  "weight": "13",
-  "distance": "none"
+  "weight": "9",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "41",
-  "weight": "1",
-  "distance": "none"
+  "weight": "8",
+  "distance": "13.038404810405298"
 }, {
   "dest": "26",
   "weight": "5",
-  "distance": "none"
+  "distance": "15.264337522473747"
 }, {
   "dest": "25",
-  "weight": "14",
-  "distance": "none"
+  "weight": "3",
+  "distance": "10.04987562112089"
 }, {
   "dest": "43",
-  "weight": "4",
-  "distance": "none"
+  "weight": "7",
+  "distance": "6.082762530298219"
 }, {
   "dest": "68",
-  "weight": "6",
-  "distance": "none"
+  "weight": "4",
+  "distance": "11.661903789690601"
 }, {
   "dest": "6",
-  "weight": "7",
-  "distance": "none"
+  "weight": "6",
+  "distance": "14.142135623730951"
 }, {
   "dest": "4",
-  "weight": "4",
-  "distance": "none"
+  "weight": "7",
+  "distance": "13.92838827718412"
 }, {
   "dest": "64",
-  "weight": "4",
-  "distance": "none"
+  "weight": "9",
+  "distance": "12.36931687685298"
 }, {
   "dest": "28",
-  "weight": "7",
-  "distance": "none"
+  "weight": "14",
+  "distance": "5.0"
 }, {
   "dest": "70",
-  "weight": "3",
-  "distance": "none"
+  "weight": "2",
+  "distance": "15.811388300841896"
 }, {
   "dest": "32",
-  "weight": "4",
-  "distance": "none"
+  "weight": "6",
+  "distance": "9.433981132056603"
 }]], [{
-  "totalOut": "12",
-  "pop": "97.6059292653678",
-  "nbFrom": "3",
-  "total": "-16",
+  "popInit": "67.6280432877",
+  "totalOut": "3",
+  "pop": "72.98596430556253",
+  "nbFrom": "1",
+  "total": "3",
   "pop2010": "none",
-  "wealth": "98.12661694810602",
+  "wealth": "73.51265900258585",
+  "orig": "24",
+  "nbTo": "0",
+  "totalIn": "0"
+}, [{
+  "dest": "9",
+  "weight": "3",
+  "distance": "8.602325267042627"
+}]], [{
+  "popInit": "72.6756862825",
+  "totalOut": "13",
+  "pop": "115.79283605195684",
+  "nbFrom": "3",
+  "total": "-32",
+  "pop2010": "none",
+  "wealth": "116.41278429805936",
   "orig": "94",
   "nbTo": "6",
-  "totalIn": "28"
+  "totalIn": "45"
 }, [{
   "dest": "58",
-  "weight": "2",
-  "distance": "none"
+  "weight": "4",
+  "distance": "8.602325267042627"
 }, {
   "dest": "52",
-  "weight": "4",
-  "distance": "none"
+  "weight": "7",
+  "distance": "7.211102550927978"
 }, {
   "dest": "78",
-  "weight": "6",
-  "distance": "none"
+  "weight": "2",
+  "distance": "8.0"
 }]], [{
+  "popInit": "53.5474731845",
   "totalOut": "16",
-  "pop": "61.06293471703158",
+  "pop": "60.78076065095527",
   "nbFrom": "4",
   "total": "8",
   "pop2010": "none",
@@ -1294,2094 +1356,2184 @@ var cities_flows =[[{
   "totalIn": "8"
 }, [{
   "dest": "12",
-  "weight": "5",
-  "distance": "none"
+  "weight": "6",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "27",
-  "weight": "3",
-  "distance": "none"
+  "weight": "1",
+  "distance": "7.810249675906654"
 }, {
   "dest": "59",
-  "weight": "3",
-  "distance": "none"
+  "weight": "2",
+  "distance": "9.219544457292887"
 }, {
   "dest": "86",
-  "weight": "5",
-  "distance": "none"
+  "weight": "7",
+  "distance": "4.0"
 }]], [{
-  "totalOut": "27",
-  "pop": "115.11106043520094",
+  "popInit": "71.4298200685",
+  "totalOut": "19",
+  "pop": "124.96790592495638",
   "nbFrom": "3",
-  "total": "-11",
+  "total": "-37",
   "pop2010": "none",
-  "wealth": "115.90417642530437",
+  "wealth": "127.21026662525371",
   "orig": "35",
-  "nbTo": "6",
-  "totalIn": "38"
+  "nbTo": "8",
+  "totalIn": "56"
 }, [{
   "dest": "76",
-  "weight": "14",
-  "distance": "none"
+  "weight": "6",
+  "distance": "5.385164807134504"
 }, {
   "dest": "3",
   "weight": "7",
-  "distance": "none"
+  "distance": "2.8284271247461903"
 }, {
   "dest": "62",
   "weight": "6",
-  "distance": "none"
+  "distance": "5.830951894845301"
 }]], [{
-  "totalOut": "25",
-  "pop": "133.88564946629324",
-  "nbFrom": "4",
-  "total": "-34",
+  "popInit": "74.4110971861",
+  "totalOut": "24",
+  "pop": "116.16552449846382",
+  "nbFrom": "5",
+  "total": "-21",
   "pop2010": "none",
-  "wealth": "135.6714152397777",
+  "wealth": "117.088567738349",
   "orig": "16",
-  "nbTo": "9",
-  "totalIn": "59"
+  "nbTo": "8",
+  "totalIn": "45"
 }, [{
   "dest": "63",
-  "weight": "5",
-  "distance": "none"
+  "weight": "7",
+  "distance": "4.123105625617661"
 }, {
   "dest": "37",
-  "weight": "5",
-  "distance": "none"
+  "weight": "3",
+  "distance": "6.708203932499369"
 }, {
   "dest": "9",
-  "weight": "11",
-  "distance": "none"
+  "weight": "1",
+  "distance": "6.4031242374328485"
+}, {
+  "dest": "71",
+  "weight": "8",
+  "distance": "3.605551275463989"
 }, {
   "dest": "65",
-  "weight": "4",
-  "distance": "none"
+  "weight": "5",
+  "distance": "9.0"
 }]], [{
-  "totalOut": "29",
-  "pop": "75.15751942357718",
+  "popInit": "62.6957660875",
+  "totalOut": "25",
+  "pop": "82.79215438889106",
   "nbFrom": "5",
-  "total": "11",
+  "total": "4",
   "pop2010": "none",
-  "wealth": "75.37303079967793",
+  "wealth": "83.40427312385594",
   "orig": "79",
   "nbTo": "2",
-  "totalIn": "18"
+  "totalIn": "21"
 }, [{
   "dest": "76",
-  "weight": "6",
-  "distance": "none"
+  "weight": "3",
+  "distance": "9.0"
 }, {
   "dest": "95",
-  "weight": "6",
-  "distance": "none"
+  "weight": "3",
+  "distance": "8.602325267042627"
 }, {
   "dest": "90",
-  "weight": "2",
-  "distance": "none"
+  "weight": "7",
+  "distance": "8.06225774829855"
 }, {
   "dest": "89",
-  "weight": "12",
-  "distance": "none"
+  "weight": "11",
+  "distance": "3.1622776601683795"
 }, {
   "dest": "27",
-  "weight": "3",
-  "distance": "none"
+  "weight": "1",
+  "distance": "9.848857801796104"
 }]], [{
-  "totalOut": "15",
-  "pop": "75.96368973872943",
+  "popInit": "64.5718422224",
+  "totalOut": "17",
+  "pop": "74.76226733597612",
   "nbFrom": "3",
   "total": "9",
   "pop2010": "none",
-  "wealth": "75.96653074308335",
+  "wealth": "74.7919265461755",
   "orig": "5",
   "nbTo": "1",
-  "totalIn": "6"
+  "totalIn": "8"
 }, [{
   "dest": "94",
-  "weight": "4",
-  "distance": "none"
+  "weight": "5",
+  "distance": "8.06225774829855"
 }, {
   "dest": "19",
   "weight": "5",
-  "distance": "none"
+  "distance": "3.605551275463989"
 }, {
   "dest": "58",
-  "weight": "6",
-  "distance": "none"
+  "weight": "7",
+  "distance": "6.082762530298219"
 }]], [{
-  "totalOut": "25",
-  "pop": "82.48743312054198",
+  "popInit": "66.7992940378",
+  "totalOut": "43",
+  "pop": "87.19988948763222",
   "nbFrom": "6",
-  "total": "11",
+  "total": "21",
   "pop2010": "none",
-  "wealth": "82.68832951046139",
+  "wealth": "87.31896059467262",
   "orig": "72",
   "nbTo": "3",
-  "totalIn": "14"
+  "totalIn": "22"
 }, [{
   "dest": "90",
-  "weight": "3",
-  "distance": "none"
+  "weight": "4",
+  "distance": "9.055385138137417"
 }, {
   "dest": "60",
-  "weight": "5",
-  "distance": "none"
+  "weight": "6",
+  "distance": "3.605551275463989"
 }, {
   "dest": "32",
-  "weight": "3",
-  "distance": "none"
+  "weight": "4",
+  "distance": "7.810249675906654"
 }, {
   "dest": "13",
-  "weight": "3",
-  "distance": "none"
+  "weight": "6",
+  "distance": "3.605551275463989"
 }, {
   "dest": "43",
-  "weight": "5",
-  "distance": "none"
+  "weight": "10",
+  "distance": "4.123105625617661"
 }, {
   "dest": "2",
-  "weight": "6",
-  "distance": "none"
+  "weight": "13",
+  "distance": "5.0"
 }]], [{
-  "totalOut": "421",
-  "pop": "859.4732297763835",
+  "popInit": "97.0985909679",
+  "totalOut": "319",
+  "pop": "672.977309992455",
   "nbFrom": "16",
-  "total": "225",
+  "total": "132",
   "pop2010": "none",
-  "wealth": "1058.0403283830233",
+  "wealth": "836.1515527209658",
   "orig": "10",
   "nbTo": "9",
-  "totalIn": "196"
+  "totalIn": "187"
 }, [{
   "dest": "86",
-  "weight": "51",
-  "distance": "none"
+  "weight": "41",
+  "distance": "4.0"
 }, {
   "dest": "20",
-  "weight": "50",
-  "distance": "none"
+  "weight": "40",
+  "distance": "4.47213595499958"
 }, {
   "dest": "45",
-  "weight": "20",
-  "distance": "none"
+  "weight": "9",
+  "distance": "9.433981132056603"
 }, {
   "dest": "55",
-  "weight": "20",
-  "distance": "none"
+  "weight": "16",
+  "distance": "7.211102550927978"
 }, {
   "dest": "59",
-  "weight": "28",
-  "distance": "none"
+  "weight": "10",
+  "distance": "6.082762530298219"
 }, {
   "dest": "39",
-  "weight": "13",
-  "distance": "none"
+  "weight": "11",
+  "distance": "13.92838827718412"
 }, {
   "dest": "49",
-  "weight": "10",
-  "distance": "none"
+  "weight": "17",
+  "distance": "4.0"
 }, {
   "dest": "80",
-  "weight": "31",
-  "distance": "none"
+  "weight": "22",
+  "distance": "2.23606797749979"
 }, {
   "dest": "61",
-  "weight": "74",
-  "distance": "none"
+  "weight": "35",
+  "distance": "12.529964086141668"
 }, {
   "dest": "31",
-  "weight": "14",
-  "distance": "none"
+  "weight": "12",
+  "distance": "9.055385138137417"
 }, {
   "dest": "4",
-  "weight": "7",
-  "distance": "none"
+  "weight": "11",
+  "distance": "19.209372712298546"
 }, {
   "dest": "74",
-  "weight": "26",
-  "distance": "none"
+  "weight": "43",
+  "distance": "14.422205101855956"
 }, {
   "dest": "98",
-  "weight": "10",
-  "distance": "none"
+  "weight": "7",
+  "distance": "15.524174696260024"
 }, {
   "dest": "22",
-  "weight": "34",
-  "distance": "none"
+  "weight": "23",
+  "distance": "8.06225774829855"
 }, {
   "dest": "91",
-  "weight": "11",
-  "distance": "none"
+  "weight": "10",
+  "distance": "15.811388300841896"
 }, {
   "dest": "27",
-  "weight": "22",
-  "distance": "none"
+  "weight": "12",
+  "distance": "6.708203932499369"
 }]], [{
-  "totalOut": "112",
-  "pop": "479.7570128198477",
+  "popInit": "72.7291304802",
+  "totalOut": "71",
+  "pop": "188.05145210604502",
   "nbFrom": "7",
-  "total": "-84",
+  "total": "-36",
   "pop2010": "none",
-  "wealth": "544.4597070854251",
+  "wealth": "200.00428669621323",
   "orig": "59",
   "nbTo": "13",
-  "totalIn": "196"
+  "totalIn": "107"
 }, [{
   "dest": "80",
-  "weight": "13",
-  "distance": "none"
+  "weight": "8",
+  "distance": "4.0"
 }, {
   "dest": "20",
   "weight": "14",
-  "distance": "none"
+  "distance": "6.4031242374328485"
 }, {
   "dest": "66",
-  "weight": "12",
-  "distance": "none"
+  "weight": "10",
+  "distance": "3.605551275463989"
 }, {
   "dest": "12",
-  "weight": "24",
-  "distance": "none"
+  "weight": "10",
+  "distance": "8.06225774829855"
 }, {
   "dest": "84",
-  "weight": "25",
-  "distance": "none"
+  "weight": "14",
+  "distance": "4.123105625617661"
 }, {
   "dest": "49",
-  "weight": "12",
-  "distance": "none"
+  "weight": "5",
+  "distance": "2.23606797749979"
 }, {
   "dest": "86",
-  "weight": "12",
-  "distance": "none"
+  "weight": "10",
+  "distance": "6.708203932499369"
 }]], [{
-  "totalOut": "17",
-  "pop": "51.75324533635766",
+  "popInit": "49.0057247903",
+  "totalOut": "18",
+  "pop": "52.053260397905824",
   "nbFrom": "5",
-  "total": "17",
+  "total": "15",
   "pop2010": "none",
-  "wealth": "51.753569776077114",
+  "wealth": "52.159307821466456",
   "orig": "87",
-  "nbTo": "0",
-  "totalIn": "0"
+  "nbTo": "1",
+  "totalIn": "3"
 }, [{
   "dest": "9",
-  "weight": "5",
-  "distance": "none"
+  "weight": "4",
+  "distance": "6.324555320336759"
 }, {
   "dest": "2",
-  "weight": "3",
-  "distance": "none"
+  "weight": "2",
+  "distance": "9.486832980505138"
 }, {
   "dest": "60",
-  "weight": "3",
-  "distance": "none"
+  "weight": "2",
+  "distance": "4.242640687119285"
 }, {
   "dest": "43",
-  "weight": "2",
-  "distance": "none"
+  "weight": "9",
+  "distance": "5.0990195135927845"
 }, {
   "dest": "28",
-  "weight": "4",
-  "distance": "none"
+  "weight": "1",
+  "distance": "8.0"
 }]], [{
-  "totalOut": "58",
-  "pop": "115.35886963025322",
+  "popInit": "67.7562168017",
+  "totalOut": "62",
+  "pop": "125.54215916763938",
   "nbFrom": "6",
-  "total": "-8",
+  "total": "-1",
   "pop2010": "none",
-  "wealth": "124.7317931404372",
+  "wealth": "132.71098300943657",
   "orig": "48",
   "nbTo": "2",
-  "totalIn": "66"
+  "totalIn": "63"
 }, [{
   "dest": "59",
-  "weight": "11",
-  "distance": "none"
+  "weight": "4",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "19",
-  "weight": "3",
-  "distance": "none"
+  "weight": "5",
+  "distance": "8.94427190999916"
 }, {
   "dest": "86",
-  "weight": "12",
-  "distance": "none"
+  "weight": "13",
+  "distance": "6.4031242374328485"
 }, {
   "dest": "12",
-  "weight": "23",
-  "distance": "none"
+  "weight": "35",
+  "distance": "2.23606797749979"
 }, {
   "dest": "58",
   "weight": "3",
-  "distance": "none"
+  "distance": "8.602325267042627"
 }, {
   "dest": "84",
-  "weight": "6",
-  "distance": "none"
+  "weight": "2",
+  "distance": "9.433981132056603"
 }]], [{
-  "totalOut": "12",
-  "pop": "69.1610989274473",
+  "popInit": "65.9185983242",
+  "totalOut": "14",
+  "pop": "69.70241890742675",
   "nbFrom": "3",
-  "total": "12",
+  "total": "14",
   "pop2010": "none",
-  "wealth": "69.16113356779356",
+  "wealth": "69.70241890783656",
   "orig": "21",
   "nbTo": "0",
   "totalIn": "0"
 }, [{
   "dest": "90",
-  "weight": "3",
-  "distance": "none"
+  "weight": "4",
+  "distance": "8.246211251235321"
 }, {
   "dest": "27",
-  "weight": "6",
-  "distance": "none"
+  "weight": "3",
+  "distance": "9.486832980505138"
 }, {
   "dest": "86",
-  "weight": "3",
-  "distance": "none"
+  "weight": "7",
+  "distance": "8.54400374531753"
 }]], [{
-  "totalOut": "46",
-  "pop": "221.0468037006969",
-  "nbFrom": "5",
-  "total": "-58",
+  "popInit": "78.0476043271",
+  "totalOut": "31",
+  "pop": "187.57655200741667",
+  "nbFrom": "4",
+  "total": "-57",
   "pop2010": "none",
-  "wealth": "227.05516793947245",
+  "wealth": "191.71523274874346",
   "orig": "76",
   "nbTo": "12",
-  "totalIn": "104"
+  "totalIn": "88"
 }, [{
   "dest": "75",
-  "weight": "8",
-  "distance": "none"
+  "weight": "1",
+  "distance": "4.0"
 }, {
   "dest": "73",
-  "weight": "15",
-  "distance": "none"
+  "weight": "5",
+  "distance": "2.23606797749979"
 }, {
   "dest": "35",
-  "weight": "6",
-  "distance": "none"
+  "weight": "15",
+  "distance": "5.385164807134504"
 }, {
   "dest": "93",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "95",
-  "weight": "12",
-  "distance": "none"
+  "weight": "10",
+  "distance": "4.47213595499958"
 }]], [{
-  "totalOut": "3",
-  "pop": "53.639323376589594",
-  "nbFrom": "1",
-  "total": "0",
+  "popInit": "49.903804543",
+  "totalOut": "5",
+  "pop": "53.2119225567051",
+  "nbFrom": "2",
+  "total": "2",
   "pop2010": "none",
-  "wealth": "53.64065155163975",
+  "wealth": "53.22345001277533",
   "orig": "54",
   "nbTo": "1",
   "totalIn": "3"
 }, [{
-  "dest": "88",
+  "dest": "56",
   "weight": "3",
-  "distance": "none"
+  "distance": "3.605551275463989"
+}, {
+  "dest": "88",
+  "weight": "2",
+  "distance": "5.385164807134504"
 }]], [{
-  "totalOut": "19",
-  "pop": "133.40372271459358",
+  "popInit": "78.4546531769",
+  "totalOut": "38",
+  "pop": "203.21382152117508",
   "nbFrom": "4",
-  "total": "-36",
+  "total": "-50",
   "pop2010": "none",
-  "wealth": "136.46922289116333",
+  "wealth": "211.88716857888386",
   "orig": "43",
   "nbTo": "10",
-  "totalIn": "55"
+  "totalIn": "88"
 }, [{
   "dest": "72",
-  "weight": "7",
-  "distance": "none"
+  "weight": "6",
+  "distance": "4.123105625617661"
 }, {
   "dest": "32",
-  "weight": "6",
-  "distance": "none"
+  "weight": "12",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "60",
-  "weight": "2",
-  "distance": "none"
+  "weight": "9",
+  "distance": "2.8284271247461903"
 }, {
   "dest": "2",
-  "weight": "4",
-  "distance": "none"
+  "weight": "11",
+  "distance": "8.246211251235321"
 }]], [{
-  "totalOut": "52",
-  "pop": "167.86129712076766",
+  "popInit": "74.6818165976",
+  "totalOut": "32",
+  "pop": "126.79118678261638",
   "nbFrom": "6",
-  "total": "-33",
+  "total": "-25",
   "pop2010": "none",
-  "wealth": "176.08126043002505",
+  "wealth": "130.23599781105875",
   "orig": "65",
   "nbTo": "10",
-  "totalIn": "85"
+  "totalIn": "57"
 }, [{
   "dest": "16",
-  "weight": "3",
-  "distance": "none"
+  "weight": "4",
+  "distance": "9.0"
 }, {
   "dest": "63",
-  "weight": "14",
-  "distance": "none"
+  "weight": "4",
+  "distance": "5.0990195135927845"
 }, {
   "dest": "7",
-  "weight": "11",
-  "distance": "none"
+  "weight": "5",
+  "distance": "5.0"
 }, {
   "dest": "8",
-  "weight": "14",
-  "distance": "none"
+  "weight": "6",
+  "distance": "2.23606797749979"
 }, {
   "dest": "37",
-  "weight": "4",
-  "distance": "none"
+  "weight": "8",
+  "distance": "8.48528137423857"
 }, {
   "dest": "96",
-  "weight": "6",
-  "distance": "none"
+  "weight": "5",
+  "distance": "3.605551275463989"
 }]], [{
+  "popInit": "53.1625737374",
   "totalOut": "25",
-  "pop": "72.01869021233013",
+  "pop": "67.86143082215652",
   "nbFrom": "4",
   "total": "-1",
   "pop2010": "none",
-  "wealth": "72.97695301349485",
+  "wealth": "68.03260540861476",
   "orig": "71",
-  "nbTo": "2",
+  "nbTo": "3",
   "totalIn": "26"
 }, [{
   "dest": "9",
-  "weight": "10",
-  "distance": "none"
+  "weight": "8",
+  "distance": "2.8284271247461903"
 }, {
   "dest": "16",
-  "weight": "4",
-  "distance": "none"
-}, {
-  "dest": "37",
-  "weight": "10",
-  "distance": "none"
-}, {
-  "dest": "63",
-  "weight": "1",
-  "distance": "none"
-}]], [{
-  "totalOut": "18",
-  "pop": "65.70704828646276",
-  "nbFrom": "4",
-  "total": "13",
-  "pop2010": "none",
-  "wealth": "65.7113405724822",
-  "orig": "57",
-  "nbTo": "1",
-  "totalIn": "5"
-}, [{
-  "dest": "65",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "7",
-  "weight": "9",
-  "distance": "none"
-}, {
-  "dest": "52",
-  "weight": "2",
-  "distance": "none"
-}, {
-  "dest": "78",
-  "weight": "2",
-  "distance": "none"
-}]], [{
-  "totalOut": "24",
-  "pop": "146.91544672305085",
-  "nbFrom": "3",
-  "total": "-32",
-  "pop2010": "none",
-  "wealth": "150.48988163109584",
-  "orig": "32",
-  "nbTo": "11",
-  "totalIn": "56"
-}, [{
-  "dest": "89",
-  "weight": "8",
-  "distance": "none"
-}, {
-  "dest": "90",
-  "weight": "12",
-  "distance": "none"
-}, {
-  "dest": "43",
-  "weight": "4",
-  "distance": "none"
-}]], [{
-  "totalOut": "53",
-  "pop": "120.30962328081122",
-  "nbFrom": "7",
-  "total": "-20",
-  "pop2010": "none",
-  "wealth": "124.95076410236726",
-  "orig": "80",
-  "nbTo": "4",
-  "totalIn": "73"
-}, [{
-  "dest": "49",
-  "weight": "7",
-  "distance": "none"
-}, {
-  "dest": "20",
-  "weight": "8",
-  "distance": "none"
-}, {
-  "dest": "84",
-  "weight": "2",
-  "distance": "none"
-}, {
-  "dest": "59",
-  "weight": "10",
-  "distance": "none"
-}, {
-  "dest": "86",
-  "weight": "14",
-  "distance": "none"
-}, {
-  "dest": "27",
-  "weight": "6",
-  "distance": "none"
-}, {
-  "dest": "12",
-  "weight": "6",
-  "distance": "none"
-}]], [{
-  "totalOut": "21",
-  "pop": "70.1864087734984",
-  "nbFrom": "4",
-  "total": "-2",
-  "pop2010": "none",
-  "wealth": "70.403496978864",
-  "orig": "82",
-  "nbTo": "3",
-  "totalIn": "23"
-}, [{
-  "dest": "65",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "7",
-  "weight": "8",
-  "distance": "none"
-}, {
-  "dest": "63",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "1",
   "weight": "3",
-  "distance": "none"
-}]], [{
-  "totalOut": "43",
-  "pop": "76.31240601519059",
-  "nbFrom": "6",
-  "total": "7",
-  "pop2010": "none",
-  "wealth": "77.51591057146724",
-  "orig": "49",
-  "nbTo": "4",
-  "totalIn": "36"
-}, [{
-  "dest": "12",
-  "weight": "6",
-  "distance": "none"
-}, {
-  "dest": "86",
-  "weight": "13",
-  "distance": "none"
-}, {
-  "dest": "80",
-  "weight": "6",
-  "distance": "none"
-}, {
-  "dest": "20",
-  "weight": "4",
-  "distance": "none"
-}, {
-  "dest": "84",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "59",
-  "weight": "9",
-  "distance": "none"
-}]], [{
-  "totalOut": "215",
-  "pop": "304.6142767811258",
-  "nbFrom": "16",
-  "total": "97",
-  "pop2010": "none",
-  "wealth": "343.4580148178004",
-  "orig": "6",
-  "nbTo": "10",
-  "totalIn": "118"
-}, [{
-  "dest": "99",
-  "weight": "6",
-  "distance": "none"
-}, {
-  "dest": "71",
-  "weight": "11",
-  "distance": "none"
-}, {
-  "dest": "30",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "69",
-  "weight": "9",
-  "distance": "none"
-}, {
-  "dest": "70",
-  "weight": "12",
-  "distance": "none"
-}, {
-  "dest": "2",
-  "weight": "13",
-  "distance": "none"
-}, {
-  "dest": "9",
-  "weight": "30",
-  "distance": "none"
-}, {
-  "dest": "16",
-  "weight": "9",
-  "distance": "none"
-}, {
-  "dest": "63",
-  "weight": "9",
-  "distance": "none"
-}, {
-  "dest": "42",
-  "weight": "40",
-  "distance": "none"
+  "distance": "3.605551275463989"
 }, {
   "dest": "37",
-  "weight": "18",
-  "distance": "none"
-}, {
-  "dest": "26",
-  "weight": "8",
-  "distance": "none"
-}, {
-  "dest": "64",
-  "weight": "17",
-  "distance": "none"
-}, {
-  "dest": "41",
   "weight": "7",
-  "distance": "none"
+  "distance": "7.211102550927978"
 }, {
-  "dest": "0",
-  "weight": "9",
-  "distance": "none"
-}, {
-  "dest": "25",
-  "weight": "12",
-  "distance": "none"
+  "dest": "63",
+  "weight": "7",
+  "distance": "7.615773105863909"
 }]], [{
-  "totalOut": "6",
-  "pop": "61.74152053158918",
-  "nbFrom": "2",
-  "total": "-1",
+  "popInit": "57.6722447895",
+  "totalOut": "9",
+  "pop": "66.22498541713865",
+  "nbFrom": "4",
+  "total": "2",
   "pop2010": "none",
-  "wealth": "62.144854473573254",
-  "orig": "36",
+  "wealth": "66.22580042766064",
+  "orig": "57",
   "nbTo": "1",
   "totalIn": "7"
 }, [{
-  "dest": "84",
-  "weight": "2",
-  "distance": "none"
-}, {
-  "dest": "19",
-  "weight": "4",
-  "distance": "none"
-}]], [{
-  "totalOut": "41",
-  "pop": "75.41113046720801",
-  "nbFrom": "8",
-  "total": "7",
-  "pop2010": "none",
-  "wealth": "75.87631703812501",
-  "orig": "1",
-  "nbTo": "3",
-  "totalIn": "34"
-}, [{
-  "dest": "82",
-  "weight": "4",
-  "distance": "none"
-}, {
-  "dest": "37",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "16",
-  "weight": "3",
-  "distance": "none"
-}, {
   "dest": "65",
-  "weight": "8",
-  "distance": "none"
+  "weight": "2",
+  "distance": "8.06225774829855"
 }, {
   "dest": "7",
-  "weight": "7",
-  "distance": "none"
-}, {
-  "dest": "63",
-  "weight": "6",
-  "distance": "none"
-}, {
-  "dest": "2",
-  "weight": "5",
-  "distance": "none"
-}, {
-  "dest": "33",
-  "weight": "3",
-  "distance": "none"
-}]], [{
-  "totalOut": "193",
-  "pop": "236.01062755989767",
-  "nbFrom": "13",
-  "total": "106",
-  "pop2010": "none",
-  "wealth": "248.5620908914751",
-  "orig": "39",
-  "nbTo": "7",
-  "totalIn": "87"
-}, [{
-  "dest": "10",
-  "weight": "24",
-  "distance": "none"
-}, {
-  "dest": "66",
-  "weight": "10",
-  "distance": "none"
-}, {
-  "dest": "44",
-  "weight": "14",
-  "distance": "none"
-}, {
-  "dest": "12",
-  "weight": "19",
-  "distance": "none"
-}, {
-  "dest": "59",
-  "weight": "13",
-  "distance": "none"
-}, {
-  "dest": "74",
-  "weight": "16",
-  "distance": "none"
-}, {
-  "dest": "61",
-  "weight": "40",
-  "distance": "none"
-}, {
-  "dest": "36",
-  "weight": "7",
-  "distance": "none"
-}, {
-  "dest": "19",
-  "weight": "11",
-  "distance": "none"
-}, {
-  "dest": "84",
-  "weight": "13",
-  "distance": "none"
-}, {
-  "dest": "22",
-  "weight": "13",
-  "distance": "none"
-}, {
-  "dest": "15",
-  "weight": "6",
-  "distance": "none"
-}, {
-  "dest": "30",
-  "weight": "7",
-  "distance": "none"
-}]], [{
-  "totalOut": "9",
-  "pop": "39.825214479652345",
-  "nbFrom": "4",
-  "total": "6",
-  "pop2010": "none",
-  "wealth": "39.825245408693256",
-  "orig": "17",
-  "nbTo": "2",
-  "totalIn": "3"
-}, [{
-  "dest": "97",
-  "weight": "3",
-  "distance": "none"
-}, {
-  "dest": "78",
-  "weight": "1",
-  "distance": "none"
-}, {
-  "dest": "77",
-  "weight": "3",
-  "distance": "none"
+  "weight": "4",
+  "distance": "4.0"
 }, {
   "dest": "52",
   "weight": "2",
-  "distance": "none"
-}]], [{
-  "totalOut": "82",
-  "pop": "215.53305261611368",
-  "nbFrom": "9",
-  "total": "14",
-  "pop2010": "none",
-  "wealth": "218.8493700548326",
-  "orig": "25",
-  "nbTo": "6",
-  "totalIn": "68"
-}, [{
-  "dest": "28",
-  "weight": "7",
-  "distance": "none"
+  "distance": "7.615773105863909"
 }, {
-  "dest": "26",
-  "weight": "13",
-  "distance": "none"
+  "dest": "78",
+  "weight": "1",
+  "distance": "8.602325267042627"
+}]], [{
+  "popInit": "78.7800359705",
+  "totalOut": "33",
+  "pop": "175.07064701515813",
+  "nbFrom": "3",
+  "total": "-47",
+  "pop2010": "none",
+  "wealth": "179.7451142455259",
+  "orig": "32",
+  "nbTo": "11",
+  "totalIn": "80"
+}, [{
+  "dest": "89",
+  "weight": "15",
+  "distance": "7.0710678118654755"
+}, {
+  "dest": "90",
+  "weight": "9",
+  "distance": "5.0"
+}, {
+  "dest": "43",
+  "weight": "9",
+  "distance": "7.0710678118654755"
+}]], [{
+  "popInit": "64.477126992",
+  "totalOut": "52",
+  "pop": "102.6274312087567",
+  "nbFrom": "7",
+  "total": "4",
+  "pop2010": "none",
+  "wealth": "104.52207101433642",
+  "orig": "80",
+  "nbTo": "4",
+  "totalIn": "48"
+}, [{
+  "dest": "49",
+  "weight": "7",
+  "distance": "2.23606797749979"
+}, {
+  "dest": "20",
+  "weight": "8",
+  "distance": "5.0"
+}, {
+  "dest": "84",
+  "weight": "5",
+  "distance": "8.06225774829855"
+}, {
+  "dest": "59",
+  "weight": "12",
+  "distance": "4.0"
+}, {
+  "dest": "86",
+  "weight": "8",
+  "distance": "3.605551275463989"
+}, {
+  "dest": "27",
+  "weight": "3",
+  "distance": "8.246211251235321"
+}, {
+  "dest": "12",
+  "weight": "9",
+  "distance": "9.433981132056603"
+}]], [{
+  "popInit": "53.5196559249",
+  "totalOut": "26",
+  "pop": "70.67713953494962",
+  "nbFrom": "5",
+  "total": "1",
+  "pop2010": "none",
+  "wealth": "70.95443842163742",
+  "orig": "82",
+  "nbTo": "3",
+  "totalIn": "25"
+}, [{
+  "dest": "65",
+  "weight": "4",
+  "distance": "5.0"
+}, {
+  "dest": "7",
+  "weight": "7",
+  "distance": "3.1622776601683795"
+}, {
+  "dest": "37",
+  "weight": "9",
+  "distance": "6.082762530298219"
+}, {
+  "dest": "63",
+  "weight": "5",
+  "distance": "7.810249675906654"
+}, {
+  "dest": "1",
+  "weight": "1",
+  "distance": "2.8284271247461903"
+}]], [{
+  "popInit": "55.435468256",
+  "totalOut": "50",
+  "pop": "82.03288805151986",
+  "nbFrom": "6",
+  "total": "9",
+  "pop2010": "none",
+  "wealth": "84.44858131349751",
+  "orig": "49",
+  "nbTo": "4",
+  "totalIn": "41"
+}, [{
+  "dest": "12",
+  "weight": "12",
+  "distance": "9.486832980505138"
+}, {
+  "dest": "86",
+  "weight": "7",
+  "distance": "5.656854249492381"
+}, {
+  "dest": "80",
+  "weight": "8",
+  "distance": "2.23606797749979"
+}, {
+  "dest": "20",
+  "weight": "7",
+  "distance": "4.47213595499958"
+}, {
+  "dest": "84",
+  "weight": "9",
+  "distance": "6.0"
+}, {
+  "dest": "59",
+  "weight": "7",
+  "distance": "2.23606797749979"
+}]], [{
+  "popInit": "92.1884157586",
+  "totalOut": "182",
+  "pop": "227.47480899864917",
+  "nbFrom": "16",
+  "total": "85",
+  "pop2010": "none",
+  "wealth": "251.2510861160789",
+  "orig": "6",
+  "nbTo": "10",
+  "totalIn": "97"
+}, [{
+  "dest": "99",
+  "weight": "4",
+  "distance": "14.142135623730951"
+}, {
+  "dest": "71",
+  "weight": "8",
+  "distance": "2.23606797749979"
+}, {
+  "dest": "30",
+  "weight": "5",
+  "distance": "18.439088914585774"
+}, {
+  "dest": "69",
+  "weight": "3",
+  "distance": "13.152946437965905"
+}, {
+  "dest": "70",
+  "weight": "4",
+  "distance": "7.0710678118654755"
+}, {
+  "dest": "2",
+  "weight": "12",
+  "distance": "9.848857801796104"
 }, {
   "dest": "9",
-  "weight": "9",
-  "distance": "none"
+  "weight": "18",
+  "distance": "3.0"
 }, {
-  "dest": "99",
+  "dest": "16",
   "weight": "9",
-  "distance": "none"
+  "distance": "4.47213595499958"
+}, {
+  "dest": "63",
+  "weight": "10",
+  "distance": "7.810249675906654"
+}, {
+  "dest": "42",
+  "weight": "59",
+  "distance": "12.206555615733702"
+}, {
+  "dest": "37",
+  "weight": "15",
+  "distance": "5.385164807134504"
+}, {
+  "dest": "26",
+  "weight": "4",
+  "distance": "18.24828759089466"
+}, {
+  "dest": "64",
+  "weight": "9",
+  "distance": "7.280109889280518"
+}, {
+  "dest": "41",
+  "weight": "8",
+  "distance": "17.029386365926403"
 }, {
   "dest": "0",
+  "weight": "6",
+  "distance": "19.235384061671343"
+}, {
+  "dest": "25",
   "weight": "8",
-  "distance": "none"
+  "distance": "11.0"
+}]], [{
+  "popInit": "53.7920737883",
+  "totalOut": "10",
+  "pop": "61.61531316797116",
+  "nbFrom": "2",
+  "total": "2",
+  "pop2010": "none",
+  "wealth": "61.661906219615986",
+  "orig": "36",
+  "nbTo": "1",
+  "totalIn": "8"
+}, [{
+  "dest": "84",
+  "weight": "6",
+  "distance": "7.211102550927978"
+}, {
+  "dest": "19",
+  "weight": "4",
+  "distance": "8.54400374531753"
+}]], [{
+  "popInit": "52.8042262924",
+  "totalOut": "25",
+  "pop": "82.33216429240436",
+  "nbFrom": "7",
+  "total": "-36",
+  "pop2010": "none",
+  "wealth": "90.75588728813088",
+  "orig": "1",
+  "nbTo": "3",
+  "totalIn": "61"
+}, [{
+  "dest": "82",
+  "weight": "5",
+  "distance": "2.8284271247461903"
+}, {
+  "dest": "37",
+  "weight": "2",
+  "distance": "4.123105625617661"
+}, {
+  "dest": "16",
+  "weight": "2",
+  "distance": "9.899494936611665"
+}, {
+  "dest": "65",
+  "weight": "2",
+  "distance": "7.280109889280518"
+}, {
+  "dest": "63",
+  "weight": "3",
+  "distance": "8.54400374531753"
+}, {
+  "dest": "2",
+  "weight": "7",
+  "distance": "7.810249675906654"
+}, {
+  "dest": "33",
+  "weight": "4",
+  "distance": "9.055385138137417"
+}]], [{
+  "popInit": "90.7843790989",
+  "totalOut": "162",
+  "pop": "264.15308612801704",
+  "nbFrom": "13",
+  "total": "63",
+  "pop2010": "none",
+  "wealth": "287.4239642108611",
+  "orig": "39",
+  "nbTo": "7",
+  "totalIn": "99"
+}, [{
+  "dest": "10",
+  "weight": "13",
+  "distance": "13.92838827718412"
+}, {
+  "dest": "66",
+  "weight": "12",
+  "distance": "4.47213595499958"
+}, {
+  "dest": "44",
+  "weight": "12",
+  "distance": "7.615773105863909"
+}, {
+  "dest": "12",
+  "weight": "16",
+  "distance": "7.211102550927978"
+}, {
+  "dest": "59",
+  "weight": "5",
+  "distance": "8.06225774829855"
+}, {
+  "dest": "74",
+  "weight": "37",
+  "distance": "13.038404810405298"
+}, {
+  "dest": "61",
+  "weight": "13",
+  "distance": "9.219544457292887"
+}, {
+  "dest": "36",
+  "weight": "8",
+  "distance": "3.1622776601683795"
+}, {
+  "dest": "19",
+  "weight": "10",
+  "distance": "7.0"
+}, {
+  "dest": "84",
+  "weight": "11",
+  "distance": "5.830951894845301"
+}, {
+  "dest": "22",
+  "weight": "7",
+  "distance": "15.0"
+}, {
+  "dest": "15",
+  "weight": "13",
+  "distance": "14.317821063276353"
+}, {
+  "dest": "30",
+  "weight": "5",
+  "distance": "19.4164878389476"
+}]], [{
+  "popInit": "38.2186249633",
+  "totalOut": "14",
+  "pop": "41.676105113798556",
+  "nbFrom": "4",
+  "total": "6",
+  "pop2010": "none",
+  "wealth": "41.737807206663724",
+  "orig": "17",
+  "nbTo": "3",
+  "totalIn": "8"
+}, [{
+  "dest": "97",
+  "weight": "3",
+  "distance": "3.1622776601683795"
+}, {
+  "dest": "78",
+  "weight": "4",
+  "distance": "3.1622776601683795"
+}, {
+  "dest": "77",
+  "weight": "5",
+  "distance": "2.23606797749979"
+}, {
+  "dest": "52",
+  "weight": "2",
+  "distance": "7.0710678118654755"
+}]], [{
+  "popInit": "92.1988144234",
+  "totalOut": "51",
+  "pop": "143.94851868232396",
+  "nbFrom": "8",
+  "total": "20",
+  "pop2010": "none",
+  "wealth": "144.30005432992846",
+  "orig": "25",
+  "nbTo": "6",
+  "totalIn": "31"
+}, [{
+  "dest": "28",
+  "weight": "5",
+  "distance": "6.324555320336759"
+}, {
+  "dest": "26",
+  "weight": "9",
+  "distance": "7.615773105863909"
+}, {
+  "dest": "9",
+  "weight": "7",
+  "distance": "8.0"
+}, {
+  "dest": "99",
+  "weight": "10",
+  "distance": "10.04987562112089"
+}, {
+  "dest": "0",
+  "weight": "4",
+  "distance": "10.816653826391969"
 }, {
   "dest": "70",
   "weight": "10",
-  "distance": "none"
-}, {
-  "dest": "64",
-  "weight": "6",
-  "distance": "none"
+  "distance": "7.810249675906654"
 }, {
   "dest": "6",
-  "weight": "8",
-  "distance": "none"
+  "weight": "4",
+  "distance": "11.0"
 }, {
   "dest": "85",
-  "weight": "12",
-  "distance": "none"
+  "weight": "2",
+  "distance": "9.433981132056603"
 }]], [{
-  "totalOut": "29",
-  "pop": "63.051473157314405",
-  "nbFrom": "6",
-  "total": "12",
+  "popInit": "54.1978083262",
+  "totalOut": "43",
+  "pop": "67.90018278392068",
+  "nbFrom": "7",
+  "total": "22",
   "pop2010": "none",
-  "wealth": "63.61637203706519",
+  "wealth": "68.24189727000372",
   "orig": "60",
   "nbTo": "4",
-  "totalIn": "17"
+  "totalIn": "21"
 }, [{
   "dest": "32",
-  "weight": "5",
-  "distance": "none"
+  "weight": "4",
+  "distance": "9.486832980505138"
 }, {
   "dest": "2",
   "weight": "6",
-  "distance": "none"
+  "distance": "6.0"
+}, {
+  "dest": "87",
+  "weight": "3",
+  "distance": "4.242640687119285"
 }, {
   "dest": "9",
-  "weight": "4",
-  "distance": "none"
+  "weight": "7",
+  "distance": "9.055385138137417"
 }, {
   "dest": "43",
-  "weight": "8",
-  "distance": "none"
+  "weight": "13",
+  "distance": "2.8284271247461903"
 }, {
   "dest": "72",
   "weight": "5",
-  "distance": "none"
+  "distance": "3.605551275463989"
 }, {
   "dest": "37",
-  "weight": "1",
-  "distance": "none"
+  "weight": "5",
+  "distance": "9.899494936611665"
 }]], [{
-  "totalOut": "16",
-  "pop": "69.42318044574138",
-  "nbFrom": "4",
-  "total": "16",
+  "popInit": "63.842569853",
+  "totalOut": "20",
+  "pop": "68.1153368417621",
+  "nbFrom": "5",
+  "total": "20",
   "pop2010": "none",
-  "wealth": "69.73208354807936",
+  "wealth": "68.12004057271741",
   "orig": "14",
   "nbTo": "0",
   "totalIn": "0"
 }, [{
   "dest": "43",
-  "weight": "5",
-  "distance": "none"
+  "weight": "3",
+  "distance": "9.486832980505138"
 }, {
   "dest": "28",
-  "weight": "3",
-  "distance": "none"
+  "weight": "5",
+  "distance": "8.0"
 }, {
   "dest": "62",
   "weight": "3",
-  "distance": "none"
+  "distance": "7.211102550927978"
+}, {
+  "dest": "35",
+  "weight": "4",
+  "distance": "9.486832980505138"
 }, {
   "dest": "32",
   "weight": "5",
-  "distance": "none"
+  "distance": "8.94427190999916"
 }]], [{
-  "totalOut": "7",
-  "pop": "66.3344356259907",
-  "nbFrom": "1",
-  "total": "7",
+  "popInit": "60.9864646236",
+  "totalOut": "11",
+  "pop": "66.21148963640589",
+  "nbFrom": "2",
+  "total": "11",
   "pop2010": "none",
   "wealth": "66.46513017077632",
   "orig": "47",
   "nbTo": "0",
   "totalIn": "0"
 }, [{
+  "dest": "88",
+  "weight": "8",
+  "distance": "7.211102550927978"
+}, {
   "dest": "84",
-  "weight": "7",
-  "distance": "none"
+  "weight": "3",
+  "distance": "8.06225774829855"
 }]], [{
-  "totalOut": "41",
-  "pop": "167.6129914155763",
+  "popInit": "77.6771275817",
+  "totalOut": "26",
+  "pop": "144.2274381025093",
   "nbFrom": "3",
-  "total": "-32",
+  "total": "-35",
   "pop2010": "none",
-  "wealth": "174.7742547555832",
+  "wealth": "147.45288916130895",
   "orig": "31",
   "nbTo": "6",
-  "totalIn": "73"
+  "totalIn": "61"
 }, [{
   "dest": "81",
-  "weight": "20",
-  "distance": "none"
+  "weight": "10",
+  "distance": "2.23606797749979"
 }, {
   "dest": "20",
-  "weight": "15",
-  "distance": "none"
+  "weight": "9",
+  "distance": "5.830951894845301"
 }, {
   "dest": "67",
-  "weight": "6",
-  "distance": "none"
+  "weight": "7",
+  "distance": "8.0"
 }]], [{
-  "totalOut": "15",
-  "pop": "48.16675138979919",
-  "nbFrom": "5",
+  "popInit": "42.5293432989",
+  "totalOut": "12",
+  "pop": "47.59766777987505",
+  "nbFrom": "4",
   "total": "4",
   "pop2010": "none",
-  "wealth": "48.34731985194436",
+  "wealth": "47.59778688348982",
   "orig": "96",
   "nbTo": "2",
-  "totalIn": "11"
+  "totalIn": "8"
 }, [{
   "dest": "7",
-  "weight": "3",
-  "distance": "none"
+  "weight": "1",
+  "distance": "8.48528137423857"
 }, {
   "dest": "65",
-  "weight": "3",
-  "distance": "none"
+  "weight": "4",
+  "distance": "3.605551275463989"
 }, {
   "dest": "37",
-  "weight": "2",
-  "distance": "none"
-}, {
-  "dest": "16",
   "weight": "1",
-  "distance": "none"
+  "distance": "8.54400374531753"
 }, {
   "dest": "63",
   "weight": "6",
-  "distance": "none"
+  "distance": "2.23606797749979"
 }]], [{
-  "totalOut": "163",
-  "pop": "246.337858925795",
+  "popInit": "89.7194660078",
+  "totalOut": "182",
+  "pop": "220.4257030729792",
   "nbFrom": "13",
-  "total": "51",
+  "total": "81",
   "pop2010": "none",
-  "wealth": "273.67322743352105",
+  "wealth": "249.66823645674464",
   "orig": "69",
   "nbTo": "7",
-  "totalIn": "112"
+  "totalIn": "101"
 }, [{
   "dest": "42",
-  "weight": "41",
-  "distance": "none"
+  "weight": "66",
+  "distance": "9.486832980505138"
 }, {
   "dest": "82",
-  "weight": "10",
-  "distance": "none"
+  "weight": "9",
+  "distance": "3.605551275463989"
 }, {
   "dest": "8",
-  "weight": "15",
-  "distance": "none"
+  "weight": "5",
+  "distance": "3.0"
 }, {
   "dest": "6",
-  "weight": "10",
-  "distance": "none"
+  "weight": "8",
+  "distance": "13.152946437965905"
 }, {
   "dest": "37",
-  "weight": "7",
-  "distance": "none"
+  "weight": "9",
+  "distance": "8.94427190999916"
 }, {
   "dest": "64",
   "weight": "8",
-  "distance": "none"
+  "distance": "14.212670403551895"
 }, {
   "dest": "34",
-  "weight": "8",
-  "distance": "none"
+  "weight": "5",
+  "distance": "12.649110640673518"
 }, {
   "dest": "63",
-  "weight": "5",
-  "distance": "none"
+  "weight": "6",
+  "distance": "7.615773105863909"
 }, {
   "dest": "65",
   "weight": "18",
-  "distance": "none"
+  "distance": "2.8284271247461903"
 }, {
   "dest": "7",
-  "weight": "19",
-  "distance": "none"
+  "weight": "17",
+  "distance": "2.23606797749979"
 }, {
   "dest": "30",
-  "weight": "9",
-  "distance": "none"
+  "weight": "10",
+  "distance": "16.0312195418814"
 }, {
   "dest": "70",
-  "weight": "9",
-  "distance": "none"
+  "weight": "10",
+  "distance": "18.24828759089466"
 }, {
   "dest": "92",
-  "weight": "4",
-  "distance": "none"
+  "weight": "11",
+  "distance": "9.899494936611665"
 }]], [{
-  "totalOut": "30",
-  "pop": "155.8310421948539",
+  "popInit": "71.2149478324",
+  "totalOut": "22",
+  "pop": "130.95362916159314",
   "nbFrom": "3",
-  "total": "-47",
+  "total": "-42",
   "pop2010": "none",
-  "wealth": "157.99837756751285",
+  "wealth": "134.3015218819659",
   "orig": "95",
   "nbTo": "11",
-  "totalIn": "77"
+  "totalIn": "64"
 }, [{
   "dest": "51",
   "weight": "11",
-  "distance": "none"
+  "distance": "3.605551275463989"
 }, {
   "dest": "38",
-  "weight": "5",
-  "distance": "none"
+  "weight": "4",
+  "distance": "7.211102550927978"
 }, {
   "dest": "76",
-  "weight": "14",
-  "distance": "none"
+  "weight": "7",
+  "distance": "8.06225774829855"
 }]], [{
-  "totalOut": "16",
-  "pop": "107.44569197856576",
+  "popInit": "71.2307077498",
+  "totalOut": "23",
+  "pop": "123.94526343475401",
   "nbFrom": "3",
-  "total": "-37",
+  "total": "-38",
   "pop2010": "none",
-  "wealth": "112.36085532680974",
+  "wealth": "128.20019838489026",
   "orig": "58",
   "nbTo": "7",
-  "totalIn": "53"
+  "totalIn": "61"
 }, [{
   "dest": "19",
-  "weight": "7",
-  "distance": "none"
+  "weight": "4",
+  "distance": "4.242640687119285"
 }, {
   "dest": "94",
-  "weight": "1",
-  "distance": "none"
+  "weight": "7",
+  "distance": "8.602325267042627"
 }, {
   "dest": "12",
-  "weight": "8",
-  "distance": "none"
+  "weight": "12",
+  "distance": "6.708203932499369"
 }]], [{
-  "totalOut": "217",
-  "pop": "275.26623912458354",
+  "popInit": "80.9919528808",
+  "totalOut": "171",
+  "pop": "224.7207050778687",
   "nbFrom": "17",
-  "total": "81",
+  "total": "57",
   "pop2010": "none",
-  "wealth": "310.2913624179962",
+  "wealth": "241.1400322078591",
   "orig": "64",
-  "nbTo": "11",
-  "totalIn": "136"
+  "nbTo": "10",
+  "totalIn": "114"
 }, [{
   "dest": "60",
-  "weight": "7",
-  "distance": "none"
+  "weight": "4",
+  "distance": "4.47213595499958"
 }, {
   "dest": "2",
-  "weight": "13",
-  "distance": "none"
+  "weight": "11",
+  "distance": "2.8284271247461903"
 }, {
   "dest": "41",
   "weight": "10",
-  "distance": "none"
+  "distance": "10.04987562112089"
 }, {
   "dest": "33",
-  "weight": "11",
-  "distance": "none"
+  "weight": "3",
+  "distance": "9.433981132056603"
 }, {
   "dest": "43",
-  "weight": "8",
-  "distance": "none"
+  "weight": "10",
+  "distance": "7.211102550927978"
 }, {
   "dest": "42",
-  "weight": "57",
-  "distance": "none"
+  "weight": "75",
+  "distance": "8.0"
 }, {
   "dest": "25",
-  "weight": "6",
-  "distance": "none"
+  "weight": "5",
+  "distance": "14.7648230602334"
 }, {
   "dest": "69",
-  "weight": "13",
-  "distance": "none"
+  "weight": "6",
+  "distance": "14.212670403551895"
 }, {
   "dest": "9",
-  "weight": "11",
-  "distance": "none"
+  "weight": "5",
+  "distance": "8.602325267042627"
 }, {
   "dest": "30",
-  "weight": "10",
-  "distance": "none"
+  "weight": "7",
+  "distance": "12.206555615733702"
 }, {
   "dest": "4",
-  "weight": "5",
-  "distance": "none"
+  "weight": "3",
+  "distance": "17.46424919657298"
 }, {
   "dest": "6",
-  "weight": "18",
-  "distance": "none"
+  "weight": "5",
+  "distance": "7.280109889280518"
 }, {
   "dest": "70",
-  "weight": "9",
-  "distance": "none"
+  "weight": "2",
+  "distance": "13.892443989449804"
 }, {
   "dest": "92",
-  "weight": "10",
-  "distance": "none"
+  "weight": "4",
+  "distance": "18.110770276274835"
 }, {
   "dest": "0",
-  "weight": "8",
-  "distance": "none"
+  "weight": "1",
+  "distance": "19.1049731745428"
 }, {
   "dest": "37",
-  "weight": "11",
-  "distance": "none"
+  "weight": "10",
+  "distance": "5.830951894845301"
 }, {
   "dest": "99",
   "weight": "10",
-  "distance": "none"
+  "distance": "12.36931687685298"
 }]], [{
-  "totalOut": "16",
-  "pop": "85.86798587472322",
+  "popInit": "63.186288485",
+  "totalOut": "20",
+  "pop": "85.9180426008944",
   "nbFrom": "3",
-  "total": "-7",
+  "total": "-6",
   "pop2010": "none",
-  "wealth": "86.04212596816716",
+  "wealth": "86.7144137954487",
   "orig": "53",
   "nbTo": "2",
-  "totalIn": "23"
+  "totalIn": "26"
 }, [{
   "dest": "95",
   "weight": "3",
-  "distance": "none"
+  "distance": "9.848857801796104"
 }, {
   "dest": "89",
-  "weight": "4",
-  "distance": "none"
+  "weight": "8",
+  "distance": "6.708203932499369"
 }, {
   "dest": "27",
   "weight": "9",
-  "distance": "none"
+  "distance": "5.0990195135927845"
 }]], [{
-  "totalOut": "678",
-  "pop": "6059.813719309373",
+  "popInit": "125.3986088467",
+  "totalOut": "1041",
+  "pop": "9497.024746582416",
   "nbFrom": "16",
-  "total": "232",
+  "total": "379",
   "pop2010": "none",
-  "wealth": "9030.219972314779",
+  "wealth": "10196.811637807265",
   "orig": "42",
   "nbTo": "10",
-  "totalIn": "446"
+  "totalIn": "662"
 }, [{
   "dest": "15",
-  "weight": "13",
-  "distance": "none"
+  "weight": "40",
+  "distance": "18.35755975068582"
 }, {
   "dest": "2",
-  "weight": "42",
-  "distance": "none"
+  "weight": "99",
+  "distance": "6.324555320336759"
 }, {
   "dest": "37",
-  "weight": "55",
-  "distance": "none"
+  "weight": "86",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "30",
-  "weight": "66",
-  "distance": "none"
+  "weight": "85",
+  "distance": "7.280109889280518"
 }, {
   "dest": "7",
-  "weight": "38",
-  "distance": "none"
+  "weight": "53",
+  "distance": "8.06225774829855"
 }, {
   "dest": "61",
-  "weight": "130",
-  "distance": "none"
+  "weight": "98",
+  "distance": "18.027756377319946"
 }, {
   "dest": "33",
-  "weight": "44",
-  "distance": "none"
+  "weight": "104",
+  "distance": "5.0"
 }, {
   "dest": "6",
-  "weight": "37",
-  "distance": "none"
+  "weight": "50",
+  "distance": "12.206555615733702"
 }, {
   "dest": "1",
-  "weight": "26",
-  "distance": "none"
+  "weight": "47",
+  "distance": "4.123105625617661"
 }, {
   "dest": "41",
-  "weight": "16",
-  "distance": "none"
+  "weight": "56",
+  "distance": "13.45362404707371"
 }, {
   "dest": "50",
-  "weight": "27",
-  "distance": "none"
+  "weight": "54",
+  "distance": "4.47213595499958"
 }, {
   "dest": "64",
-  "weight": "50",
-  "distance": "none"
+  "weight": "60",
+  "distance": "8.0"
 }, {
   "dest": "69",
-  "weight": "46",
-  "distance": "none"
+  "weight": "65",
+  "distance": "9.486832980505138"
 }, {
   "dest": "70",
-  "weight": "15",
-  "distance": "none"
+  "weight": "42",
+  "distance": "19.209372712298546"
 }, {
   "dest": "92",
-  "weight": "48",
-  "distance": "none"
+  "weight": "58",
+  "distance": "10.198039027185569"
 }, {
   "dest": "34",
-  "weight": "25",
-  "distance": "none"
+  "weight": "44",
+  "distance": "19.849433241279208"
 }]], [{
-  "totalOut": "27",
-  "pop": "72.24469293261151",
-  "nbFrom": "4",
-  "total": "2",
+  "popInit": "56.1236939451",
+  "totalOut": "31",
+  "pop": "63.975098061062134",
+  "nbFrom": "5",
+  "total": "20",
   "pop2010": "none",
-  "wealth": "73.00672145817127",
+  "wealth": "64.44462562058592",
   "orig": "75",
   "nbTo": "3",
-  "totalIn": "25"
+  "totalIn": "11"
 }, [{
   "dest": "73",
-  "weight": "10",
-  "distance": "none"
+  "weight": "5",
+  "distance": "2.23606797749979"
 }, {
   "dest": "76",
-  "weight": "10",
-  "distance": "none"
+  "weight": "15",
+  "distance": "4.0"
 }, {
   "dest": "95",
   "weight": "6",
-  "distance": "none"
+  "distance": "5.0"
+}, {
+  "dest": "35",
+  "weight": "3",
+  "distance": "9.219544457292887"
 }, {
   "dest": "38",
-  "weight": "1",
-  "distance": "none"
+  "weight": "2",
+  "distance": "9.0"
 }]], [{
-  "totalOut": "88",
-  "pop": "174.17313266873606",
+  "popInit": "89.1400252331",
+  "totalOut": "71",
+  "pop": "142.58345898619154",
   "nbFrom": "12",
-  "total": "28",
+  "total": "30",
   "pop2010": "none",
-  "wealth": "177.4173818342412",
+  "wealth": "144.0086270824037",
   "orig": "0",
   "nbTo": "9",
-  "totalIn": "60"
+  "totalIn": "41"
 }, [{
   "dest": "28",
-  "weight": "9",
-  "distance": "none"
+  "weight": "14",
+  "distance": "5.0"
 }, {
   "dest": "25",
-  "weight": "10",
-  "distance": "none"
+  "weight": "5",
+  "distance": "10.816653826391969"
 }, {
   "dest": "62",
-  "weight": "7",
-  "distance": "none"
+  "weight": "5",
+  "distance": "9.219544457292887"
 }, {
   "dest": "64",
-  "weight": "9",
-  "distance": "none"
+  "weight": "6",
+  "distance": "19.1049731745428"
 }, {
   "dest": "70",
-  "weight": "5",
-  "distance": "none"
+  "weight": "1",
+  "distance": "18.439088914585774"
 }, {
   "dest": "4",
-  "weight": "7",
-  "distance": "none"
+  "weight": "5",
+  "distance": "18.439088914585774"
 }, {
   "dest": "99",
   "weight": "9",
-  "distance": "none"
+  "distance": "7.0710678118654755"
 }, {
   "dest": "41",
-  "weight": "1",
-  "distance": "none"
+  "weight": "9",
+  "distance": "19.697715603592208"
 }, {
   "dest": "26",
-  "weight": "10",
-  "distance": "none"
+  "weight": "5",
+  "distance": "12.041594578792296"
 }, {
   "dest": "68",
-  "weight": "6",
-  "distance": "none"
+  "weight": "5",
+  "distance": "11.045361017187261"
 }, {
   "dest": "6",
-  "weight": "6",
-  "distance": "none"
+  "weight": "1",
+  "distance": "19.235384061671343"
 }, {
   "dest": "85",
-  "weight": "9",
-  "distance": "none"
+  "weight": "6",
+  "distance": "4.47213595499958"
 }]], [{
-  "totalOut": "104",
-  "pop": "431.97511504354475",
+  "popInit": "80.5361694708",
+  "totalOut": "72",
+  "pop": "460.84866321008394",
   "nbFrom": "6",
-  "total": "-74",
+  "total": "-105",
   "pop2010": "none",
-  "wealth": "488.10900824474675",
+  "wealth": "541.8289586888042",
   "orig": "20",
   "nbTo": "11",
-  "totalIn": "178"
+  "totalIn": "177"
 }, [{
   "dest": "49",
-  "weight": "7",
-  "distance": "none"
+  "weight": "12",
+  "distance": "4.47213595499958"
 }, {
   "dest": "81",
-  "weight": "23",
-  "distance": "none"
+  "weight": "13",
+  "distance": "4.123105625617661"
 }, {
   "dest": "31",
-  "weight": "25",
-  "distance": "none"
+  "weight": "15",
+  "distance": "5.830951894845301"
 }, {
   "dest": "86",
-  "weight": "14",
-  "distance": "none"
+  "weight": "9",
+  "distance": "8.246211251235321"
 }, {
   "dest": "59",
-  "weight": "24",
-  "distance": "none"
+  "weight": "10",
+  "distance": "6.4031242374328485"
 }, {
   "dest": "84",
-  "weight": "11",
-  "distance": "none"
+  "weight": "13",
+  "distance": "8.94427190999916"
 }]], [{
-  "totalOut": "11",
-  "pop": "257.869500012749",
+  "popInit": "80.1000298296",
+  "totalOut": "16",
+  "pop": "179.3139064909967",
   "nbFrom": "1",
-  "total": "-106",
+  "total": "-62",
   "pop2010": "none",
-  "wealth": "271.3181194017357",
+  "wealth": "187.69676998823235",
   "orig": "27",
   "nbTo": "10",
-  "totalIn": "117"
+  "totalIn": "78"
 }, [{
   "dest": "86",
-  "weight": "11",
-  "distance": "none"
+  "weight": "16",
+  "distance": "6.082762530298219"
 }]], [{
-  "totalOut": "96",
-  "pop": "170.8550978016423",
+  "popInit": "82.1539860579",
+  "totalOut": "89",
+  "pop": "180.82292258942596",
   "nbFrom": "10",
-  "total": "22",
+  "total": "9",
   "pop2010": "none",
-  "wealth": "176.70160316718727",
+  "wealth": "198.35521953396278",
   "orig": "70",
   "nbTo": "8",
-  "totalIn": "74"
+  "totalIn": "80"
 }, [{
   "dest": "26",
-  "weight": "7",
-  "distance": "none"
+  "weight": "4",
+  "distance": "13.152946437965905"
 }, {
   "dest": "6",
-  "weight": "14",
-  "distance": "none"
+  "weight": "6",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "42",
-  "weight": "24",
-  "distance": "none"
+  "weight": "47",
+  "distance": "19.209372712298546"
 }, {
   "dest": "64",
-  "weight": "3",
-  "distance": "none"
+  "weight": "6",
+  "distance": "13.892443989449804"
 }, {
   "dest": "99",
-  "weight": "9",
-  "distance": "none"
+  "weight": "4",
+  "distance": "15.811388300841896"
 }, {
   "dest": "0",
-  "weight": "5",
-  "distance": "none"
+  "weight": "1",
+  "distance": "18.439088914585774"
 }, {
   "dest": "9",
-  "weight": "7",
-  "distance": "none"
+  "weight": "5",
+  "distance": "5.385164807134504"
 }, {
   "dest": "25",
-  "weight": "7",
-  "distance": "none"
+  "weight": "5",
+  "distance": "7.810249675906654"
 }, {
   "dest": "69",
-  "weight": "8",
-  "distance": "none"
+  "weight": "3",
+  "distance": "18.24828759089466"
 }, {
   "dest": "16",
-  "weight": "12",
-  "distance": "none"
+  "weight": "8",
+  "distance": "7.0710678118654755"
 }]], [{
-  "totalOut": "18",
-  "pop": "214.83046374950024",
+  "popInit": "67.9820671719",
+  "totalOut": "25",
+  "pop": "308.3159999443528",
   "nbFrom": "3",
-  "total": "-117",
+  "total": "-174",
   "pop2010": "none",
-  "wealth": "240.30841047650844",
+  "wealth": "394.15091156611066",
   "orig": "2",
   "nbTo": "14",
-  "totalIn": "135"
+  "totalIn": "199"
 }, [{
   "dest": "43",
-  "weight": "5",
-  "distance": "none"
+  "weight": "7",
+  "distance": "8.246211251235321"
 }, {
   "dest": "33",
-  "weight": "6",
-  "distance": "none"
+  "weight": "8",
+  "distance": "6.708203932499369"
 }, {
   "dest": "37",
-  "weight": "7",
-  "distance": "none"
+  "weight": "10",
+  "distance": "7.0710678118654755"
 }]], [{
-  "totalOut": "106",
-  "pop": "474.9826211139904",
+  "popInit": "78.6275698924",
+  "totalOut": "77",
+  "pop": "459.33489293448605",
   "nbFrom": "6",
-  "total": "-116",
+  "total": "-108",
   "pop2010": "none",
-  "wealth": "618.1626930726958",
+  "wealth": "536.9726700976104",
   "orig": "86",
   "nbTo": "13",
-  "totalIn": "222"
+  "totalIn": "185"
 }, [{
   "dest": "59",
-  "weight": "16",
-  "distance": "none"
+  "weight": "10",
+  "distance": "6.708203932499369"
 }, {
   "dest": "20",
-  "weight": "18",
-  "distance": "none"
+  "weight": "17",
+  "distance": "8.246211251235321"
 }, {
   "dest": "80",
-  "weight": "23",
-  "distance": "none"
+  "weight": "10",
+  "distance": "3.605551275463989"
 }, {
   "dest": "12",
-  "weight": "23",
-  "distance": "none"
+  "weight": "22",
+  "distance": "8.602325267042627"
 }, {
   "dest": "27",
-  "weight": "18",
-  "distance": "none"
+  "weight": "10",
+  "distance": "6.082762530298219"
 }, {
   "dest": "83",
   "weight": "8",
-  "distance": "none"
+  "distance": "4.0"
 }]], [{
-  "totalOut": "2",
-  "pop": "103.48060222082819",
+  "popInit": "75.7670212519",
+  "totalOut": "7",
+  "pop": "95.98853231176028",
   "nbFrom": "1",
-  "total": "-14",
+  "total": "-9",
   "pop2010": "none",
-  "wealth": "103.74884505506323",
+  "wealth": "95.98999932542033",
   "orig": "38",
   "nbTo": "5",
   "totalIn": "16"
 }, [{
   "dest": "95",
-  "weight": "2",
-  "distance": "none"
+  "weight": "7",
+  "distance": "7.211102550927978"
 }]], [{
-  "totalOut": "20",
-  "pop": "122.38441213537548",
+  "popInit": "67.8280998139",
+  "totalOut": "19",
+  "pop": "102.34405881341868",
   "nbFrom": "2",
-  "total": "-38",
+  "total": "-23",
   "pop2010": "none",
-  "wealth": "123.76831892894641",
+  "wealth": "104.33853474775479",
   "orig": "81",
   "nbTo": "3",
-  "totalIn": "58"
+  "totalIn": "42"
 }, [{
   "dest": "20",
   "weight": "11",
-  "distance": "none"
+  "distance": "4.123105625617661"
 }, {
   "dest": "31",
-  "weight": "9",
-  "distance": "none"
+  "weight": "8",
+  "distance": "2.23606797749979"
 }]], [{
-  "totalOut": "139",
-  "pop": "288.9223561716861",
+  "popInit": "92.6479217606",
+  "totalOut": "141",
+  "pop": "219.53156638033036",
   "nbFrom": "11",
-  "total": "18",
+  "total": "44",
   "pop2010": "none",
-  "wealth": "331.64420329856694",
+  "wealth": "242.5319039456287",
   "orig": "92",
   "nbTo": "7",
-  "totalIn": "121"
+  "totalIn": "97"
 }, [{
   "dest": "52",
-  "weight": "21",
-  "distance": "none"
+  "weight": "13",
+  "distance": "2.23606797749979"
 }, {
   "dest": "64",
-  "weight": "5",
-  "distance": "none"
+  "weight": "3",
+  "distance": "18.110770276274835"
 }, {
   "dest": "34",
-  "weight": "4",
-  "distance": "none"
+  "weight": "6",
+  "distance": "12.083045973594572"
 }, {
   "dest": "61",
-  "weight": "26",
-  "distance": "none"
+  "weight": "13",
+  "distance": "19.4164878389476"
 }, {
   "dest": "15",
   "weight": "9",
-  "distance": "none"
+  "distance": "12.529964086141668"
 }, {
   "dest": "94",
-  "weight": "5",
-  "distance": "none"
+  "weight": "8",
+  "distance": "9.433981132056603"
 }, {
   "dest": "42",
-  "weight": "37",
-  "distance": "none"
+  "weight": "53",
+  "distance": "10.198039027185569"
 }, {
   "dest": "7",
-  "weight": "9",
-  "distance": "none"
+  "weight": "8",
+  "distance": "7.810249675906654"
 }, {
   "dest": "69",
-  "weight": "8",
-  "distance": "none"
+  "weight": "11",
+  "distance": "9.899494936611665"
 }, {
   "dest": "78",
-  "weight": "7",
-  "distance": "none"
+  "weight": "10",
+  "distance": "5.0"
 }, {
   "dest": "30",
-  "weight": "8",
-  "distance": "none"
+  "weight": "7",
+  "distance": "12.041594578792296"
 }]], [{
-  "totalOut": "23",
-  "pop": "77.53504607487255",
+  "popInit": "64.9700561195",
+  "totalOut": "10",
+  "pop": "79.33628341500916",
   "nbFrom": "3",
-  "total": "11",
+  "total": "-5",
   "pop2010": "none",
-  "wealth": "77.76285300521718",
+  "wealth": "80.22367861951564",
   "orig": "18",
   "nbTo": "2",
-  "totalIn": "12"
+  "totalIn": "15"
 }, [{
   "dest": "59",
-  "weight": "8",
-  "distance": "none"
+  "weight": "2",
+  "distance": "8.06225774829855"
 }, {
   "dest": "88",
   "weight": "3",
-  "distance": "none"
+  "distance": "4.123105625617661"
 }, {
   "dest": "84",
-  "weight": "12",
-  "distance": "none"
+  "weight": "5",
+  "distance": "4.242640687119285"
 }]], [{
-  "totalOut": "198",
-  "pop": "397.50014677215955",
+  "popInit": "87.1320315024",
+  "totalOut": "212",
+  "pop": "309.65382308198525",
   "nbFrom": "13",
-  "total": "19",
+  "total": "52",
   "pop2010": "none",
-  "wealth": "507.36509867559573",
+  "wealth": "390.09387931540755",
   "orig": "30",
   "nbTo": "11",
-  "totalIn": "179"
+  "totalIn": "160"
 }, [{
   "dest": "41",
-  "weight": "5",
-  "distance": "none"
+  "weight": "7",
+  "distance": "11.40175425099138"
 }, {
   "dest": "45",
-  "weight": "3",
-  "distance": "none"
+  "weight": "12",
+  "distance": "18.867962264113206"
 }, {
   "dest": "4",
-  "weight": "7",
-  "distance": "none"
+  "weight": "5",
+  "distance": "19.235384061671343"
 }, {
   "dest": "64",
-  "weight": "13",
-  "distance": "none"
+  "weight": "5",
+  "distance": "12.206555615733702"
 }, {
   "dest": "33",
-  "weight": "14",
-  "distance": "none"
+  "weight": "22",
+  "distance": "2.8284271247461903"
 }, {
   "dest": "39",
-  "weight": "8",
-  "distance": "none"
+  "weight": "3",
+  "distance": "19.4164878389476"
 }, {
   "dest": "15",
   "weight": "5",
-  "distance": "none"
+  "distance": "14.142135623730951"
 }, {
   "dest": "6",
-  "weight": "8",
-  "distance": "none"
+  "weight": "5",
+  "distance": "18.439088914585774"
 }, {
   "dest": "2",
-  "weight": "7",
-  "distance": "none"
+  "weight": "8",
+  "distance": "9.433981132056603"
 }, {
   "dest": "61",
-  "weight": "45",
-  "distance": "none"
+  "weight": "22",
+  "distance": "10.770329614269007"
 }, {
   "dest": "69",
-  "weight": "12",
-  "distance": "none"
+  "weight": "6",
+  "distance": "16.0312195418814"
 }, {
   "dest": "42",
-  "weight": "63",
-  "distance": "none"
+  "weight": "109",
+  "distance": "7.280109889280518"
 }, {
   "dest": "92",
-  "weight": "8",
-  "distance": "none"
+  "weight": "3",
+  "distance": "12.041594578792296"
 }]], [{
-  "totalOut": "47",
-  "pop": "239.9007420220141",
+  "popInit": "72.0268582642",
+  "totalOut": "42",
+  "pop": "177.6582736865736",
   "nbFrom": "6",
-  "total": "-88",
+  "total": "-69",
   "pop2010": "none",
-  "wealth": "258.1145548803365",
+  "wealth": "195.78468487166094",
   "orig": "7",
-  "nbTo": "13",
-  "totalIn": "135"
+  "nbTo": "12",
+  "totalIn": "111"
 }, [{
   "dest": "82",
-  "weight": "9",
-  "distance": "none"
+  "weight": "11",
+  "distance": "3.1622776601683795"
 }, {
   "dest": "65",
-  "weight": "10",
-  "distance": "none"
+  "weight": "4",
+  "distance": "5.0"
 }, {
   "dest": "63",
   "weight": "5",
-  "distance": "none"
+  "distance": "9.433981132056603"
 }, {
   "dest": "37",
   "weight": "10",
-  "distance": "none"
+  "distance": "9.219544457292887"
 }, {
   "dest": "57",
-  "weight": "5",
-  "distance": "none"
+  "weight": "7",
+  "distance": "4.0"
 }, {
   "dest": "52",
-  "weight": "8",
-  "distance": "none"
+  "weight": "5",
+  "distance": "9.899494936611665"
 }]], [{
-  "totalOut": "18",
-  "pop": "69.06667432164356",
+  "popInit": "58.4380093848",
+  "totalOut": "12",
+  "pop": "69.8046435870482",
   "nbFrom": "4",
-  "total": "6",
+  "total": "-2",
   "pop2010": "none",
-  "wealth": "69.39767586661684",
+  "wealth": "69.9407998826346",
   "orig": "97",
   "nbTo": "3",
-  "totalIn": "12"
+  "totalIn": "14"
 }, [{
   "dest": "78",
-  "weight": "7",
-  "distance": "none"
+  "weight": "4",
+  "distance": "4.47213595499958"
 }, {
   "dest": "77",
-  "weight": "3",
-  "distance": "none"
+  "weight": "5",
+  "distance": "2.23606797749979"
 }, {
   "dest": "52",
-  "weight": "7",
-  "distance": "none"
+  "weight": "1",
+  "distance": "8.94427190999916"
 }, {
   "dest": "17",
-  "weight": "1",
-  "distance": "none"
+  "weight": "2",
+  "distance": "3.1622776601683795"
 }]], [{
-  "totalOut": "2",
-  "pop": "41.19381591337976",
+  "popInit": "39.2754842443",
+  "totalOut": "9",
+  "pop": "42.30031904810067",
   "nbFrom": "1",
-  "total": "0",
+  "total": "3",
   "pop2010": "none",
-  "wealth": "41.1938663210373",
+  "wealth": "42.50225007059446",
   "orig": "29",
   "nbTo": "1",
-  "totalIn": "2"
+  "totalIn": "6"
 }, [{
   "dest": "67",
-  "weight": "2",
-  "distance": "none"
+  "weight": "9",
+  "distance": "5.0"
 }]], [{
-  "totalOut": "127",
-  "pop": "181.4314436957307",
+  "popInit": "86.0322466689",
+  "totalOut": "182",
+  "pop": "246.03270829103752",
   "nbFrom": "17",
-  "total": "43",
+  "total": "52",
   "pop2010": "none",
-  "wealth": "189.57020231571857",
+  "wealth": "289.04615104267407",
   "orig": "41",
   "nbTo": "11",
-  "totalIn": "84"
+  "totalIn": "130"
 }, [{
   "dest": "45",
   "weight": "9",
-  "distance": "none"
+  "distance": "13.038404810405298"
 }, {
   "dest": "4",
-  "weight": "6",
-  "distance": "none"
+  "weight": "9",
+  "distance": "8.48528137423857"
 }, {
   "dest": "99",
-  "weight": "4",
-  "distance": "none"
+  "weight": "9",
+  "distance": "13.038404810405298"
 }, {
   "dest": "68",
   "weight": "6",
-  "distance": "none"
+  "distance": "17.26267650163207"
 }, {
   "dest": "42",
-  "weight": "10",
-  "distance": "none"
+  "weight": "50",
+  "distance": "13.45362404707371"
 }, {
   "dest": "90",
-  "weight": "4",
-  "distance": "none"
+  "weight": "14",
+  "distance": "4.47213595499958"
 }, {
   "dest": "61",
-  "weight": "18",
-  "distance": "none"
+  "weight": "13",
+  "distance": "16.55294535724685"
 }, {
   "dest": "32",
-  "weight": "1",
-  "distance": "none"
+  "weight": "4",
+  "distance": "6.082762530298219"
 }, {
   "dest": "89",
-  "weight": "10",
-  "distance": "none"
+  "weight": "8",
+  "distance": "9.433981132056603"
 }, {
   "dest": "43",
-  "weight": "8",
-  "distance": "none"
+  "weight": "14",
+  "distance": "7.810249675906654"
 }, {
   "dest": "13",
-  "weight": "11",
-  "distance": "none"
+  "weight": "12",
+  "distance": "2.23606797749979"
 }, {
   "dest": "64",
-  "weight": "11",
-  "distance": "none"
+  "weight": "3",
+  "distance": "10.04987562112089"
 }, {
   "dest": "6",
-  "weight": "7",
-  "distance": "none"
+  "weight": "8",
+  "distance": "17.029386365926403"
 }, {
   "dest": "30",
-  "weight": "11",
-  "distance": "none"
+  "weight": "6",
+  "distance": "11.40175425099138"
 }, {
   "dest": "98",
-  "weight": "5",
-  "distance": "none"
+  "weight": "9",
+  "distance": "15.231546211727817"
 }, {
   "dest": "0",
-  "weight": "3",
-  "distance": "none"
+  "weight": "6",
+  "distance": "19.697715603592208"
 }, {
   "dest": "2",
-  "weight": "3",
-  "distance": "none"
+  "weight": "2",
+  "distance": "8.54400374531753"
 }]], [{
-  "totalOut": "30",
-  "pop": "137.1551231714575",
+  "popInit": "68.4557354368",
+  "totalOut": "32",
+  "pop": "114.10282517869132",
   "nbFrom": "5",
-  "total": "-38",
+  "total": "-25",
   "pop2010": "none",
-  "wealth": "139.02406127392092",
+  "wealth": "117.22683792394662",
   "orig": "63",
   "nbTo": "11",
-  "totalIn": "68"
+  "totalIn": "57"
 }, [{
   "dest": "37",
-  "weight": "5",
-  "distance": "none"
+  "weight": "6",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "65",
-  "weight": "8",
-  "distance": "none"
+  "weight": "7",
+  "distance": "5.0990195135927845"
 }, {
   "dest": "16",
-  "weight": "8",
-  "distance": "none"
+  "weight": "11",
+  "distance": "4.123105625617661"
 }, {
   "dest": "96",
-  "weight": "5",
-  "distance": "none"
+  "weight": "3",
+  "distance": "2.23606797749979"
 }, {
   "dest": "7",
-  "weight": "4",
-  "distance": "none"
+  "weight": "5",
+  "distance": "9.433981132056603"
 }]], [{
-  "totalOut": "15",
-  "pop": "68.5253789363587",
+  "popInit": "62.4902197429",
+  "totalOut": "22",
+  "pop": "69.15233423307761",
   "nbFrom": "3",
-  "total": "8",
+  "total": "15",
   "pop2010": "none",
-  "wealth": "68.61582843652212",
+  "wealth": "69.15287471697866",
   "orig": "3",
   "nbTo": "1",
   "totalIn": "7"
 }, [{
   "dest": "35",
-  "weight": "9",
-  "distance": "none"
+  "weight": "10",
+  "distance": "2.8284271247461903"
 }, {
   "dest": "62",
-  "weight": "3",
-  "distance": "none"
+  "weight": "5",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "76",
-  "weight": "3",
-  "distance": "none"
+  "weight": "7",
+  "distance": "5.0"
 }]], [{
-  "totalOut": "154",
-  "pop": "771.1102872142717",
+  "popInit": "132.7839649816",
+  "totalOut": "325",
+  "pop": "3637.488078221227",
   "nbFrom": "8",
-  "total": "17",
+  "total": "122",
   "pop2010": "none",
-  "wealth": "1033.432575539698",
+  "wealth": "5726.675763866123",
   "orig": "74",
   "nbTo": "6",
-  "totalIn": "137"
+  "totalIn": "203"
 }, [{
   "dest": "10",
-  "weight": "23",
-  "distance": "none"
+  "weight": "45",
+  "distance": "14.422205101855956"
 }, {
   "dest": "61",
   "weight": "47",
-  "distance": "none"
+  "distance": "19.924858845171276"
 }, {
   "dest": "22",
-  "weight": "22",
-  "distance": "none"
+  "weight": "44",
+  "distance": "8.06225774829855"
 }, {
   "dest": "88",
-  "weight": "23",
-  "distance": "none"
+  "weight": "69",
+  "distance": "2.23606797749979"
 }, {
   "dest": "39",
-  "weight": "7",
-  "distance": "none"
+  "weight": "35",
+  "distance": "13.038404810405298"
 }, {
   "dest": "55",
-  "weight": "9",
-  "distance": "none"
+  "weight": "25",
+  "distance": "16.1245154965971"
 }, {
   "dest": "44",
-  "weight": "6",
-  "distance": "none"
+  "weight": "22",
+  "distance": "17.88854381999832"
 }, {
   "dest": "84",
-  "weight": "17",
-  "distance": "none"
+  "weight": "38",
+  "distance": "8.246211251235321"
 }]], [{
-  "totalOut": "68",
-  "pop": "157.05628111826678",
+  "popInit": "87.6792538524",
+  "totalOut": "83",
+  "pop": "166.69085175555003",
   "nbFrom": "11",
-  "total": "18",
+  "total": "33",
   "pop2010": "none",
-  "wealth": "158.6843499668758",
+  "wealth": "167.501326138932",
   "orig": "91",
   "nbTo": "7",
   "totalIn": "50"
 }, [{
   "dest": "98",
-  "weight": "11",
-  "distance": "none"
+  "weight": "9",
+  "distance": "9.0"
 }, {
   "dest": "67",
-  "weight": "4",
-  "distance": "none"
+  "weight": "10",
+  "distance": "7.211102550927978"
 }, {
   "dest": "22",
   "weight": "7",
-  "distance": "none"
+  "distance": "19.1049731745428"
 }, {
   "dest": "95",
-  "weight": "7",
-  "distance": "none"
+  "weight": "11",
+  "distance": "7.0710678118654755"
 }, {
   "dest": "45",
   "weight": "4",
-  "distance": "none"
+  "distance": "12.206555615733702"
 }, {
   "dest": "29",
-  "weight": "2",
-  "distance": "none"
+  "weight": "6",
+  "distance": "4.123105625617661"
 }, {
   "dest": "10",
-  "weight": "13",
-  "distance": "none"
+  "weight": "14",
+  "distance": "15.811388300841896"
 }, {
   "dest": "55",
-  "weight": "7",
-  "distance": "none"
+  "weight": "5",
+  "distance": "11.045361017187261"
 }, {
   "dest": "4",
-  "weight": "4",
-  "distance": "none"
+  "weight": "8",
+  "distance": "17.0"
 }, {
   "dest": "46",
   "weight": "6",
-  "distance": "none"
+  "distance": "9.433981132056603"
 }, {
   "dest": "38",
   "weight": "3",
-  "distance": "none"
+  "distance": "9.055385138137417"
 }]], [{
-  "totalOut": "17",
-  "pop": "142.8512809363011",
+  "popInit": "75.1681222527",
+  "totalOut": "14",
+  "pop": "115.42289120123341",
   "nbFrom": "3",
-  "total": "-38",
+  "total": "-22",
   "pop2010": "none",
-  "wealth": "144.03102870326342",
+  "wealth": "115.93364783393429",
   "orig": "52",
   "nbTo": "9",
-  "totalIn": "55"
-}, [{
-  "dest": "78",
-  "weight": "6",
-  "distance": "none"
-}, {
-  "dest": "7",
-  "weight": "7",
-  "distance": "none"
-}, {
-  "dest": "94",
-  "weight": "4",
-  "distance": "none"
-}]], [{
-  "totalOut": "6",
-  "pop": "110.01157847288756",
-  "nbFrom": "1",
-  "total": "-25",
-  "pop2010": "none",
-  "wealth": "111.11529717390948",
-  "orig": "85",
-  "nbTo": "4",
-  "totalIn": "31"
-}, [{
-  "dest": "28",
-  "weight": "6",
-  "distance": "none"
-}]], [{
-  "totalOut": "3",
-  "pop": "118.08143224596742",
-  "nbFrom": "1",
-  "total": "-33",
-  "pop2010": "none",
-  "wealth": "118.09274700820644",
-  "orig": "28",
-  "nbTo": "6",
   "totalIn": "36"
 }, [{
+  "dest": "78",
+  "weight": "5",
+  "distance": "4.47213595499958"
+}, {
+  "dest": "7",
+  "weight": "1",
+  "distance": "9.899494936611665"
+}, {
+  "dest": "94",
+  "weight": "8",
+  "distance": "7.211102550927978"
+}]], [{
+  "popInit": "73.0064343083",
+  "totalOut": "5",
+  "pop": "89.57154733743378",
+  "nbFrom": "1",
+  "total": "-16",
+  "pop2010": "none",
+  "wealth": "90.784499419438",
+  "orig": "85",
+  "nbTo": "4",
+  "totalIn": "21"
+}, [{
+  "dest": "28",
+  "weight": "5",
+  "distance": "6.082762530298219"
+}]], [{
+  "popInit": "77.4534871886",
+  "totalOut": "6",
+  "pop": "132.1012874510026",
+  "nbFrom": "1",
+  "total": "-38",
+  "pop2010": "none",
+  "wealth": "133.68977143311074",
+  "orig": "28",
+  "nbTo": "6",
+  "totalIn": "44"
+}, [{
   "dest": "85",
-  "weight": "3",
-  "distance": "none"
+  "weight": "6",
+  "distance": "6.082762530298219"
 }]]]
 var dataGen={
   "pop": {
-    "mean": 284.0493054271817,
-    "min": 39.825214479652345,
-    "max": 6059.813719309373
+    "mean": 294.3258125730573,
+    "min": 41.676105113798556,
+    "max": 9497.024746582416
   },
   "exchange": {
-    "nbmax": 792.0,
-    "maxSumIn": 503.0,
-    "maxSumOut": 792.0
+    "nbmax": 1041.0,
+    "maxSumIn": 662.0,
+    "maxSumOut": 1041.0
   },
   "commercial": {
-    "nbPos": 0.0,
-    "nbNeg": 0.0,
-    "maxPos": 0.0,
-    "minNeg": 0.0,
-    "meanNeg": 0.0,
-    "meanPos": 0.0,
-    "maxNeg": 0.0,
-    "minPos": 0.0
+    "nbPos": 55.0,
+    "nbNeg": 45.0,
+    "maxPos": 379.0,
+    "minNeg": -174.0,
+    "meanNeg": -45.82,
+    "meanPos": 37.49,
+    "maxNeg": -1.0,
+    "minPos": 1.0
   },
   "flow": {
-    "mean": 11.64,
+    "mean": 11.36,
     "min": 1.0,
-    "nb": 6842.0,
-    "max": 177.0,
-    "median": 3.0,
-    "q3": 42.0,
-    "q1": 8.0
+    "nb": 6746.0,
+    "max": 120.0,
+    "median": 10.5,
+    "q3": 99.0,
+    "q1": 17.0
   },
   "wealth": {
-    "mean": 372.54,
-    "min": 39.83,
-    "max": 9047.74
+    "mean": 346.15,
+    "min": 41.74,
+    "max": 10196.81
+  }
+}
+var whiskers={
+  "positive": {
+    "mean": 396.21,
+    "min": 41.68,
+    "max": 9497.02,
+    "median": 102.63,
+    "q3": 224.72,
+    "q1": 69.15
+  },
+  "negative": {
+    "mean": 195.43,
+    "min": 89.57,
+    "max": 772.22,
+    "median": 150.45,
+    "q3": 233.43,
+    "q1": 116.17
   }
 }

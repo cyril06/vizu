@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+        <title>Data from models</title>
+		
+		<link rel="stylesheet" href="nouislider.space.css" type="text/css">
+		<link rel="stylesheet" href="nouislider.fox.css" type="text/css">
+		
+		<style>
+			div#header{
+				position: floated;
+				border: 2px solid gray;
+				margin: 2px;
+				padding:2px;
+			}
+			#step{
+				position: floated;
+				color: red;
+				font-family: sans;
+				font-size: 35px;
+				padding:400px;
+			}
+			#info{
+				position: floated;
+				color: black;
+				font-family: sans;
+				font-size: 20px;
+			}
+			#slidertime{
+				position: floated;
+			}
+			div#map{
+				position: absolute;
+				top: 60px;
+			}
+			div#help{
+				position:absolute;
+				top:25px;
+				right:80px;
+				font-family: sans;
+				font-size: 21px;
+			}
+			div#commentmouse{
+				position:absolute;
+				top:600px;
+				right:500px;
+				color: grey;
+				font-family: sans;
+				font-size: 14px;
+				font-style:italic;
+			}
+		</style>
+		
+		<script src="d3.v3.min.js"></script>
+		<script src="../HighCharts/jquery-1.9.1.min.js"></script>
+		<script src="jquery.nouislider.min.js"></script>
+		<script src="../HighCharts/highcharts.js"></script>
+		<script src="../HighCharts/highcharts-more.js"></script>
+		<script src="thenBy.min.js"></script>
+		
+		<script src="map_square.js"></script>
+		<script src="../files/simpopreal.js"></script>
+		<script src="../files/simpopexchange.js"></script>
+		<script src="../files/simpopallpop.js"></script>
+		
+		<script type="text/javascript">
+			var svg;
+			var LegendContainer;
+			var LegendContainerText;
+			var legendCircles;
+			
+			var width = 1000;//1600
+			var height = 550;//1400
+				
+			var sizeMaxCircle=30;
+			var sizeMinCircle=0.5;
+				
+			var d3color = d3.interpolateRgb("#BDC9E1", "#045A8D");
+			
+			var color_scale;
+			var scale;
+			var width_scale;
+			
+			var max={flow:Math.round(dataGen.flow.max*100)/100,pop:Math.round(dataGen.pop.max*100)/100,wealth:Math.round(dataGen.wealth.max*100)/100,totalPos:Math.round(dataGen.commercial.maxPos*100)/100,totalNeg:Math.round(dataGen.commercial.maxNeg*100)/100};
+			var min={flow:Math.round(dataGen.flow.min*100)/100,pop:Math.round(dataGen.pop.min*100)/100,wealth:Math.round(dataGen.wealth.min*100)/100,totalPos:Math.round(dataGen.commercial.minPos*100)/100,totalNeg:Math.round(dataGen.commercial.minNeg*100)/100};
+			var mean={flow:Math.round(dataGen.flow.mean*100)/100,pop:Math.round(dataGen.pop.mean*100)/100,wealth:Math.round(dataGen.wealth.mean*100)/100,totalPos:Math.round(dataGen.commercial.meanPos*100)/100,totalNeg:Math.round(dataGen.commercial.meanNeg*100)/100};
+			
+			var domainExchange=[[Math.abs(max.totalNeg),min.totalPos].sort(function(a,b){return a-b})[0],[Math.abs(min.totalNeg),max.totalPos].sort(function(a,b){return b-a})[0]];
+			
+			var cityTo=new Array();
+			var cityFrom=new Array();
+				
+				/*
+				 * On créait un nouvel objet path qui permet
+				 * de manipuler les données géographiques.
+				*/
+			if (model=='marius') {
+				var path = d3.geo.path();
+				
+				var projection = d3.geo.albers()
+					.rotate([-105, 0])
+					.center([-10, 65])
+					.parallels([52, 64])
+					.scale(700);
+			}
+			else {
+				var path = d3.geo.path();
+				var projection = d3.geo.equirectangular()
+					.center([0,0])
+					.scale(400);
+			}
+			
+			path.projection(projection); // On assigne la projection au path
+			
+			var zoom = d3.behavior.zoom()
+				.translate([0, 0])
+				.scale(1)
+				.scaleExtent([1, 8])
+				.on("zoom", zoomed);
+				
+			var lines;
+			var cities;
+			var text;
+			var textGen;
+			var chart;
+			var chartFlow;
+			var resNodes;
+			var pop2010;
+			var popInit;
+		
+			function getLonLat(id2) {
+				for (var i=0;i < cities_def.length;i++) {
+					if (cities_def[i].id==id2) {
+						return [cities_def[i].long,cities_def[i].lat];
+						break;
+					}
+				}
+			}
+				
+			function getName(id) {
+				for (var i=0;i < cities_def.length;i++) {
+					if (cities_def[i].id==id) {
+						return cities_def[i].name;
+						break;
+					}
+				}
+			}
+			
+			function slider(mapChoice) {
+				if (mapChoice=="commercial") {	
+					drawSlider(domainExchange[0],domainExchange[1]);
+				};
+				if (mapChoice=="pop") {
+					drawSlider(min.pop,max.pop);
+				};
+				if (mapChoice=="wealth") {
+					drawSlider(min.wealth,max.wealth);
+				};
+				if (mapChoice=="exchange") {
+					drawSlider(min.flow,max.flow);
+				};
+			}
+				
+			function draw(mapChoice,mini,maxi,exchangeType,threshold) {
+			
+				if (mapChoice=="commercial") {	
+					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain(domainExchange);
+				};
+				if (mapChoice=="pop") {
+					//scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([min.pop,max.pop]);
+					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([mini,maxi]);
+				};
+				if (mapChoice=="wealth") {
+					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([mini,maxi]);
+				};
+				if (mapChoice=="exchange"){
+					if (exchangeType=="in") {
+						scale=scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([0,dataGen.exchange.maxSumIn]);
+					}
+					else {
+						scale=scale = d3.scale.sqrt().range([sizeMinCircle+1, sizeMaxCircle]).domain([0,dataGen.exchange.maxSumOut]);
+					}
+					color_scale = d3.scale.linear().range([0, 1]).domain([threshold,100]);
+					width_scale = d3.scale.linear().range([0.3, 3]).domain([mini,maxi]);
+				};
+				
+				/*res=new Array();
+				resNodes=new Array();
+				pop2010Array=new Array();
+				for (var i in cities_flows) {
+					if (Math.round(parseFloat(cities_flows[i][0].pop)) >= mini && Math.round(parseFloat(cities_flows[i][0].pop)) <= maxi) {
+						pop=Math.round(parseFloat(cities_flows[i][0].pop)*100)/100;
+						pop2010=Math.round(parseFloat(cities_flows[i][0].pop2010)*100)/100;
+						wealth=Math.round(parseFloat(cities_flows[i][0].wealth)*100)/100;
+						total=Math.round(parseFloat(cities_flows[i][0].total)*100)/100;
+						resNodes.push([cities_flows[i][0].orig,pop,wealth,total]);
+						pop2010Array.push(pop2010);
+					}
+					for (var j in cities_flows[i][1]) {
+						if (Math.round(parseFloat(cities_flows[i][0].pop)) >= mini && Math.round(parseFloat(cities_flows[i][0].pop)) <= maxi) {
+							flow=Math.round(parseFloat(cities_flows[i][1][j].weight)*100)/100;
+							res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,flow]);
+						}
+					}
+				}*/
+
+				/*
+				 * On créait un nouvel élément svg à la racine de notre div #map,
+				 * définie plus haut dans le HTML
+				*/
+				//d3.select("svg").remove();
+				
+				var click=false;
+				
+				if (cities) {cities.remove();};
+				if (lines) {lines.remove();};
+					
+				cities=country.selectAll("circle")
+					 .data(function () {return fetchDataNodes(mapChoice,mini,maxi,exchangeType)})
+					 .enter()
+					 .append("circle")
+					 .attr("cx", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[0];
+					})
+					.attr("cy", function(d) {
+						var coord=getLonLat(d[0])
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[1];
+					})
+					.attr("id",function(d) {return d[0]})
+					.attr("r", function(d) {return attrR(d,mapChoice,scale)})
+					.attr("value",function(d) {return parseInt(parseFloat(d[1]*100)/100)})
+					.style("fill",function(d) {return applyStyleNodes(d,mapChoice)})
+					.style("stroke","#fff")
+					.style("stroke-width",0.5)
+					.style("fill-opacity",0.8)
+					.on("mouseover", function(d){var elem=d3.select(this);
+												if (mapChoice=="exchange") {
+													if (click==false) {
+														cityMouseOver(elem,d);
+													}
+												}
+												})
+					.on("mouseout",function(d){var elem=d3.select(this);
+												if (mapChoice=="exchange") {
+													if (click==false) {
+														draw(mapChoice,mini,maxi,exchangeType,threshold);
+														cityMouseOut(elem,d);
+													}
+													}})
+					.sort(function (a,b) {return Math.abs(b[1])-Math.abs(a[1])});
+						
+					/*cities.append("svg:title")
+						  .text(function(d) {return getName(d[0])+"   "+mapChoice+" : "+d[1]});*/
+			
+				if (mapChoice=="exchange") {
+					lines=country.selectAll("line")
+					 .data(function() {
+										if (exchangeType=="in") {
+											return fetchDataLinks("in",mini,maxi,threshold);
+										}
+										else {
+											return fetchDataLinks("out",mini,maxi,threshold);
+										}
+									})
+					 .enter()
+					 .append("line")
+					 .attr("from",function(d) {return d[0]})
+					 .attr("to",function(d) {return d[1]})
+					 .attr("x1", function(d) {
+						var coord=getLonLat(d[0]);
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[0];
+					})
+					.attr("y1", function(d) {
+						var coord=getLonLat(d[0]);
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[1];
+					})
+					.attr("x2", function(d) {
+						var coord=getLonLat(d[1]);
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[0];
+					})
+					.attr("y2", function(d) {
+						var coord=getLonLat(d[1]);
+						var x=coord[0];
+						var y=coord[1];
+						return projection([x, y])[1];
+					})
+					.on("mouseover",function(d) {var elem=d3.select(this);
+												 if (click==false) {
+													lines.filter(function(e) {return (e[0]!=elem.attr("from") || e[1]!=elem.attr("to"))}).attr("display","none");
+													cities.filter(function(e) {return (e[0]!=elem.attr("from") && e[0]!=elem.attr("to"))}).attr("display","none");
+												}
+												})
+					.on("mouseout",function(d) {if (click==false) {
+													lines.attr("display","true");
+													cities.attr("display","true")
+												}
+												})
+					.attr("stroke",function(d) {return d3color(color_scale(d[2]))})
+					.attr("marker-end", "url(#arrow)")
+					.attr("stroke-width",function(d) {return width_scale(d[3])});
+
+					
+					lines.append("svg:title")
+						 .text(function (d) {return ("From: "+getName(d[0])+"  To: "+getName(d[1])+"    Percent: "+d[2]+"   Value: "+d[3])});
+						 
+				}
+				else { if (lines) {lines.remove();}};
+				
+				//LEGEND
+				
+				if (legendCircles) {legendCircles.remove()};
+				sizeMaxMin=lookForMaxMin() //recherche du rayon et de la valeur associee au cercle de plus grande/petite taille
+				legendCircles=LegendContainer.selectAll("circle")
+					.data(sizeMaxMin[0])
+					.enter()
+					.append("circle")
+					.attr("cx",function(d,i){return (10+sizeMaxCircle*(i+1)+(i*sizeMaxCircle))})
+					.attr("cy",10+sizeMaxCircle)
+					.attr("r",function(d){return d})
+					.attr("stroke","#aaa")
+					.attr("stroke-width",2)
+					.attr("fill","white");
+			
+				if (text) {text.remove();};
+			
+				text=LegendContainer.selectAll("text")
+					.data(sizeMaxMin[1])
+					.enter()
+					.append("text");
+											
+				var textLabels=text
+					.attr("x",function(d,i) {return sizeMaxCircle*(i+1)+(i*sizeMaxCircle)})
+					.attr("y",function(d,i) {return 3*sizeMaxCircle})
+					.text(function(d) {return d})
+					.attr("font-family", "sans-serif")
+					.attr("font-size", "10px");
+				//Pie: villes presentes/absentes
+				drawPie();
+					
+
+				if (mapChoice=="pop") {
+					cities.on("mouseover", function(d, i) {
+						zoomCityPop(d);
+						return tooltip.style("visibility", "visible").style("top", (d3.event.pageY + 5) + "px").style("left",(d3.event.pageX + 5) + "px")
+					})
+					.on("mouseout", function(d, i) {
+						return tooltip.style("visibility", "hidden");
+					});
+				};	  
+				if (mapChoice=="commercial") {
+					cities.on("mouseover", function(d, i) {
+						zoomCityComm(d);
+						return tooltip.style("visibility", "visible").style("top", (d3.event.pageY + 5) + "px").style("left",(d3.event.pageX + 5) + "px")
+					})
+					.on("mouseout", function(d, i) {
+						return tooltip.style("visibility", "hidden");
+					});
+					drawWhiskers();			
+				};
+				if (mapChoice=="exchange") {
+					drawHistogram(exchangeType);
+				}
+				
+		
+			}
+			
+		function lookForMaxMin() {
+			var max=0;
+			var min=0;
+			if (d3.selectAll("circle")[0].length==0) {
+				return([[0,0],[0,0]]);
+			}
+			if (d3.selectAll("circle")[0].length!=0) {
+				min=Math.abs(d3.selectAll("circle")[0][0].getAttribute("value"));
+			}
+			var radiusMax=0;
+			var radiusMin=0
+			for (i in d3.selectAll("circle")[0]) {
+				if (d3.selectAll("circle")[0][0].getAttribute("display")!="none") {;
+					value=Math.abs(parseFloat(d3.selectAll("circle")[0][i].getAttribute("value")));
+					if (value>max) {max=value;radiusMax=d3.selectAll("circle")[0][i].getAttribute("r")};
+					if (value<min) {min=value;radiusMin=d3.selectAll("circle")[0][i].getAttribute("r")};
+				}
+			}
+			return([[parseFloat(radiusMax),parseFloat(radiusMin)],[parseInt(max),parseInt(min)]]);
+		}
+
+		function fetchDataNodes(mapChoice,mini,maxi,exchangeType) {
+			resNodes=new Array();
+			pop2010=new Array();
+			popInit=new Array();
+			if (mapChoice=='pop') {
+				for (var i in cities_flows) {
+					if (Math.round(cities_flows[i][0].pop) >= mini && Math.round(cities_flows[i][0].pop) <= maxi) {
+						pop=Math.round(cities_flows[i][0].pop*100)/100;
+						resNodes.push([cities_flows[i][0].orig,pop]);
+						pop2010.push(Math.round(cities_flows[i][0].pop2010*100)/100);
+						popInit.push(Math.round(cities_flows[i][0].popInit*100)/100);
+					}
+				}
+			}
+			if (mapChoice=='wealth') {
+				for (var i in cities_flows) {
+					if (Math.round(cities_flows[i][0].wealth) >= mini && Math.round(cities_flows[i][0].wealth) <= maxi) {
+						wealth=Math.round(cities_flows[i][0].wealth*100)/100;
+						resNodes.push([cities_flows[i][0].orig,wealth]);
+					}
+				}
+			}
+			if (mapChoice=='commercial') {
+				for (var i in cities_flows) {
+					if ( Math.abs(Math.round(cities_flows[i][0].total))!=0&&Math.abs(Math.round(cities_flows[i][0].total)) >= mini && Math.abs(Math.round(cities_flows[i][0].total) <= maxi)) {
+						total=Math.round(cities_flows[i][0].total*100)/100;
+						resNodes.push([cities_flows[i][0].orig,total]);
+					}
+				}
+			}
+			if (mapChoice=='exchange') {
+				for (var i in cities_flows) {
+					if (exchangeType=="out") {
+						var somme=parseFloat(cities_flows[i][0].totalOut);
+					}
+					else {
+						var somme=parseFloat(cities_flows[i][0].totalIn);
+					}
+					
+					resNodes.push([cities_flows[i][0].orig,Math.round(somme*100)/100]);
+				}
+			}
+			
+			if (mapChoice=='exchangeBis') {
+				for (var i in cities_flows) {
+					var somme=parseInt(cities_flows[i][0].nbFrom)+parseInt(cities_flows[i][0].nbTo);
+					if (somme != 0) {
+						resNodes.push([cities_flows[i][0].orig,somme]);
+					}
+				}
+			}
+			return resNodes;
+		}
+		
+		/*function fetchDataLinks(mini,maxi) {
+			var res=new Array();
+			for (var i in cities_flows) {
+				for (var j in cities_flows[i][1]) {
+					flow=Math.round(parseFloat(cities_flows[i][1][j].weight)*100)/100;
+					if (flow>=mini && flow<=maxi) {
+						res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,flow]);
+					}
+				}
+			}
+			return res;
+		}*/
+		function fetchDataLinks(direction,mini,maxi,thresh) {
+			var res=new Array();
+			var city=new Array();
+			for (var i in cities_flows) {
+				for (var j in cities_flows[i][1]) {
+					if (model=='marius') {
+						distance=Math.round(cities_flows[i][1][j].distance/1000);
+					}
+					else {
+						distance=Math.round(cities_flows[i][1][j].distance);
+					}
+					flow=parseFloat(cities_flows[i][1][j].weight*100)/100;
+					if (flow>=mini && flow<=maxi) {
+						if (direction=="out") {
+							percent=(flow/cities_flows[i][0].totalOut)*100;
+						}
+						if (direction=="in") {
+							for (var k in cities_flows) {
+								if (cities_flows[k][0].orig==cities_flows[i][1][j].dest) {
+									percent=Math.round((flow/cities_flows[k][0].totalIn)*100);
+									break;
+								}
+							}
+						}
+						if (percent>=thresh) {
+							res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,Math.round(percent*100)/100,Math.round(flow*100)/100,distance]);
+							city.push(cities_flows[i][0].orig);
+							city.push(cities_flows[i][1][j].dest);
+						}
+					}
+				}
+			}
+			cities.attr("display","none");
+			cities.filter(function(d) {present=false;for (var i=0;i<city.length;i++) {if (city[i]==d[0]) {present=true;break}};return present}).attr("display","true");
+			
+			return res;
+		}
+
+		function applyStyleNodes(d,mapChoice) {
+			if (mapChoice=="commercial") {
+				if (d[1]>0) {return "red"};
+				if (d[1]==0) {return "#f6f4f2"}
+				if (d[1]<0) {return "blue"}
+			}
+			else {
+				return "#23991F"
+			}
+		};
+		
+		function cityMouseOver(elem,d,click) {
+			city=[];
+			city.push(elem.attr("id"));
+			if (document.getElementById("exchangeType").value=="out") {
+				lines.filter(function(e) {return d3.select(this).attr("display")!="none"})
+				.filter(function(e) {if (e[0]!=d[0]) {return true} else {city.push(e[1])}}).attr("display","none");
+			}
+			else {
+				lines.filter(function(e) {return d3.select(this).attr("display")!="none"})
+				.filter(function(e) {if (e[1]!=d[0]) {return true} else {city.push(e[0])}}).attr("display","none");
+			}
+			cities.filter(function(e) {return e[0]!=d[0]}).attr("display","none");
+			cities.filter(function(e) {for (j in city) {if (e[0]==city[j]) {return true; break;}}}).attr("display","true");
+		}
+		
+		function cityMouseOut(elem,d) {
+			/*lines.attr("display","true");
+			lines.attr("stroke",function(d) {return d3color(color_scale(d[2]))});
+			lines.attr("stroke-width",function(d) {return width_scale(d[3])});
+			cities.attr("display","true");*/
+			if (document.getElementById("preferred").checked) {
+				prefLinks(document.getElementById("exchangeType").value);
+			}
+			
+		}
+		
+		function attrR(d,mapChoice,scale) {
+			if (mapChoice=="commercial") {
+				if (d[1]>=0) {
+					return scale(d[1])
+				} 
+				else {
+					return scale(-1*d[1]);
+				}
+			}
+			else {
+				return scale(d[1]);
+			}
+		}
+
+		function zoomed() {
+			country.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+			country.selectAll("circle").style("stoke-width",.5/d3.event.scale);
+			//features.select(".county-border").style("stroke-width", .5 / d3.event.scale + "px");
+		};
+		
+		function prefLinks(typeEx) {
+			if (typeEx=="out") {
+				var old='';
+				lines.sort(firstBy(function (a,b) {return d3.ascending(a[0],b[0]);})
+						.thenBy(function (a,b) {return Math.abs(b[2])-Math.abs(a[2]);}))
+					.filter(function (e) {if (e[0]!=old) {old=e[0]} else {return true}}).attr("display","none");
+			}
+			else {
+				var old='';
+				lines.sort(firstBy(function (a,b) {return d3.ascending(a[1],b[1]);})
+						.thenBy(function (a,b) {return Math.abs(b[2])-Math.abs(a[2]);}))
+					.filter(function (e) {if (e[1]!=old) {old=e[1]} else {return true}}).attr("display","none");
+			}
+		}
+		
+		function eraseGraph(graph) {
+			chart = new Highcharts.Chart({
+					chart: {
+						renderTo: graph,
+						width:300
+					},
+					title: {
+						text: ''
+					},
+					data: []
+			});
+		}		
+  
+		function zoomCityComm(d) {
+			for (var i=0;i<cities_flows.length;i++) {
+				if (cities_flows[i][0].orig==d[0]) {
+					var res=[Math.round(cities_flows[i][0].totalIn*100)/100,Math.round(cities_flows[i][0].totalOut*100)/100];
+					break;
+				}
+			};
+
+			chart = new Highcharts.Chart({
+				chart : {
+					renderTo: 'tooltip',
+					type: 'column',
+					width:200,
+					height:200,
+					plotBackgroundColor: '#FCFFC5',
+					zoomType: 'xy'
+				},
+				title: {
+					text: getName(d[0])
+				},
+				subtitle: {
+					text: "Balance="+(Math.round(res[1]-res[0]))
+				},
+				legend: {
+					enabled: false
+				},	
+				xAxis: {
+					categories: ['In','Out']
+				},
+				yAxis: {
+					title: {
+						text: 'Sum',
+						style: {
+							color: '#4572A7'
+						}
+					},
+					labels: {
+						style: {
+							color: '#4572A7'
+							}
+					},
+				},
+				series:[{color: '#4572A7',data: res}]
+			});
+			return document.getElementById("tooltip").innerHTML;
+		}
+		
+		function zoomCityPop(d) {
+			var res=new Array();
+			for (var i=0;i<cities_pop.length;i++) {
+				if (cities_pop[i][0].id==d[0]) {
+					for (var j=0;j<cities_pop[i][1].length;j++) {
+						if (parseInt(cities_pop[i][1][j].step)==0) step=1; else step=parseInt(cities_pop[i][1][j].step);
+						res.push([step,parseFloat(cities_pop[i][1][j].pop)]);
+					}
+					break;
+				}
+			};
+
+			chart = new Highcharts.Chart({
+				chart : {
+					renderTo: 'tooltip',
+					type: 'line',
+					width:200,
+					height:200,
+					plotBackgroundColor: '#FCFFC5',
+					zoomType: 'xy'
+				},
+				plotOptions: {
+					line: {
+						lineWidth: 0.8,
+						marker: {
+							radius: 0
+						},
+						pointToStart:1
+					}
+				},
+				title: {
+					text: getName(d[0])
+				},
+				subtitle: {
+					text: "Population: "+parseInt(d[1])
+				},
+				legend: {
+					enabled: false
+				},	
+				xAxis: {
+					title:{
+						enabled:true,
+						text:'Step'
+					},
+					min:1,
+					labels: {
+						formatter: function() {
+							return this.value;
+						}
+					}
+				},
+				yAxis: {
+					title: {
+						text: 'Population (Log)',
+					},
+					type: 'logarithmic',
+					labels: {
+						style: {
+							color: '#4572A7'
+							},
+						formatter: function() {
+							return this.value;
+						}
+					},
+				},
+				series:[{color: '#4572A7',data: res}]
+			});
+			return document.getElementById("tooltip").innerHTML;
+		}
+
+		function genRankPop() {
+			chart = new Highcharts.Chart({
+					chart: {
+						renderTo: 'graph',
+						width:300,
+						/*height:500,*/
+						plotBackgroundColor: '#FCFFC5',
+						zoomType: 'xy'
+					},
+					
+					plotOptions: {
+						line: {
+							lineWidth:0.5,
+							marker: {
+								symbol:"triangle",
+								radius:1
+							}	
+						}
+					},
+            
+					title: {
+						text: null,
+						style: {
+							color: "black"
+						}
+					},
+            
+					xAxis: {
+						type: 'logarithmic',
+						minortickInterval: 0.1,
+						title: {
+							text: "Rank",
+							style: {
+								color: "black",
+								fontSize: '11px',
+								fontWeight: 'normal'
+							}
+						},
+						labels: {
+							formatter: function() {
+								return this.value;
+							}
+						}
+					},
+            
+					yAxis: {
+						type: 'logarithmic',
+						minorTickInterval: 0.1,
+						title: {
+							text: "Population",
+							style: {
+								color:"black",
+								fontSize:'11px',
+								fontWeight:'normal'
+							}
+						},
+						labels: {
+							formatter: function() {
+								return this.value;
+							}
+						}
+					},
+            
+					tooltip: {
+						headerFormat: '<b>{series.name}</b><br />',
+						pointFormat: 'x = {point.x}, y = {point.y}'
+					},
+            
+					series: []
+					
+				});
+				
+				var resRank=new Array();
+				for (var i in resNodes) {
+					resRank.push(resNodes[i][1]);
+				}
+				
+				resRank.sort(function(a,b){return b - a});
+				pop2010.sort(function(a,b){return b - a});
+				popInit.sort(function(a,b){return b - a});
+			
+				chart.addSeries({data: resRank,
+							pointStart: 1,
+							name: 'Estimated'},false);
+				if (model=='marius'){			
+					chart.addSeries({data: pop2010,
+							pointStart: 1,
+							color:'red',
+							name: 'Observed'},false);
+				}
+				if (model=='simpoplocal'){			
+					chart.addSeries({data: popInit,
+							pointStart: 1,
+							color:'red',
+							name: 'Initial'},false);
+				}
+							
+				chart.redraw();
+				
+			};
+			
+		function drawUrbanPop() {
+			var sumEstimated=0;
+			var sumObserved=0;
+			for (var i in resNodes) {
+				sumEstimated+=resNodes[i][1];
+			}
+			for (var i in pop2010) {
+				sumObserved+=pop2010[i];
+			}
+			
+			chart = new Highcharts.Chart({
+				chart : {
+					renderTo: 'graph',
+					type: 'column',
+					width:200,
+					height:200,
+					plotBackgroundColor: '#FCFFC5',
+					zoomType: 'xy'
+				},
+				title: {
+					text: null
+				},
+				legend: {
+					enabled: false
+				},	
+				xAxis: {
+					categories: ['Estimated','Observed'],
+				},
+				yAxis: {
+					title: {
+						text: 'Sum',
+						style: {
+							color: '#4572A7'
+						}
+					},
+					labels: {
+						style: {
+							color: '#4572A7'
+						},
+						formatter: function() {
+								return this.value;
+						}
+					},
+				},
+				series:[{color: '#4572A7',data: [Math.round(sumEstimated*100)/100,Math.round(sumObserved*100)/100]}]
+			});
+		}
+		
+		function drawWhiskers() {
+			chart=new Highcharts.Chart({
+					chart: {
+						renderTo: 'graph',
+						type: 'boxplot',
+						plotBackgroundColor: '#FCFFC5',
+						height:300
+					},
+	    
+					title: {
+						text: ''//'Highcharts box plot styling'
+					},
+	    
+					legend: {
+						enabled: false
+					},
+	
+					xAxis: {
+						categories: ['Positive', 'Negative'],
+						title: {
+							text: 'Exchange Total'
+						}
+					},
+	    
+					yAxis: {
+						type: 'logarithmic',
+						title: {
+							text: 'Population'
+						} 
+					},
+
+					plotOptions: {
+						boxplot: {
+							fillColor: '#F0F0E0',
+							lineWidth: 2,
+							medianColor: '#0C5DA5',
+							medianWidth: 3,
+							stemColor: '#A63400',
+							stemDashStyle: 'dot',
+							stemWidth: 1,
+							whiskerColor: '#3D9200',
+							whiskerLength: '20%',
+							whiskerWidth: 3 
+						}
+					},
+	
+					series: []
+	
+			});
+			
+			chart.addSeries({data:[{low:whiskers.positive.min,q1:whiskers.positive.q1,median:whiskers.positive.median,q3:whiskers.positive.q3,high:whiskers.positive.max},
+								   {low:whiskers.negative.min,q1:whiskers.negative.q1,median:whiskers.negative.median,q3:whiskers.negative.q3,high:whiskers.negative.max}],
+							},false);
+			chart.redraw();
+			
+		};
+		
+		function drawHistogram(direction) {
+			var res=new Array()
+			var hist2={};
+			var cat=new Array();
+			var dat=new Array();
+			if (direction=="out") {
+				lines.filter(function(e) {return d3.select(this).attr("display")!="none"})
+					 .each(function(e) {res.push(e[0])});
+			}
+			else {
+				lines.filter(function(e) {return d3.select(this).attr("display")!="none"})
+					 .each(function(e) {res.push(e[1])});
+			}
+			var hist = res.reduce( function (prev, item) { 
+				if (item in prev ) prev[item] ++; 
+				else prev[item] = 1; 
+				return prev; 
+			}, {} );
+			for (var i in hist) {
+				if (parseInt(hist[i]) in hist2) hist2[parseInt(hist[i])]++;
+				else hist2[parseInt(hist[i])]=1;
+			}
+			var max=0;
+			for (var i in hist2) {
+				if (parseInt(i)>max) max=parseInt(i);
+			}
+			for (var i=1;i<=max;i++) {
+				cat.push(i);
+				trouve=false;
+				for (var j in hist2) {
+					if (i==j) {dat.push(hist2[j]);trouve=true;break;};
+				}
+				if (trouve==false) dat.push(0);
+			}
+
+			chart = new Highcharts.Chart({
+				chart : {
+					renderTo: 'graph',
+					defaultSeriesType:'column',
+					borderWidth:0,
+					backgroundColor:'#eee',
+					borderWidth:1,
+					borderColor:'#ccc',
+					plotBackgroundColor:'#FCFFC5',
+					plotBorderWidth:1,
+					plotBorderColor:'#ccc'
+				},
+				title:{text:null},
+				legend:{
+					//enabled:false
+				},
+				tooltip:{
+					borderWidth:1,
+					formatter:function() {
+						return '<b>Range:</b><br/> '+ this.x +'<br/>'+
+						'<b>Count:</b> '+ this.y;
+					}
+				},
+				plotOptions:{
+					column:{
+						shadow:false,
+						borderWidth:.5,
+						borderColor:'#666',
+						pointPadding:0,
+						groupPadding:0,
+						color: 'rgba(204,204,204,.85)',
+					},
+					spline:{
+						shadow:false,
+						marker:{
+							radius:1
+						}
+					},
+					areaspline:{
+						color:'rgb(69, 114, 167)',
+						fillColor:'rgba(69, 114, 167,.25)',
+						shadow:false,
+						marker:{
+							radius:1
+						}
+					},
+					series:{
+						cursor:'pointer',
+						point:{
+							events:{
+								mouseOver: function(){
+									for (var i in hist) {
+										if (hist[i]==this.category) {
+											cities.filter(function(e) {if (e[0]==i) return true}).style("fill","red");
+										}
+									}
+								},
+								mouseOut: function(){ cities.style("fill","#A1D99B")}
+									
+							}
+						}
+					}
+				},
+				xAxis:{
+					categories: cat,//['> 48.00 =< 51.81','> 51.81 =< 54.63','> 54.63 =< 57.44','> 57.44 =< 60.25','> 60.25 =< 63.06','> 63.06 =< 65.88','> 65.88 =< 68.69','> 68.69 =< 71.50','> 71.50 =< 74.31','> 74.31 =< 77.13','> 77.13 =< 79.94','> 79.94 =< 82.75','> 82.75 =< 85.56','> 85.56 =< 88.38','> 88.38 =< 91.19','> 91.19 =< 94.00'],
+					labels:{
+						enabled:false,
+						style: {
+							fontSize:'8px',
+							fontWeight:'normal',
+							color:'#333'
+						},
+					},
+					lineWidth:0,
+					lineColor:'#999',
+					//tickLength:70,
+					tickColor:'#ccc',
+				},
+				yAxis:{
+					title:{text:''},
+					//maxPadding:0,
+					tickWidth:1,
+					tickColor:'#ccc',
+					lineColor:'#ccc',
+					endOnTick:false,
+				},
+				series: [{
+					name:'Bins',
+					data: dat//[3,2,1,6,10,5,13,9,14,21,23,66,47,14,5,2],
+				},{
+					name:'Curve',
+					type:'spline',
+					visible:false,
+					data: dat,//[3,2,1,6,10,5,13,9,14,21,23,66,47,14,5,2],
+					//color: 'rgba(204,204,255,.85)'
+				},{
+					name:'Filled Curve',
+					type:'areaspline',
+					visible:false,
+					data: dat,//[3,2,1,6,10,5,13,9,14,21,23,66,47,14,5,2],
+					//color: 'rgba(204,204,255,.85)'
+				}]
+			});
+		}
+		
+		function drawWeightByDistance() {
+			var res=new Array();
+			lines.filter(function(e) {return d3.select(this).attr("display")!="none"})
+					 .each(function(e) {res.push([e[4],e[3]])});
+			chart = new Highcharts.Chart({
+					chart: {
+						renderTo: 'graph',
+						type: 'scatter',
+						width:300,
+						/*height:500,*/
+						plotBackgroundColor: '#FCFFC5',
+						zoomType: 'xy'
+					},
+					title: {
+						text: null,
+						style: {
+							color: "black"
+						}
+					},
+					legend: {
+						enabled: false
+					},
+					xAxis: {
+						title: {
+							enabled:true,
+							text: "Distance",
+							style: {
+								color: "black",
+								fontSize: '11px',
+								fontWeight: 'normal'
+							}
+						},
+						labels: {
+							formatter: function() {
+							return this.value;
+							}
+						},
+						startOnTick: true,
+						endOnTick: true,
+						showLastLabel: true
+					},
+					yAxis: {
+						type:"logarithmic",
+						title: {
+							text: "Weight",
+							style: {
+								color:"black",
+								fontSize:'11px',
+								fontWeight:'normal'
+							}
+						},
+						labels: {
+							formatter: function() {
+								return this.value;
+							}
+						}
+					},
+					plotOptions: {
+						scatter: {
+							marker: {
+								radius: 1,
+								states: {
+									hover: {
+										enabled: true,
+										lineColor: 'rgb(100,100,100)'
+									}
+								}
+							},
+							states: {
+								hover: {
+									marker: {
+										enabled: false
+									}
+								}
+							},
+							tooltip: {
+								headerFormat: '<b>{series.name}</b><br />',
+								pointFormat: 'x = {point.x}, y = {point.y}'
+							}
+						}
+					},
+					series: [{data:res}]
+					
+				});
+			};
+			
+		function drawPie() {
+			//Nb total de villes visibles
+			var nbOnScreen=0;
+			//Nb total de villes visibles
+			for (i in cities[0]) {
+				if (d3.selectAll("circle")[0][i].getAttribute("display")!="none") {
+					nbOnScreen=nbOnScreen+1;
+				}
+			}
+			chart = new Highcharts.Chart({
+				chart : {
+					renderTo: 'legendtext',
+					type: 'pie',
+					width:150,
+					height:150,
+					plotBackgroundColor: '#FCFFC5',
+					zoomType: 'xy'
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: false
+						},
+						showInLegend: true
+					}
+				},
+				tooltip: {
+					pointFormat: '<b>{point.percentage:.1f}%</b>'
+				},
+				credits: {
+					enabled:false
+				},
+				title: {
+					text: null
+				},
+				legend: {
+					enabled: false
+				},	
+				series:[{data: [['Present',nbOnScreen],['NoPresent',cities_def.length-nbOnScreen]]}]
+			});
+			
+		}
+			
+		function drawRegress() {
+			var res=new Array();
+			for (i in cities_coeff) {
+				res.push([parseInt(cities_coeff[i].step),Math.abs(Math.round(parseFloat(cities_coeff[i].coeff)*100)/100)]);
+			}
+			chart = new Highcharts.Chart({
+				chart : {
+					renderTo: 'graph',
+					type: 'line',
+					width:200,
+					height:200,
+					plotBackgroundColor: '#FCFFC5',
+					zoomType: 'xy'
+				},
+				plotOptions: {
+					line: {
+						lineWidth: 0.8,
+						marker: {
+							radius: 0
+						}
+					}
+				},
+				title: {
+					text: null
+				},
+				legend: {
+					enabled: false
+				},	
+				xAxis: {
+					title:{
+						enabled:true,
+						text:'Step'
+					},
+					min:1,
+					labels: {
+						formatter: function() {
+							return this.value;
+						}
+					}
+				},
+				yAxis: {
+					title: {
+						text: 'Coefficient',
+					},
+					labels: {
+						style: {
+							color: '#4572A7'
+							},
+						formatter: function() {
+							return this.value;
+						}
+					},
+				},
+				series:[{color: '#4572A7',data: res}]
+			});
+		};
+		
+		function drawEvolPop() {
+			var res=new Array();
+			//Construction de la liste vide
+			for (i in cities_coeff) {
+				res.push([parseInt(cities_coeff[i].step),parseFloat(cities_coeff[i].popTotal)]);
+			}
+
+			chart = new Highcharts.Chart({
+				chart : {
+					renderTo: 'graph',
+					type: 'line',
+					width:200,
+					height:200,
+					plotBackgroundColor: '#FCFFC5',
+					zoomType: 'xy'
+				},
+				plotOptions: {
+					line: {
+						lineWidth: 0.8,
+						marker: {
+							radius: 0
+						}
+					}
+				},
+				title: {
+					text: null
+				},
+				legend: {
+					enabled: false
+				},	
+				xAxis: {
+					title:{
+						enabled:true,
+						text:'Step'
+					},
+					min:1,
+					labels: {
+						formatter: function() {
+							return this.value;
+						}
+					}
+				},
+				yAxis: {
+					title: {
+						text: 'Population',
+					},
+					labels: {
+						style: {
+							color: '#4572A7'
+							},
+						formatter: function() {
+							return this.value;
+						}
+					},
+				},
+				series:[{color: '#4572A7',data: res}]
+			});
+		};
+			
+			
+		</script>
+	</head>
+	<body>
+		<div id="header">
+			<class id="step"></class>
+			<class id="info"></div>
+		</div>
+		<div id="map"></div>
+		<div id="commentmouse">Use your mouse in order to zoom and pan</div>
+		<div style="position:absolute;right:10px" id="commentdiv" >
+			<div style="float:bottom;height:40px" id="choice">Variable:
+				<SELECT name="mapType" id="mapType" onChange='var val=this.options[this.selectedIndex].value;onChangeType(val)'>
+					<OPTION id="default" value="" selected="selected"></option>
+					<OPTION VALUE="pop">Population
+					<OPTION VALUE="wealth">Wealth
+					<OPTION VALUE="commercial">Balance
+					<OPTION VALUE="exchange">Exchange
+				</SELECT>
+			</div>
+			<div style="float:bottom;height:20px">
+				<div style="float:bottom" id="slider" class="noUiSlider"></div>
+			</div>
+			<div style="float:bottom;height:40px">
+				<div style="float:left">Minimum: <input type="text" id="from" size=3 onChange='onChangeButton()'></div>
+				<div style="float:right">Maximum: <input type="text" id="to" size=3 onChange='onChangeButton()'></div>
+			</div>
+			<div style="float:bottom;visibility:hidden" id="divextype">
+			Direction:
+				<SELECT name="exchangeType" id="exchangeType" onChange='onChangeButton()'>
+					<OPTION id="default" value="" selected="selected"></option>
+					<OPTION VALUE="out">Out
+					<OPTION VALUE="in">In
+				</SELECT>
+				<div style="float:bottom" id="divexPerc">
+				Minimum threshold:
+					<SELECT name="exPerc" id="exPerc" onChange='onChangeButton()'>
+						<OPTION id="default" value="0" selected="selected">0%
+						<OPTION VALUE="25">25%
+						<OPTION VALUE="50">50%
+						<OPTION VALUE="75">75%
+					</SELECT>
+				</div>
+				Preferred Links:
+				<input type="checkbox" id="preferred" onChange='onChangeButtonDir();'>
+			</div>
+		</div>
+		<div style="position:absolute;top:240px;left:1050px;width:130px;border-style:solid" id="legenddiv"></div>
+			<div style="position:absolute;top:220px;left:1200px" id="legendtext"></div>
+			<div style="position:absolute;top:360px;left:1050px;visibility:visible" id="divgraphchoice">
+			Choose a graphic:
+				<SELECT name="graphicType" id="graphicType" onChange='onChangeButtonGraph()'>
+					<OPTION id="default" value="" selected="selected"></option>
+					<OPTION VALUE="histo">Histogramm
+					<OPTION VALUE="distweight">Weight by distance
+					<OPTION VALUE="rank">Rank-size distribution
+					<OPTION VALUE="coeff">Regression
+					<OPTION VALUE="total">Total
+					<OPTION VALUE="whisker">Whiskers
+					<OPTION VALUE="evol">Evolution of Population
+				</SELECT>
+			</div>
+			<div style="position:absolute;top:400px;left:1050px;height:300px;width:200px" id="graph"></div>
+			<div id="help">
+				<a href="help.html">Help</a>
+			</id>	
+			
+			
+			
+			
+			
+		
+	<script type="text/javascript">
+		var newYear=parseInt(header.yearBegin)+parseInt(header.oneStep)*parseInt(header.step);
+		document.getElementById("step").innerHTML=header.version+"  -  Step: "+parseInt(header.step)+"/"+parseInt(header.totalStep);
+		//document.getElementById("info").innerHTML="Year begin: "+parseInt(header.yearBegin)+"  Year end: "+parseInt(header.yearEnd);
+	
+		var tooltip = d3.select("body")
+				.append("div")
+				.attr("id","tooltip")
+				.style("position", "absolute")
+				.style("visibility", "hidden");
+				
+		svg = d3.select("#map").append("svg")
+			.attr("width", width)
+			.attr("height", height);
+			
+					
+						
+		var axes = svg.append("g").attr("id", "axes"),
+			xAxis = axes.append("line").attr("y2", height),
+			yAxis = axes.append("line").attr("x2", width);
+					
+		svg.append("svg:defs").selectAll("marker")
+			.data(["arrow"])
+			.enter().append("svg:marker")
+			.attr("id", "arrow")
+			.attr("viewBox", "0 -5 10 10")
+			.attr("refX", 15)
+			.attr("refY", -1.5)
+			.attr("markerWidth", 6)
+			.attr("markerHeight", 6)
+			.attr("orient", "auto")
+			.append("svg:path")
+			.attr("d", "M0,-5L10,0L0,5");
+					
+ 
+		/*
+		 * On créé un groupe SVG qui va accueillir
+		 * tous nos départements
+		*/
+		var country = svg
+			.append("g")
+			.attr("id", "map")
+			.call(zoom);
+			/*.call(d3.behavior.zoom()
+				.translate(projection.translate())
+				.scale(projection.scale())
+				.on("zoom", redraw));*/
+		
+		if (model=='marius') {
+			/*
+			* On charge les données GeoJSON
+			*/
+			//russia= JSON.parse(json_country);
+			gas=JSON.parse(json_gas);
+			fronteer=JSON.parse(json_fronteer);
+
+			/*
+			* On "bind" un élément SVG path pour chaque entrée
+			* du tableau features de notre objet geojson
+			*/
+			/*var features = country
+				.selectAll("path")
+				.data(russia.features);*/
+			
+			var features_fronteer = country
+				.selectAll("path")
+				.data(fronteer.features);
+			
+			var features_gas = country
+				.selectAll("path")
+				.data(gas.features);
+ 
+			/*
+			* Pour chaque entrée du tableau feature, on
+			* créait un élément SVG path, avec les
+			* propriétés suivantes
+			*/
+				
+				
+			/*features.enter()
+				.append("path")
+				.attr('class', 'REGION')
+				.attr('fill', '#BCBDDC')//#f6f4f2')
+				.style("fill-opacity",0.3)
+				.attr('stroke', '#aaa')
+				.attr('stroke-width',0.2)
+				.attr("d", path)
+				.attr("id",function(d){return d.properties.IDREG});*/
+			
+			features_fronteer.enter()
+				.append("path")
+				.attr('class', 'COUNTRY')
+				.attr('fill', '#BCBDDC')//#f6f4f2')
+				.style("fill-opacity",0.5)
+				.attr('stroke', 'red')
+				.attr('stroke-width',0.5)
+				.attr("d", path)
+				.attr("id",function(d){return d.properties.ISO});
+			
+			features_gas.enter()
+				.append("path")
+				.attr('class', 'NAME')
+				.attr('fill', 'red')//#f6f4f2')
+				.style("fill-opacity",0.1)
+				.attr('stroke', '#aaa')
+				.attr('stroke-width',0.3)
+				.attr("d", path)
+				.attr("id",function(d){return d.properties.NAME_ENGLI});
+			
+		}
+		
+		if (model=='simpoplocal') {
+			var square = JSON.parse(json_country);
+			var features = country
+				.selectAll("path")
+				.data(square.features);
+			features.enter()
+				.append("path")
+				.attr('class', 'NAME')
+				.attr('fill', '#BCBDDC')//#f6f4f2')
+				.style("fill-opacity",0.5)
+				.attr('stroke', '#aaa')
+				.attr('stroke-width',0.5)
+				.attr("d", path);
+		}
+				
+		LegendContainer = d3.select('div#legenddiv')
+			.append('svg')
+			.attr('width', 200) 
+			.attr('height', 100)
+			.attr('id', 'Legendsvg');
+						
+		/*legendCircles=LegendContainer.append("circle")
+			.attr("cx",10+sizeMaxCircle)
+			.attr("cy",10+sizeMaxCircle)
+			.attr("r",sizeMaxCircle)
+			.attr("stroke","#aaa")
+			.attr("stroke-width",2)
+			.attr("fill","white");*/
+			
+		LegendContainerText = d3.select('div#legendtext')
+			.append('svg')
+			.attr('width', 200) 
+			.attr('height', 150)
+			.attr('id', 'Legendsvg2');
+			
+		function onChangeType(val) {
+			slider(val);
+			//if (model=='marius') {
+				if (val!="exchange") {
+					document.getElementById("divextype").style.visibility="hidden";
+					//document.getElementById("divgraphchoice").style.visibility="hidden";
+					draw(val,document.getElementById("from").value,document.getElementById("to").value,0);
+				} 
+				else {
+					document.getElementById("divextype").style.visibility="visible";
+					//document.getElementById("divgraphchoice").style.visibility="visible";
+				}
+			//}
+			/*if (model=='simpoplocal') {
+				if (val!="exchange") {
+					document.getElementById("divextype").style.visibility="hidden";
+					document.getElementById("divgraphchoice").style.visibility="hidden";
+					draw(val,document.getElementById("from").value,document.getElementById("to").value,0);
+				} 
+				else {
+					document.getElementById("divextype").style.visibility="visible";
+					document.getElementById("divgraphchoice").style.visibility="visible";
+					draw(val,document.getElementById("from").value,document.getElementById("to").value,0);
+				}
+			}*/
+		}
+		
+		function onChangeButton() {
+			var map=document.getElementById("mapType").value;
+			var min=document.getElementById("from").value;
+			var max=document.getElementById("to").value;
+			var typeEx=document.getElementById("exchangeType").value;
+			var threshold=document.getElementById("exPerc").value;
+			document.getElementById("preferred").checked=false;
+			draw(map,min,max,typeEx,threshold);
+		}
+		
+		function onChangeButtonDir() {
+			var typeEx=document.getElementById("exchangeType").value;
+			var pref=document.getElementById("preferred").checked;
+			if (pref==true) {
+				prefLinks(typeEx);
+			}
+			else {
+				onChangeButton();
+			}
+		}
+		
+		function onChangeButtonGraph() {
+			var typeGraphic=document.getElementById("graphicType").value;
+			var map=document.getElementById("mapType").value;
+			var typeEx=document.getElementById("exchangeType").value;
+			eraseGraph(graph);
+			if (typeGraphic=="histo") drawHistogram(typeEx);
+			if (typeGraphic=="distweight") drawWeightByDistance();
+			if (typeGraphic=="rank") genRankPop();
+			if (typeGraphic=="total") drawUrbanPop();
+			if (typeGraphic=="coeff") drawRegress();
+			if (typeGraphic=="whisker") drawWhiskers();
+			if (typeGraphic=="evol" && map=='pop') drawEvolPop();
+		}
+		
+		function drawSlider(min,max) {
+			$("#slider").empty();
+			$("#slider").noUiSlider({
+				range: [parseInt(min), parseInt(max)+1],
+				start: [parseInt(min),parseInt(max)+1],
+				handles: 2,
+				orientation: "horizontal",
+				serialization: {
+					to: [$("#from"),$("#to")],
+					resolution: 1
+				},
+				slide: function(){
+					var values=$(this).val();
+					var map=document.getElementById("mapType").value;
+					var typeEx=document.getElementById("exchangeType").value;
+					var threshold=document.getElementById("exPerc").value;
+					draw(map,values[0],values[1],typeEx,threshold);
+				}
+			});
+			//$("#slider").noUiSlider("enabled",false);
+			
+		}
+					
+	</script>	
+		
+	</body>
+</html>
+		

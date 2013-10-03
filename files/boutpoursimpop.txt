@@ -1,0 +1,3 @@
+<script src="../files/simpopreal.js"></script>
+		<script src="../files/simpopexchange.js"></script>
+		<script src="../files/simpopallpop.js"></script>
