@@ -1,9 +1,4 @@
 var header={
-  "step": "3910",
-  "yearEnd": "??",
-  "totalStep": "3910",
-  "oneStep": "?",
-  "yearBegin": "??",
   "version": "simpoplocal"
 }
 var cities_flows =[[{

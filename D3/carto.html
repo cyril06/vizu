@@ -13,13 +13,14 @@
 				border: 1px solid gray;
 				margin: 2px;
 				padding:2px;
+				width:1000px;
+				z-index:4;
 			}
-			div#step{
-				position: floated;
-				color: red;
-				font-family: sans;
-				font-size: 35px;
-				padding:400px;
+			div#time{
+				position: absolute;
+				top: 10px;
+				right: 95px;
+				z-index:3;
 			}
 			#info{
 				position: floated;
@@ -30,6 +31,7 @@
 			}
 			#slidertime{
 				position: floated;
+				right:10px;
 			}
 			div#map{
 				position: absolute;
@@ -38,7 +40,7 @@
 			div#help{
 				position:absolute;
 				top:25px;
-				right:80px;
+				right:400px;
 				font-family: sans;
 				font-size: 21px;
 			}
@@ -85,9 +87,9 @@
 			var scale;
 			var width_scale;
 			
-			var max={flow:Math.round(dataGen.flow.max*100)/100,pop:Math.round(dataGen.pop.max*100)/100,wealth:Math.round(dataGen.wealth.max*100)/100,totalPos:Math.round(dataGen.commercial.maxPos*100)/100,totalNeg:Math.round(dataGen.commercial.maxNeg*100)/100};
-			var min={flow:Math.round(dataGen.flow.min*100)/100,pop:Math.round(dataGen.pop.min*100)/100,wealth:Math.round(dataGen.wealth.min*100)/100,totalPos:Math.round(dataGen.commercial.minPos*100)/100,totalNeg:Math.round(dataGen.commercial.minNeg*100)/100};
-			var mean={flow:Math.round(dataGen.flow.mean*100)/100,pop:Math.round(dataGen.pop.mean*100)/100,wealth:Math.round(dataGen.wealth.mean*100)/100,totalPos:Math.round(dataGen.commercial.meanPos*100)/100,totalNeg:Math.round(dataGen.commercial.meanNeg*100)/100};
+			var max={flow:Math.round(dataGenAll.flow.max*100)/100,pop:Math.round(dataGenAll.pop.max*100)/100,wealth:Math.round(dataGenAll.wealth.max*100)/100,totalPos:Math.round(dataGenAll.commercial.maxPos*100)/100,totalNeg:Math.round(dataGenAll.commercial.maxNeg*100)/100};
+			var min={flow:Math.round(dataGenAll.flow.min*100)/100,pop:Math.round(dataGenAll.pop.min*100)/100,wealth:Math.round(dataGenAll.wealth.min*100)/100,totalPos:Math.round(dataGenAll.commercial.minPos*100)/100,totalNeg:Math.round(dataGenAll.commercial.minNeg*100)/100};
+			//var mean={flow:Math.round(dataGen.flow.mean*100)/100,pop:Math.round(dataGen.pop.mean*100)/100,wealth:Math.round(dataGen.wealth.mean*100)/100,totalPos:Math.round(dataGen.commercial.meanPos*100)/100,totalNeg:Math.round(dataGen.commercial.meanNeg*100)/100};
 			
 			var domainExchange=[[Math.abs(max.totalNeg),min.totalPos].sort(function(a,b){return a-b})[0],[Math.abs(min.totalNeg),max.totalPos].sort(function(a,b){return b-a})[0]];
 			
@@ -150,13 +152,6 @@
 				}
 			}
 			
-			/*function getMaxMin(step){
-				var max={flow:Math.round(dataGen.flow.max*100)/100,pop:Math.round(dataGen.pop.max*100)/100,wealth:Math.round(dataGen.wealth.max*100)/100,totalPos:Math.round(dataGen.commercial.maxPos*100)/100,totalNeg:Math.round(dataGen.commercial.maxNeg*100)/100};
-			var min={flow:Math.round(dataGen.flow.min*100)/100,pop:Math.round(dataGen.pop.min*100)/100,wealth:Math.round(dataGen.wealth.min*100)/100,totalPos:Math.round(dataGen.commercial.minPos*100)/100,totalNeg:Math.round(dataGen.commercial.minNeg*100)/100};
-				for (var i in alltimeexchange) {
-					if {alltimeexchange[i][0].step==step) {
-						for (var j in alltimeexchange[i][1][j]) {
-							if*/
 			
 			function slider(mapChoice) {
 				if (mapChoice=="commercial") {	
@@ -173,27 +168,28 @@
 				};
 			}
 				
-			function draw(mapChoice,mini,maxi,exchangeType,threshold) {
-			
+			function draw(mapChoice,mini,maxi,exchangeType,threshold,step) {
 				if (mapChoice=="commercial") {	
 					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain(domainExchange);
 				};
 				if (mapChoice=="pop") {
-					//scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([min.pop,max.pop]);
-					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([mini,maxi]);
+					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([min.pop,max.pop]);
+					//scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([mini,maxi]);
 				};
 				if (mapChoice=="wealth") {
-					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([mini,maxi]);
+					scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([min.wealth,max.wealth]);
+					//scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([mini,maxi]);
 				};
 				if (mapChoice=="exchange"){
 					if (exchangeType=="in") {
-						scale=scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([0,dataGen.exchange.maxSumIn]);
+						scale=scale = d3.scale.sqrt().range([sizeMinCircle, sizeMaxCircle]).domain([0,dataGenAll.exchange.maxSumIn]);
 					}
 					else {
-						scale=scale = d3.scale.sqrt().range([sizeMinCircle+1, sizeMaxCircle]).domain([0,dataGen.exchange.maxSumOut]);
+						scale=scale = d3.scale.sqrt().range([sizeMinCircle+1, sizeMaxCircle]).domain([0,dataGenAll.exchange.maxSumOut]);
 					}
 					color_scale = d3.scale.linear().range([0, 1]).domain([threshold,100]);
-					width_scale = d3.scale.linear().range([0.3, 3]).domain([mini,maxi]);
+					width_scale = d3.scale.linear().range([0.3, 3]).domain([min.flow,max.flow]);
+					//width_scale = d3.scale.linear().range([0.3, 3]).domain([mini,maxi]);
 				};
 				
 				/*res=new Array();
@@ -228,7 +224,7 @@
 				if (lines) {lines.remove();};
 					
 				cities=country.selectAll("circle")
-					 .data(function () {return fetchDataNodes(mapChoice,mini,maxi,exchangeType)})
+					 .data(function () {return fetchDataNodes(mapChoice,mini,maxi,exchangeType,step)})
 					 .enter()
 					 .append("circle")
 					 .attr("cx", function(d) {
@@ -260,7 +256,7 @@
 					.on("mouseout",function(d){var elem=d3.select(this);
 												if (mapChoice=="exchange") {
 													if (click==false) {
-														draw(mapChoice,mini,maxi,exchangeType,threshold);
+														draw(mapChoice,mini,maxi,exchangeType,threshold,step);
 														cityMouseOut(elem,d);
 													}
 													}})
@@ -273,10 +269,10 @@
 					lines=country.selectAll("line")
 					 .data(function() {
 										if (exchangeType=="in") {
-											return fetchDataLinks("in",mini,maxi,threshold);
+											return fetchDataLinks("in",mini,maxi,threshold,step);
 										}
 										else {
-											return fetchDataLinks("out",mini,maxi,threshold);
+											return fetchDataLinks("out",mini,maxi,threshold,step);
 										}
 									})
 					 .enter()
@@ -384,7 +380,7 @@
 					drawHistogram(exchangeType);
 				}
 				
-		
+				onChangeButtonGraph()
 			}
 			
 		function lookForMaxMin() {
@@ -408,107 +404,105 @@
 			return([[parseFloat(radiusMax),parseFloat(radiusMin)],[parseInt(max),parseInt(min)]]);
 		}
 
-		function fetchDataNodes(mapChoice,mini,maxi,exchangeType) {
+		function fetchDataNodes(mapChoice,mini,maxi,exchangeType,step) {
 			resNodes=new Array();
 			pop2010=new Array();
 			popInit=new Array();
 			if (mapChoice=='pop') {
-				for (var i in cities_flows) {
-					if (Math.round(cities_flows[i][0].pop) >= mini && Math.round(cities_flows[i][0].pop) <= maxi) {
-						pop=Math.round(cities_flows[i][0].pop*100)/100;
-						resNodes.push([cities_flows[i][0].orig,pop]);
-						pop2010.push(Math.round(cities_flows[i][0].pop2010*100)/100);
-						popInit.push(Math.round(cities_flows[i][0].popInit*100)/100);
+				for (var i in alltimeexchange) {
+					if (parseInt(alltimeexchange[i][0].step)==step) {
+						for (var j in alltimeexchange[i][1]){
+							if (Math.round(alltimeexchange[i][1][j][0].pop) >= mini && Math.round(alltimeexchange[i][1][j][0].pop) <= maxi) {
+								pop=Math.round(alltimeexchange[i][1][j][0].pop*100)/100;
+								resNodes.push([alltimeexchange[i][1][j][0].orig,pop]);
+								pop2010.push(Math.round(alltimeexchange[i][1][j][0].pop.pop2010*100)/100);
+								popInit.push(Math.round(alltimeexchange[i][1][j][0].pop.popInit*100)/100);
+							}
+						}
 					}
 				}
 			}
 			if (mapChoice=='wealth') {
-				for (var i in cities_flows) {
-					if (Math.round(cities_flows[i][0].wealth) >= mini && Math.round(cities_flows[i][0].wealth) <= maxi) {
-						wealth=Math.round(cities_flows[i][0].wealth*100)/100;
-						resNodes.push([cities_flows[i][0].orig,wealth]);
+				for (var i in alltimeexchange) {
+					if (parseInt(alltimeexchange[i][0].step)==step) {
+						for (var j in alltimeexchange[i][1]){
+							if (Math.round(alltimeexchange[i][1][j][0].wealth) >= mini && Math.round(alltimeexchange[i][1][j][0].wealth) <= maxi) {
+								wealth=Math.round(alltimeexchange[i][1][j][0].wealth*100)/100;
+								resNodes.push([alltimeexchange[i][1][j][0].orig,wealth]);
+							}
+						}
 					}
 				}
 			}
 			if (mapChoice=='commercial') {
-				for (var i in cities_flows) {
-					if ( Math.abs(Math.round(cities_flows[i][0].total))!=0&&Math.abs(Math.round(cities_flows[i][0].total)) >= mini && Math.abs(Math.round(cities_flows[i][0].total) <= maxi)) {
-						total=Math.round(cities_flows[i][0].total*100)/100;
-						resNodes.push([cities_flows[i][0].orig,total]);
+				for (var i in alltimeexchange) {
+					if (parseInt(alltimeexchange[i][0].step)==step) {
+						for (var j in alltimeexchange[i][1]) {
+							if ( Math.abs(Math.round(alltimeexchange[i][1][j][0].total))!=0&&Math.abs(Math.round(alltimeexchange[i][1][j][0].total)) >= mini && Math.abs(Math.round(alltimeexchange[i][1][j][0].total) <= maxi)) {
+								total=Math.round(alltimeexchange[i][1][j][0].total*100)/100;
+								resNodes.push([alltimeexchange[i][1][j][0].orig,total]);
+							}
+						}
 					}
 				}
 			}
 			if (mapChoice=='exchange') {
-				for (var i in cities_flows) {
-					if (exchangeType=="out") {
-						var somme=parseFloat(cities_flows[i][0].totalOut);
+				for (var i in alltimeexchange) {
+					if (parseInt(alltimeexchange[i][0].step)==step) {
+						for (var j in alltimeexchange[i][1]) {
+							if (exchangeType=="out") {
+								var somme=parseFloat(alltimeexchange[i][1][j][0].totalOut);
+							}
+							else {
+								var somme=parseFloat(alltimeexchange[i][1][j][0].totalIn);
+							}
+							resNodes.push([alltimeexchange[i][1][j][0].orig,Math.round(somme*100)/100]);
+						}
 					}
-					else {
-						var somme=parseFloat(cities_flows[i][0].totalIn);
-					}
-					
-					resNodes.push([cities_flows[i][0].orig,Math.round(somme*100)/100]);
 				}
 			}
 			
-			if (mapChoice=='exchangeBis') {
-				for (var i in cities_flows) {
-					var somme=parseInt(cities_flows[i][0].nbFrom)+parseInt(cities_flows[i][0].nbTo);
-					if (somme != 0) {
-						resNodes.push([cities_flows[i][0].orig,somme]);
-					}
-				}
-			}
 			return resNodes;
 		}
 		
-		/*function fetchDataLinks(mini,maxi) {
-			var res=new Array();
-			for (var i in cities_flows) {
-				for (var j in cities_flows[i][1]) {
-					flow=Math.round(parseFloat(cities_flows[i][1][j].weight)*100)/100;
-					if (flow>=mini && flow<=maxi) {
-						res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,flow]);
-					}
-				}
-			}
-			return res;
-		}*/
-		function fetchDataLinks(direction,mini,maxi,thresh) {
+		function fetchDataLinks(direction,mini,maxi,thresh,step) {
 			var res=new Array();
 			var city=new Array();
-			for (var i in cities_flows) {
-				for (var j in cities_flows[i][1]) {
-					if (model=='marius') {
-						distance=Math.round(cities_flows[i][1][j].distance/1000);
-					}
-					else {
-						distance=Math.round(cities_flows[i][1][j].distance);
-					}
-					flow=parseFloat(cities_flows[i][1][j].weight*100)/100;
-					if (flow>=mini && flow<=maxi) {
-						if (direction=="out") {
-							percent=(flow/cities_flows[i][0].totalOut)*100;
-						}
-						if (direction=="in") {
-							for (var k in cities_flows) {
-								if (cities_flows[k][0].orig==cities_flows[i][1][j].dest) {
-									percent=Math.round((flow/cities_flows[k][0].totalIn)*100);
-									break;
+			for (var i in alltimeexchange) {
+				if (parseInt(alltimeexchange[i][0].step)==step) {
+					for (var j in alltimeexchange[i][1]) {
+						for (var k in alltimeexchange[i][1][j][1]) {
+							if (model=='marius') {
+								distance=Math.round(cities_flowsalltimeexchange[i][1][j][1][k].distance/1000);
+							}
+							else {
+								distance=Math.round(alltimeexchange[i][1][j][1][k].distance);
+							}
+							flow=parseFloat(alltimeexchange[i][1][j][1][k].weight*100)/100;
+							if (flow>=mini && flow<=maxi) {
+								if (direction=="out") {
+									percent=(flow/alltimeexchange[i][1][j][0].totalOut)*100;
+								}
+								if (direction=="in") {
+									for (var z in alltimeexchange[i][1]) {
+										if (alltimeexchange[i][1][z][0].orig==alltimeexchange[i][1][j][1][k].dest) {
+											percent=flow/(alltimeexchange[i][1][z][0].totalIn)*100;
+											break;
+										}
+									}
+								}
+								if (percent>=thresh) {
+									res.push([alltimeexchange[i][1][j][0].orig,alltimeexchange[i][1][j][1][k].dest,Math.round(percent*100)/100,Math.round(flow*100)/100,distance]);
+									city.push(alltimeexchange[i][1][j][0].orig);
+									city.push(alltimeexchange[i][1][j][1][k].dest);
 								}
 							}
-						}
-						if (percent>=thresh) {
-							res.push([cities_flows[i][0].orig,cities_flows[i][1][j].dest,Math.round(percent*100)/100,Math.round(flow*100)/100,distance]);
-							city.push(cities_flows[i][0].orig);
-							city.push(cities_flows[i][1][j].dest);
 						}
 					}
 				}
 			}
 			cities.attr("display","none");
 			cities.filter(function(d) {present=false;for (var i=0;i<city.length;i++) {if (city[i]==d[0]) {present=true;break}};return present}).attr("display","true");
-			
 			return res;
 		}
 
@@ -1312,15 +1306,15 @@
 	</head>
 	<body>
 		<div id="header">
-			<class id="info"></div>
-			<div><input type="text" id ="step"></div>		
+			<class id="info"></div>			
 		</div>
-		<div style="position:absolute;left:10px;top:50px">
+		<div id="time">Step: <input type="text" id ="step"></div>
+		<div style="position:absolute;right:10px;top:50px">
 			<div style="float:bottom" id="slidertime" class="noUiSlider"></div>
 		</div>
 		<div id="map"></div>
 		<div id="commentmouse">Use your mouse in order to zoom and pan</div>
-		<div style="position:absolute;right:10px" id="commentdiv" >
+		<div style="position:absolute;right:10px;top:80px" id="commentdiv" >
 			<div style="float:bottom;height:40px" id="choice">Variable:
 				<SELECT name="mapType" id="mapType" onChange='var val=this.options[this.selectedIndex].value;onChangeType(val)'>
 					<OPTION id="default" value="" selected="selected"></option>
@@ -1357,9 +1351,9 @@
 				<input type="checkbox" id="preferred" onChange='onChangeButtonDir();'>
 			</div>
 		</div>
-		<div style="position:absolute;top:240px;left:1050px;width:130px;border-style:solid" id="legenddiv"></div>
-			<div style="position:absolute;top:220px;left:1200px" id="legendtext"></div>
-			<div style="position:absolute;top:360px;left:1050px;visibility:visible" id="divgraphchoice">
+		<div style="position:absolute;top:250px;left:1050px;width:130px;border-style:solid" id="legenddiv"></div>
+		<div style="position:absolute;top:230px;left:1200px" id="legendtext"></div>
+		<div style="position:absolute;top:360px;left:1050px;visibility:visible" id="divgraphchoice">
 			Choose a graphic:
 				<SELECT name="graphicType" id="graphicType" onChange='onChangeButtonGraph()'>
 					<OPTION id="default" value="" selected="selected"></option>
@@ -1383,8 +1377,7 @@
 			
 		
 	<script type="text/javascript">
-		var newYear=parseInt(header.yearBegin)+parseInt(header.oneStep)*parseInt(header.step);
-		document.getElementById("step").innerHTML=100//parseInt(header.step)//+"/"+parseInt(header.totalStep);
+		//document.getElementById("step").innerHTML=100//parseInt(header.step)//+"/"+parseInt(header.totalStep);
 		document.getElementById("info").innerHTML=header.version;
 		
 		$("#slidertime").empty();
@@ -1405,7 +1398,8 @@
 					var threshold=document.getElementById("exPerc").value;
 					var fromv=document.getElementById("from").value;
 					var tov=document.getElementById("to").value;
-					draw(map,fromv,tov,typeEx,threshold,values);
+					var step=document.getElementById("step").value;
+					draw(map,fromv,tov,typeEx,threshold,step);
 				}
 			});
 	
@@ -1556,7 +1550,8 @@
 				if (val!="exchange") {
 					document.getElementById("divextype").style.visibility="hidden";
 					//document.getElementById("divgraphchoice").style.visibility="hidden";
-					draw(val,document.getElementById("from").value,document.getElementById("to").value,0);
+					var step=document.getElementById("step").value;
+					draw(val,document.getElementById("from").value,document.getElementById("to").value,val,0,step);
 				} 
 				else {
 					document.getElementById("divextype").style.visibility="visible";
@@ -1578,13 +1573,14 @@
 		}
 		
 		function onChangeButton() {
+			var step=document.getElementById("step").value;
 			var map=document.getElementById("mapType").value;
 			var min=document.getElementById("from").value;
 			var max=document.getElementById("to").value;
 			var typeEx=document.getElementById("exchangeType").value;
 			var threshold=document.getElementById("exPerc").value;
 			document.getElementById("preferred").checked=false;
-			draw(map,min,max,typeEx,threshold);
+			draw(map,min,max,typeEx,threshold,step);
 		}
 		
 		function onChangeButtonDir() {
@@ -1628,7 +1624,8 @@
 					var map=document.getElementById("mapType").value;
 					var typeEx=document.getElementById("exchangeType").value;
 					var threshold=document.getElementById("exPerc").value;
-					draw(map,values[0],values[1],typeEx,threshold);
+					var step=document.getElementById("step").value;
+					draw(map,values[0],values[1],typeEx,threshold,step);
 				}
 			});
 			//$("#slider").noUiSlider("enabled",false);
